@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titulo</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #header_disign {
+            width: 100%;            /* Ocupa todo el ancho */
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: row; /* Los pone en fila */
+            justify-content: space-around; /* Reparte el espacio entre ellos */
+            align-items: center; /* Los alinea al centro verticalmente */
+            padding: 20px;
+            background-color: #f0f2f5
+        }
+
+
+        .logo_circular{
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid black;
+        }
+
+
+        #search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        #search-input {
+            padding: 8px;
+            border-radius: 30px;
+            border: 3px solid black;
+            width: 250px;
+        }
+
+
+
+    </style>
+
+</head>
+
+<body>
+    <header id="header_disign">
+        <div class="Logo_Empresa">
+            <figure>
+                <img src="../Fotos/imagen.png" alt="logo" class="logo_circular">
+
+            </figure>
+        </div>
+
+
+        <div class="buscador_centrado">
+            <form id="search-form">
+                <input type="search" id="search-input" placeholder="Buscar Talleres..." required>
+                <button type="submit">🔍</button>
+            </form>
+
+        </div>
+
+        <figure>
+            <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
+        </figure>
+
+    </header>
+</body>
+</html>
