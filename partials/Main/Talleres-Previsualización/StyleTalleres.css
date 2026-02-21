@@ -1,0 +1,53 @@
+/* Color de fondo gris para toda la página (opcional, según tu diseño) */
+body {
+    background-color: #dcdcdc;
+    font-family: Arial, sans-serif; /* Para que el texto se vea limpio */
+}
+
+/* 1. El contenedor principal que agrupa todo */
+.contenedor-talleres {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    padding: 80px 20px;
+    flex-wrap: wrap;
+}
+
+/* 2. Cada tarjeta individual */
+.Taller {
+    display: flex;
+    flex-direction: column;
+    width: 380px; /* Ancho de la caja negra */
+}
+
+/* 3. El recuadro negro gigante */
+
+.texto-h3 {
+    color: white;
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0;
+}
+
+/* 4. La fila de abajo (Estrellas + Texto) */
+.resenas{
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre la caja de estrellas y el texto */
+}
+
+/* 5. El recuadro blanco con borde amarillo para las estrellas */
+.estrellas {
+    background-color: white;
+    border: 2px solid #ffcc00; /* El color amarillo del borde */
+    border-radius: 8px; /* Redondea las esquinas */
+    padding: 4px 10px;
+    font-size: 18px;
+    letter-spacing: 2px; /* Separa un poquito las estrellas entre sí */
+}
+
+/* 6. El texto "Nº de Reseñas" */
+.texto-resenas {
+    font-size: 14px;
+    color: #000;
+}

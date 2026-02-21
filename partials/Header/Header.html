@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titulo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <template id="header-principal">
+        <header id="header_disign">
+
+            <figure>
+                <img src="../../Fotos/imagen.png" alt="logo" class="logo_circular">
+            </figure>
+
+
+            <form id="search-form">
+                <input type="search" id="search-input" placeholder="Buscar Talleres..." required>
+                <button type="submit">🔍</button>
+            </form>
+
+
+            <figure>
+                <img src="../../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
+            </figure>
+
+        </header>
+    </template>
+
+    <script>
+        // 1. Buscamos el molde por su ID
+        const plantilla = document.getElementById('header-principal');
+
+        // 2. Clonamos su contenido (el true es para que copie todo lo de adentro)
+        const clon = plantilla.content.cloneNode(true);
+
+        document.body.prepend(clon);
+    </script>
+
+</body>
+</html>
