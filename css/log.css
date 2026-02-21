@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Fondo oscuro */
+.overlay {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/* Caja gris */
+.auth-container {
+    position: relative;
+    width: 800px;
+    height: 420px;
+    background: #d9d9d9;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botón cerrar */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    background: #000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Contenedor botones */
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Botón claro */
+.btn-outline {
+    width: 280px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+/* Botón oscuro */
+.btn-dark {
+    width: 280px;
+    height: 40px;
+    background: #2b2b2b;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.btn-dark:hover,
+.btn-outline:hover {
+    filter: brightness(1.1);
+}
