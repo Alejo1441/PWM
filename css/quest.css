@@ -1,0 +1,134 @@
+/* ========== RESET BÁSICO ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========== OVERLAY (fondo oscuro) ========== */
+.overlay {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* fondo oscuro tipo modal */
+    background: rgba(0, 0, 0, 0.75);
+    padding: 40px 16px;
+}
+
+/* ========== CONTENEDOR DEL FORM ========== */
+.form-container {
+    position: relative;
+    width: min(820px, 92vw);
+    background: #d9d9d9;          /* gris claro del panel */
+    border-radius: 6px;
+    padding: 28px 28px 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* ========== BOTÓN CERRAR (X) ========== */
+.close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #000000;
+
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 28px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    filter: brightness(0.92);
+}
+
+/* (Si quieres que se vea como “X” dentro de círculo negro)
+   puedes cambiar background a #000 y color a #fff */
+
+/* ========== TÍTULO (si no lo quieres, borra el h2) ========== */
+.form-title {
+    display: none; /* En tu Figma no se aprecia título grande */
+}
+
+/* ========== FORM + GRUPOS ========== */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-group label {
+    display: inline-block;
+    margin-bottom: 6px;
+    font-size: 13px;
+    color: #111;
+}
+
+.form-group label span {
+    color: #e60000; /* asterisco rojo */
+    margin-left: 2px;
+}
+
+/* Inputs */
+.form-group input {
+    width: 100%;
+    height: 34px;
+    padding: 0 12px;
+
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+
+    background: #ffffff;
+    outline: none;
+
+    font-size: 13px;
+    color: #111;
+}
+
+.form-group input::placeholder {
+    color: #9a9a9a;
+}
+
+/* efecto focus suave */
+.form-group input:focus {
+    border-color: #9b9b9b;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+/* ========== BOTÓN FINAL ========== */
+.submit-btn {
+    margin-top: 6px;
+    height: 42px;
+    border: none;
+    border-radius: 6px;
+
+    background: #2b2b2b;
+    color: #ffffff;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    filter: brightness(1.08);
+}
+
+.submit-btn:active {
+    transform: translateY(1px);
+}
