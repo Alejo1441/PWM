@@ -1,0 +1,73 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.tu-contenedor-flex * {
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1); /* Un rojo clarito de fondo */
+}
+
+.TallerInfo{
+
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #D6D6D6;
+}
+
+.botones-especialidad{
+    display: flex;
+    gap: 10px;
+}
+
+.botonEspecialidad{
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.Color-Linea{
+    border: 2px solid white;
+}
+
+.Info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.Imagenes-Taller{
+    width: 33%;
+    align-items: center;
+}
+
+.foto-taller {
+    border: 2px solid black;
+}
+
+.InfoTalleryResena{
+    width: 33%;
+}
+
+.mapa{
+   width: 33%;
+}
+.google-maps{
+
+    border: 2px solid black;
+}
+
+.estrellas {
+    background-color: white;
+    border: 2px solid #ffcc00; /* El color amarillo del borde */
+    border-radius: 8px; /* Redondea las esquinas */
+    padding: 4px 10px;
+    font-size: 18px;
+    letter-spacing: 2px; /* Separa un poquito las estrellas entre sí */
+}
+
+/* 6. El texto "Nº de Reseñas" */
+.texto-resenas {
+    font-size: 14px;
+    color: #000;
+}

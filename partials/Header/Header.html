@@ -31,10 +31,9 @@
     </template>
 
     <script>
-        // 1. Buscamos el molde por su ID
+
         const plantilla = document.getElementById('header-principal');
 
-        // 2. Clonamos su contenido (el true es para que copie todo lo de adentro)
         const clon = plantilla.content.cloneNode(true);
 
         document.body.prepend(clon);
