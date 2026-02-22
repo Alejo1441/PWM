@@ -2,10 +2,13 @@ body{
     margin: 0;
     padding: 0;
 }
+
+/*
 .tu-contenedor-flex * {
     border: 1px solid #ff0000;
-    background-color: rgba(255, 0, 0, 0.1); /* Un rojo clarito de fondo */
+    background-color: rgba(255, 0, 0, 0.1);
 }
+*/
 
 .TallerInfo{
 
@@ -13,7 +16,7 @@ body{
     background-color: #D6D6D6;
 }
 
-.botones-especialidad{
+.cajabotones{
     display: flex;
     gap: 10px;
 }
@@ -25,19 +28,54 @@ body{
     margin: 20px;
     padding: 10px 20px;
     font-size: 16px;
+    border-radius: 25px;
 }
 
 .Color-Linea{
     border: 2px solid white;
 }
 
-.Info{
+.CajaInfo{
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    gap: 10px
 }
 
-.Imagenes-Taller{
-    width: 33%;
+.CajaImagen{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.CajaInfoTalleryResena{
+    position: relative;
+    flex: 2;
+}
+
+.Cajamapa{
+    flex: 2;
+    display: flex;
+    padding: 10px;
+}
+
+.Resenas{
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+
+}
+
+.texto-h3{
+    display: flex;
+    align-items: center;
+}
+
+.resenasyestrella{
+    display: flex;
     align-items: center;
 }
 
@@ -45,28 +83,30 @@ body{
     border: 2px solid black;
 }
 
-.InfoTalleryResena{
-    width: 33%;
+.Cajamapa a{
+    width: 100%;
+    height: 100%;
+
 }
 
-.mapa{
-   width: 33%;
-}
 .google-maps{
-
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border: 2px solid black;
+    box-sizing: border-box;
+    border-radius:25px;
 }
 
 .estrellas {
     background-color: white;
-    border: 2px solid #ffcc00; /* El color amarillo del borde */
-    border-radius: 8px; /* Redondea las esquinas */
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
     padding: 4px 10px;
     font-size: 18px;
-    letter-spacing: 2px; /* Separa un poquito las estrellas entre sí */
+    letter-spacing: 2px;
 }
 
-/* 6. El texto "Nº de Reseñas" */
 .texto-resenas {
     font-size: 14px;
     color: #000;
