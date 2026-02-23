@@ -3,22 +3,34 @@ body {
     padding: 0;
 }
 
+/*
+.tu-contenedor-flex * {
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+*/
+
+
 #header_disign {
     width: 100%;
+    height: 90px;
     box-sizing: border-box;
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #f0f2f5
+    background-color: #dcdcdc
 }
 
+figure {
+    margin: 0;
+}
 
 .logo_circular{
-    width: 125px;
-    height: 125px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid black;
@@ -27,7 +39,9 @@ body {
 
 #search-form {
     display: flex;
+
     gap: 10px;
+
 }
 
 #search-input {
