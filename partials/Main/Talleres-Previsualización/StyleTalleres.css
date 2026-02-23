@@ -4,50 +4,54 @@ body {
     font-family: Arial, sans-serif; /* Para que el texto se vea limpio */
 }
 
-/* 1. El contenedor principal que agrupa todo */
-.contenedor-talleres {
-    display: flex;
-    justify-content: center;
-    gap: 150px;
-    padding: 80px 20px;
-    flex-wrap: wrap;
+
+.tu-contenedor-flex * {
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1);
 }
 
-/* 2. Cada tarjeta individual */
+
+
 .Taller {
     display: flex;
     flex-direction: column;
-    width: 380px; /* Ancho de la caja negra */
+    gap: 10px;
+    padding: 8px 8px;
+    width: 50%;
 }
 
-/* 3. El recuadro negro gigante */
+.imagen-taller{
+    display: flex;
+    width: 350px;
+    height: 300px;
+}
 
 .texto-h3 {
-    color: white;
+    color: black;
     font-size: 22px;
     font-weight: normal;
     margin: 0;
 }
 
-/* 4. La fila de abajo (Estrellas + Texto) */
 .resenas{
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre la caja de estrellas y el texto */
+    gap: 10px;
 }
 
-/* 5. El recuadro blanco con borde amarillo para las estrellas */
+
 .estrellas {
+    display: flex;
     background-color: white;
-    border: 2px solid #ffcc00; /* El color amarillo del borde */
-    border-radius: 8px; /* Redondea las esquinas */
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
     padding: 4px 10px;
     font-size: 18px;
-    letter-spacing: 2px; /* Separa un poquito las estrellas entre sí */
+    letter-spacing: 2px;
 }
 
-/* 6. El texto "Nº de Reseñas" */
 .texto-resenas {
+    display: flex;
     font-size: 14px;
-    color: #000;
+    color: black;
 }

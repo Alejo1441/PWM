@@ -1,54 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link  rel="stylesheet"  href="StyleTalleres.css">
+    <title>Talleres</title>
+    <link rel="stylesheet" href="StyleTalleres.css">
 </head>
 <body>
 
-    <template id="Talleres-Previsualizacion">
+<main>
+    <div class="tu-contenedor-flex">
+        <article class="Taller">
 
-            <div class="Taller">
-                <h3 class="texto-h3"></h3>
-                <img src="" alt="" class="Imagen-Taller">
-                <div class="resenas">
-                    <span class="estrellas"></span>
-                    <span class="texto-resenas"></span>
+            <header>
+                <img src="../../../Fotos/imagen.png" alt="Foto Taller 2" class="imagen-taller">
+                <h3 class="texto-h3">Nombre Taller</h3>
+            </header>
+
+            <footer class="resenas">
+                <div class="estrellas-contenedor">
+                    <span class="estrellas">★★★★★</span>
                 </div>
-            </div>
+                <span class="texto-resenas">Nº de Reseñas</span>
+            </footer>
 
-    </template>
-
-    <main id="contenedor-talleres" class="Talleres-disign"></main>
-
-    <script>
-
-        const listaTalleres = [
-            { nombre: "Taller Mecánico Juan", foto: "imagen.png", estrellas: "⭐⭐⭐⭐⭐", reviews: 15 },
-            { nombre: "AutoFix Pro", foto: "imagen.png", estrellas: "⭐⭐⭐⭐", reviews: 8 },
-            { nombre: "MotoSport", foto: "imagen.png", estrellas: "⭐⭐⭐⭐⭐", reviews: 20 },
-            { nombre: "Chapa y Pintura", foto: "imagen.png", estrellas: "⭐⭐⭐", reviews: 5 }
-        ];
-
-        const plantilla = document.getElementById('Talleres-Previsualizacion');
-        const contenedor = document.getElementById('contenedor-talleres');
-
-        listaTalleres.forEach(taller => {
-            // 1. Clonamos el molde
-            const clon = plantilla.content.cloneNode(true);
-
-            // 2. Personalizamos el contenido del clon con los datos del array
-            clon.querySelector('h3').textContent = taller.nombre;
-            clon.querySelector('.Imagen-Taller').src = "../../../Fotos/" + taller.foto;
-            clon.querySelector('.Imagen-Taller').alt = "Foto de " + taller.nombre;
-            clon.querySelector('.resenas').textContent = `${taller.estrellas} ${taller.reviews} Reseñas`;
-
-            // 3. Lo metemos en el contenedor principal
-            contenedor.appendChild(clon);
-        });
-
-    </script>
+        </article>
+    </div>
+</main>
 
 </body>
 </html>

@@ -9,35 +9,24 @@
 </head>
 
 <body>
-    <template id="header-principal">
-        <header id="header_disign">
 
-            <figure>
-                <img src="../../Fotos/imagen.png" alt="logo" class="logo_circular">
-            </figure>
+    <header id="header_disign">
 
-
-            <form id="search-form">
-                <input type="search" id="search-input" placeholder="Buscar Talleres..." required>
-                <button type="submit">🔍</button>
-            </form>
+        <figure>
+            <img src="../../Fotos/imagen.png" alt="logo" class="logo_circular">
+        </figure>
 
 
-            <figure>
-                <img src="../../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-            </figure>
+        <form id="search-form">
+            <input type="search" id="search-input" placeholder="Buscar Talleres..." required>
+            <button type="submit">🔍</button>
+        </form>
 
-        </header>
-    </template>
 
-    <script>
-
-        const plantilla = document.getElementById('header-principal');
-
-        const clon = plantilla.content.cloneNode(true);
-
-        document.body.prepend(clon);
-    </script>
+        <figure>
+            <img src="../../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
+        </figure>
+    </header>
 
 </body>
 </html>
