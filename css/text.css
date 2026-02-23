@@ -1,0 +1,27 @@
+.article-container{
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.custom-details{
+    border:1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+.custom-details summary{
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    padding: 10px;
+}
+.custom-details summary:hover{
+    color: #007BFF
+}
+.custom-details .content{
+    padding: 10px;
+    border-top: 1px solid #eeeeee;
+    line-height: 1.6;
+    color: #555;
+}
