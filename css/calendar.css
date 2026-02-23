@@ -1,0 +1,138 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background:#d9d9d9;
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:40px 30px;
+}
+
+.container{
+    width:min(1200px, 95vw);
+    display:grid;
+    grid-template-columns: 320px 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+/* IZQUIERDA */
+.title{
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.calendar{
+    width:280px;
+    background:#f4f4f4;
+    border-radius:12px;
+    padding:14px;
+}
+
+.cal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.nav-btn{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:10px;
+    background:#ffffff;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.selects{
+    display:flex;
+    gap:8px;
+}
+
+select{
+    height:32px;
+    padding:0 10px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+.dow{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:6px;
+    font-size:11px;
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(7, 1fr);
+    gap:6px;
+}
+
+/* Ocultar radios */
+.grid input{
+    display:none;
+}
+
+.day{
+    height:30px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    cursor:pointer;
+    background:transparent;
+}
+
+.day:hover{
+    background:#eaeaea;
+}
+
+/* Seleccionado */
+.grid input:checked + .day{
+    background:#111;
+    color:#fff;
+}
+
+/* DERECHA */
+.slots{
+    background:#bfbfbf;
+    border-radius:8px;
+    padding:18px;
+}
+
+.slots-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:14px;
+}
+
+.slot{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+
+.slot.available{
+    color:#1d7a2c;
+}
+
+.slot.busy{
+    color:#c11b1b;
+}
