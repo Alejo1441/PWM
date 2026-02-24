@@ -124,6 +124,12 @@ body {
 
     cursor: pointer;
 }
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
 
 .submit-btn:hover {
     filter: brightness(1.08);
