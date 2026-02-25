@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccion</title>
+    <link rel="stylesheet" href="../css/car_select.css">
+</head>
+<body>
+
+<div class="page">
+    <div class="container">
+
+        <!-- IZQUIERDA -->
+        <div class="left">
+            <h1>¿A que vehículo le quieres realizar el servicio?</h1>
+
+            <div class="car-list">
+                <button class="car-item">coche 1</button>
+                <button class="car-item">coche 2</button>
+                <button class="car-item">coche 3</button>
+                <button class="car-item">coche 4</button>
+                <button class="car-item">coche 5</button>
+                <button class="car-item">coche 6</button>
+            </div>
+        </div>
+
+        <!-- DERECHA -->
+        <div class="right">
+            <div class="summary">
+                <p><strong>Vehículo seleccionado:</strong> <span id="selectedCar">Ninguno</span></p>
+                <p><strong>Tipo de servicio:</strong> nombre servicio</p>
+                <p><strong>Fecha de la cita:</strong> Día y fecha</p>
+
+                <div class="price-block">
+                    <p><strong>Precio estimado:</strong></p>
+                    <div class="price">Precio</div>
+                </div>
+            </div>
+
+            <button class="confirm-btn">Confirmar reserva</button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const cars = document.querySelectorAll(".car-item");
+    const selectedText = document.getElementById("selectedCar");
+
+    cars.forEach(car => {
+        car.addEventListener("click", () => {
+
+            // Quitar selección anterior
+            cars.forEach(c => c.classList.remove("active"));
+
+            // Activar el clicado
+            car.classList.add("active");
+
+            // Cambiar texto del resumen
+            selectedText.textContent = car.textContent;
+        });
+    });
+</script>
+
+</body>
+</html>
