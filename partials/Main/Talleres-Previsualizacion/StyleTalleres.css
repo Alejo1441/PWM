@@ -1,0 +1,57 @@
+/* Color de fondo gris para toda la página (opcional, según tu diseño) */
+body {
+    background-color: #dcdcdc;
+    font-family: Arial, sans-serif; /* Para que el texto se vea limpio */
+}
+
+/*
+.tu-contenedor-flex * {
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+*/
+
+
+.Taller {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 8px;
+    width: 50%;
+}
+
+.imagen-taller{
+    display: flex;
+    width: 350px;
+    height: 300px;
+}
+
+.texto-h3 {
+    color: black;
+    font-size: 22px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.resenas{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.estrellas {
+    display: flex;
+    background-color: white;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.texto-resenas {
+    display: flex;
+    font-size: 14px;
+    color: black;
+}
