@@ -1,3 +1,15 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main .content{
+    flex: 1;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -9,6 +21,7 @@
     color: #fff;
     padding: 16px;
     font-family: sans-serif;
+    width: 100%;
 }
 
 .footer-container{
