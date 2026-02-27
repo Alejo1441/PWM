@@ -9,6 +9,11 @@ body{
     background:#d9d9d9;
 }
 
+.Color-Linea{
+    border: 2px solid white;
+}
+
+
 .page{
     min-height:100vh;
     display:flex;

@@ -10,6 +10,9 @@ body{
     background-color: #dcdcdc
 }
 
+.Color-Linea{
+    border: 2px solid white;
+}
 
 .profile-container {
     display: flex;

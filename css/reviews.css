@@ -1,4 +1,69 @@
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #D6D6D6;
+}
+
 .reviews {
     max-width: 800px;
     flex: 1;
+}
+
+.Color-Linea{
+    border: 2px solid white;
+}
+
+.logo_circular{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid black;
+}
+
+.Resenas{
+    width: 100%;
+    bottom: 20px;
+    padding: 100px 0;
+}
+
+.texto-h3{
+    display: flex;
+    align-items: center;
+}
+
+.resenasyestrella{
+    display: flex;
+    align-items: center;
+}
+
+.estrellas {
+    background-color: white;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.texto-resenas {
+    font-size: 14px;
+    color: #000;
+}
+
+.item-resena {
+    display: flex;
+    align-items: center; /* Centra la imagen con el texto verticalmente */
+    gap: 15px;           /* Separación entre la foto de perfil y las estrellas */
+    margin-bottom: 30px; /* Separación hacia abajo para la siguiente reseña */
+}
+
+/* Y asegúrate de tener esto (que ya lo tenías, pero le añadí gap) */
+.resenasyestrella {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Separa la cajita amarilla del texto "El Mejor Taller" */
 }
