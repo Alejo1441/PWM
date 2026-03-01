@@ -44,7 +44,7 @@
 # Listado de las páginas de HTML
 https://www.figma.com/design/ep7QrRIzNu6s7XHIGgbBrd/SPRINT-1?node-id=33-218&t=WaOALsUylymES8q4-0
 - (Para una mayor rapidez a la hora de ver e identificar los Mockups, en este apartado
-se hablarán sobre los layes, es decir, los nombres que les hemos puesto a los mockups, que pueden ser tanto números,
+se hablarán sobre los layers, es decir, los nombres que les hemos puesto a los mockups, que pueden ser tanto números,
 como nombres, todo esto hablando sobre el figma)
 
 
