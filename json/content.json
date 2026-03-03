@@ -1,0 +1,85 @@
+{
+  "configuracion": {
+    "nombreSitio": "Mi Taller Web",
+    "logo": "assets/img/logo.png",
+    "redesSociales": {
+      "twitter": "@taller_info",
+      "instagram": "@taller_web"
+    }
+  },
+
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "Jose",
+      "lastname": "Juan",
+      "email": "prueba@gmail.com",
+      "municipality": "La Aldea",
+      "password": "hashed_password",
+      "rol": "admin",
+      "car": ["coche1"],
+      "bookings": []
+    },
+    {
+      "id": 2,
+      "username": "Profe",
+      "lastname": "2",
+      "email": "profe@gmail.com",
+      "municipality": "Las Palmas",
+      "password": "hashed_password",
+      "rol": "user",
+      "car": ["coche2"],
+      "bookings": []
+    }
+  ],
+
+  "talleres": [
+    {
+      "id": 101,
+      "name": "Taller1",
+      "description": "Los más mejores",
+      "image": ["img/js-taller.jpg"],
+      "speciality": [
+        {
+          "service": "cambiar aceite",
+          "price": 30
+        }
+      ],
+      "coordinates": {"lat": 10.00, "lng":  10.00 },
+      "reviews": [
+        {
+          "username": "Jose",
+          "stars": 1,
+          "comment": "Basura de taller",
+          "date": "02-03-2026"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "name": "Taller2",
+      "description": "El mejor Taller",
+      "image": ["img/js-taller.jpg"],
+      "speciality": [
+        {
+          "service": "cambiar rueda",
+          "price": 33
+        }
+      ],
+      "coordinates": {"lat": 11.00, "lng":  11.00 },
+      "reviews": [
+        {
+          "username": "Jose",
+          "stars": 5,
+          "comment": "El mejor taller",
+          "date": "02-03-2026"
+        }
+      ]
+    }
+  ],
+
+  "footer": {
+    "copyright": "2025 Universidad de Las Palmas de Gran Canaria",
+    "enlaces": ["Aviso Legal", "Privacidad"]
+  }
+}
