@@ -19,8 +19,8 @@ async function cargarDatos() {
             await renderizarHeader(datos.configuracion);
         }
 
-        if (document.getElementById('main-content')) {
-           await renderizarMain();
+        if (document.querySelector('.TallerInfo')) {
+            await renderizarMain();
         }
 
         if (document.getElementById('site-footer')) {
@@ -64,44 +64,67 @@ async function renderizarMain() {
 
     try {
 
-        const respuesta = await fetch('../partials/Talleres-Previsualizacion.html');
-        if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
-        const main = await respuesta.text();
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idTaller = parametrosURL.get('id');
+
+        if (!idTaller) throw new Error("Falta el ID del taller en la URL");
 
         const respuestaJson = await fetch('../json/content.json');
-        if (!respuestaJson.ok) throw new Error("Error cargando el JSON");
+        if (!respuestaJson.ok) throw new Error("Error al cargar el JSON");
+
         const datosGenerales = await respuestaJson.json();
 
-        const talleres = datosGenerales.talleres.slice(0,2);
+        const tallerSeleccionado = datosGenerales.talleres.find(t => t.id == idTaller);
 
-        const mainContainer = document.getElementById('main-content');
+        if (tallerSeleccionado) {
 
-        let mainfinal = '<div class="tu-contenedor-flex">';
+            const parrafoInfo = document.querySelector('.InfoTaller');
+            if (parrafoInfo) {
+                parrafoInfo.textContent = tallerSeleccionado.description;
+            }
 
-        talleres.forEach(taller => {
-            const numeroResenas = taller.reviews.length;
+            const cajaImagen = document.querySelector('.CajaImagen');
+            if (cajaImagen) {
+                cajaImagen.innerHTML = '';
+                tallerSeleccionado.image.forEach(imgUrl => {
+                    cajaImagen.innerHTML += `<img src="../${imgUrl}" alt="Foto de ${tallerSeleccionado.name}" class="foto-taller">`;
+                });
+            }
+
+            const cajaBotones = document.querySelector('.cajabotones');
+            if (cajaBotones) {
+                cajaBotones.innerHTML = '';
+
+                tallerSeleccionado.speciality.forEach(especialidad => {
+                    cajaBotones.innerHTML += `<a href="../pages/calendar.html" class="botonEspecialidad">${especialidad.service} - ${especialidad.price}€</a>`;
+                });
+            }
+
+            const numeroResenas = tallerSeleccionado.reviews.length;
             let promedio = 0;
 
             if (numeroResenas > 0) {
-                const sumaEstrellas = taller.reviews.reduce((suma, review) => suma + review.stars, 0);
-                promedio = Math.round(sumaEstrellas / numeroResenas);
+                const suma = tallerSeleccionado.reviews.reduce((acc, review) => acc + review.stars, 0);
+                promedio = Math.round(suma / numeroResenas);
             }
 
             const estrellasVisuales = '★'.repeat(promedio) + '☆'.repeat(5 - promedio);
 
-            let tarjetaTaller = main
-                .replaceAll('{{id}}', taller.id)
-                .replaceAll('{{nombre}}', taller.name)
-                .replaceAll('{{imagen}}', taller.image[0]) // Tomamos la 1ra imagen del array
-                .replaceAll('{{resenas}}', numeroResenas)
-                .replaceAll('★★★★★', estrellasVisuales); // Cambiamos las fijas por las dinámicas
+            const spanEstrellas = document.querySelector('.estrellas');
+            const enlaceResenas = document.querySelector('.texto-resenas');
 
-            mainfinal += tarjetaTaller;
+            if (spanEstrellas) spanEstrellas.textContent = estrellasVisuales;
 
-        });
+            if (enlaceResenas) {
+                enlaceResenas.textContent = `${numeroResenas} Reseñas`;
+                enlaceResenas.href = `reviews.html?id=${tallerSeleccionado.id}`;
+            }
+            document.title = `${tallerSeleccionado.name} - Mi Taller Web`;
 
-        mainfinal += '</div>';
-        mainContainer.innerHTML = mainfinal;
+        } else {
+            console.error("No existe ningún taller con el ID:", idTaller);
+            document.querySelector('.TallerInfo').innerHTML = "<h2>Taller no encontrado</h2>";
+        }
 
     } catch (error) {
         console.error("Error al pintar el main:", error);
