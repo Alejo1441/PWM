@@ -38,7 +38,7 @@
       "id": 101,
       "name": "Taller1",
       "description": "Los más mejores",
-      "image": ["img/js-taller.jpg"],
+      "image": ["../Fotos/tallerCarrizal.jpg"],
       "speciality": [
         {
           "service": "cambiar aceite",
@@ -59,7 +59,7 @@
       "id": 102,
       "name": "Taller2",
       "description": "El mejor Taller",
-      "image": ["img/js-taller.jpg"],
+      "image": ["../Fotos/tallerSalamanca.jpg"],
       "speciality": [
         {
           "service": "cambiar rueda",
@@ -72,6 +72,12 @@
           "username": "Jose",
           "stars": 5,
           "comment": "El mejor taller",
+          "date": "02-03-2026"
+        },
+        {
+          "username": "Jose2",
+          "stars": 3,
+          "comment": "Taller regular",
           "date": "02-03-2026"
         }
       ]
