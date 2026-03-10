@@ -3,7 +3,7 @@ async function xLuIncludeFile() {
 
     for (let i = 0; i < z.length; i++) {
         if (z[i].getAttribute("xlu-include-file")) {
-            let a = z[i].cloneNode(false);
+                let a = z[i].cloneNode(false);
             let file = z[i].getAttribute("xlu-include-file");
 
             try {
