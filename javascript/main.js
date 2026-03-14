@@ -115,12 +115,12 @@ async function renderizarFooter(datos) {
     try {
 
         const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
-        if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
+        if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
         const footer = await respuesta.text();
 
         footerContainer.innerHTML = footer;
 
     } catch (error) {
-        console.error("Error al pintar el header:", error);
+        console.error("Error al pintar el footer:", error);
     }
 }

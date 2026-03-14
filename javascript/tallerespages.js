@@ -1,20 +1,15 @@
-// Esperamos a que el HTML cargue completamente
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatos();
 });
 
-// Lógica de lectura usando async/await
 async function cargarDatos() {
     try {
-        // 1. Esperamos (await) a que se descargue el JSON
         const respuesta = await fetch('../json/content.json');
 
         if (!respuesta.ok) throw new Error("Error al cargar el JSON");
 
-        // 2. Esperamos (await) a que se convierta en objeto JS
         const datos = await respuesta.json();
 
-        // 3. Renderizamos las partes de la página
         if (document.getElementById('site-header')) {
             await renderizarHeader(datos.configuracion);
         }
@@ -32,23 +27,18 @@ async function cargarDatos() {
     }
 }
 
-// Le añadimos "async" a la función
 async function renderizarHeader(config) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        // 1. Hacemos el fetch al archivo HTML y esperamos
         const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
-        // 2. Esperamos a que nos devuelva el texto del HTML
         const header = await respuesta.text();
 
-        // 3. Lo inyectamos en la pantalla
         headerContainer.innerHTML = header;
 
-        // 4. Inyectamos los datos dinámicos (Ej: el texto alternativo del logo)
         const logo = headerContainer.querySelector('.logo_circular');
         if (logo) {
             logo.alt = `Logo de ${config.nombreSitio}`;
@@ -78,6 +68,12 @@ async function renderizarMain() {
 
         if (tallerSeleccionado) {
 
+            const contenedorInfo = document.querySelector('.TallerInfo');
+            if (contenedorInfo && tallerSeleccionado.image.length > 0) {
+                const rutaFoto = `../${tallerSeleccionado.image[0]}`;
+                contenedorInfo.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+            }
+
             const parrafoInfo = document.querySelector('.InfoTaller');
             if (parrafoInfo) {
                 parrafoInfo.textContent = tallerSeleccionado.description;
@@ -96,7 +92,7 @@ async function renderizarMain() {
                 cajaBotones.innerHTML = '';
 
                 tallerSeleccionado.speciality.forEach(especialidad => {
-                    cajaBotones.innerHTML += `<a href="../pages/calendar.html" class="botonEspecialidad">${especialidad.service} - ${especialidad.price}€</a>`;
+                    cajaBotones.innerHTML += `<a href="../pages/calendar.html" class="botonEspecialidad">${especialidad.service}</a>`;
                 });
             }
 
@@ -123,7 +119,6 @@ async function renderizarMain() {
 
         } else {
             console.error("No existe ningún taller con el ID:", idTaller);
-            document.querySelector('.TallerInfo').innerHTML = "<h2>Taller no encontrado</h2>";
         }
 
     } catch (error) {
@@ -138,12 +133,12 @@ async function renderizarFooter(datos) {
     try {
 
         const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
-        if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
+        if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
         const footer = await respuesta.text();
 
         footerContainer.innerHTML = footer;
 
     } catch (error) {
-        console.error("Error al pintar el header:", error);
+        console.error("Error al pintar el footer:", error);
     }
 }

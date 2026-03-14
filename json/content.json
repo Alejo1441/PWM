@@ -38,7 +38,7 @@
       "id": 101,
       "name": "Taller1",
       "description": "Los más mejores",
-      "image": ["../Fotos/tallerCarrizal.jpg"],
+      "image": ["../Fotos/taller-elpaso2000-03.jpg", "../Fotos/tallerCarrizal.jpg"],
       "speciality": [
         {
           "service": "cambiar aceite",
@@ -71,7 +71,7 @@
         {
           "username": "Jose",
           "stars": 5,
-          "comment": "El mejor taller",
+          "comment": "El mejor tallerrrrr",
           "date": "02-03-2026"
         },
         {
