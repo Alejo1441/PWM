@@ -5,8 +5,12 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    background-color: #D6D6D6;
 }
 
+.Color-Linea{
+    border: 2px solid white;
+}
 
 .article-container{
     flex: 1;

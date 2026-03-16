@@ -1,20 +1,25 @@
+// Esperamos a que el HTML cargue completamente
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatos();
 });
 
+// Lógica de lectura usando async/await
 async function cargarDatos() {
     try {
+        // 1. Esperamos (await) a que se descargue el JSON
         const respuesta = await fetch('../json/content.json');
 
         if (!respuesta.ok) throw new Error("Error al cargar el JSON");
 
+        // 2. Esperamos (await) a que se convierta en objeto JS
         const datos = await respuesta.json();
 
+        // 3. Renderizamos las partes de la página
         if (document.getElementById('site-header')) {
             await renderizarHeader(datos.configuracion);
         }
 
-        if (document.querySelector('.reviews')) {
+        if (document.getElementById('main-content')) {
             await renderizarMain(datos);
         }
 
@@ -44,6 +49,11 @@ async function renderizarHeader(config) {
             logo.alt = `Logo de ${config.nombreSitio}`;
         }
 
+        const imagen_perfil = headerContainer.querySelector('#Taller-image');
+        if(imagen_perfil){
+            imagen_perfil.src = "../Fotos/Nuestro logo.png";
+        }
+
 
     } catch (error) {
         console.error("Error al pintar el header:", error);
@@ -53,46 +63,33 @@ async function renderizarHeader(config) {
 async function renderizarMain(datos) {
 
     try {
-
         const parametrosURL = new URLSearchParams(window.location.search);
         const idTaller = parametrosURL.get('id');
+        const tipo = parametrosURL.get('tipo');
 
-        if (!idTaller) throw new Error("Falta el ID del taller en la URL");
+        if (idTaller == 0) {
+            if (tipo == 'politicas') {
+                const politicas = document.querySelector('#main-content');
 
+                if (politicas) {
+                    politicas.innerHTML = '';
+                    datos.configuracion.politicas.forEach(politica => {
+                        politicas.innerHTML += `<article class="article-container">
+                                                    <details class ="custom-details">
+                                                        <summary>${politica.name_politica}</summary>
+    
+                                                        <div class="content">
+                                                            <p>${politica.politica_texto}</p>
+                                                        </div>
+                                                    </details>
+                                                </article>`;
+                    });
+                }
 
-        const tallerSeleccionado = datos.talleres.find(t => t.id == idTaller);
-
-        if (tallerSeleccionado) {
-
-            const contenedorReview = document.querySelector('.reviews');
-            if (contenedorReview && tallerSeleccionado.image.length > 0) {
-                const rutaFoto = `../${tallerSeleccionado.image[0]}`;
-                contenedorReview.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
             }
-
-            const nombre_taller = document.querySelector('.nombre-taller');
-            nombre_taller.textContent = `Reviews del Taller '${tallerSeleccionado.name}'`;
-
-            const resena = document.querySelector(".resena")
-
-            if (resena) {
-                resena.innerHTML = '';
-                tallerSeleccionado.reviews.forEach(review => {
-                    const valoracion = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars)
-                    resena.innerHTML += `<div class="item-resena">
-                                            <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-                                                <span class="estrellas">${valoracion}</span>
-                                                <p class="texto-resenas"> ${review.comment}</p>
-                                            </div>
-                                         </div>`;
-                });
-            }
-
-        } else {
-            console.error("No existe ningún taller con el ID:", idTaller);
         }
 
-    }catch(error) {
+    }catch (error) {
         console.error("Error al pintar el main:", error);
     }
 
@@ -108,6 +105,7 @@ async function renderizarFooter(datos) {
         const footer = await respuesta.text();
 
         footerContainer.innerHTML = footer;
+
 
     } catch (error) {
         console.error("Error al pintar el footer:", error);

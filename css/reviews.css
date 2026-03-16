@@ -8,8 +8,29 @@ body{
 }
 
 .reviews {
-    max-width: 800px;
+    width: 100%;
     flex: 1;
+
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.reviews::before {
+    content: "";
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    z-index: -1;
+
+    background-image: var(--bg-taller);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(10px);
+    opacity: 0.6;
 }
 
 .Color-Linea{

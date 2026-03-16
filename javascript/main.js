@@ -32,26 +32,26 @@ async function cargarDatos() {
     }
 }
 
-// Le añadimos "async" a la función
 async function renderizarHeader(config) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        // 1. Hacemos el fetch al archivo HTML y esperamos
         const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
-        // 2. Esperamos a que nos devuelva el texto del HTML
         const header = await respuesta.text();
 
-        // 3. Lo inyectamos en la pantalla
         headerContainer.innerHTML = header;
 
-        // 4. Inyectamos los datos dinámicos (Ej: el texto alternativo del logo)
         const logo = headerContainer.querySelector('.logo_circular');
         if (logo) {
             logo.alt = `Logo de ${config.nombreSitio}`;
+        }
+
+        const imagen_perfil = headerContainer.querySelector('#Taller-image');
+        if(imagen_perfil){
+            imagen_perfil.src = "../Fotos/Nuestro logo.png";
         }
 
 
@@ -76,7 +76,7 @@ async function renderizarMain() {
 
         const mainContainer = document.getElementById('main-content');
 
-        let mainfinal = '<div class="tu-contenedor-flex">';
+        let mainfinal = '<div class="Home">';
 
         talleres.forEach(taller => {
             const numeroResenas = taller.reviews.length;
@@ -92,9 +92,9 @@ async function renderizarMain() {
             let tarjetaTaller = main
                 .replaceAll('{{id}}', taller.id)
                 .replaceAll('{{nombre}}', taller.name)
-                .replaceAll('{{imagen}}', taller.image[0]) // Tomamos la 1ra imagen del array
+                .replaceAll('{{imagen}}', taller.image[0])
                 .replaceAll('{{resenas}}', numeroResenas)
-                .replaceAll('★★★★★', estrellasVisuales); // Cambiamos las fijas por las dinámicas
+                .replaceAll('★★★★★', estrellasVisuales);
 
             mainfinal += tarjetaTaller;
 
@@ -116,9 +116,14 @@ async function renderizarFooter(datos) {
 
         const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
         if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
-        const footer = await respuesta.text();
+        let footer = await respuesta.text();
+
+        const parametrosURL = new URLSearchParams(window.location.search);
+        let idActual = parametrosURL.get('id') || 0;
+        footer = footer.replaceAll('{{id}}', idActual);
 
         footerContainer.innerHTML = footer;
+
 
     } catch (error) {
         console.error("Error al pintar el footer:", error);
