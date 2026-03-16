@@ -1,59 +1,82 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btnLogin = document.getElementById('btn-login');
-    const btnSignup = document.getElementById('btn-signup');
-    const emailInput = document.getElementById('email');
-    const passInput = document.getElementById('password');
-    const errorMsg = document.getElementById('auth-error');
+    // 1. Referencias a los Diálogos (Modales)
+    const modalAuth = document.getElementById('modal-auth-choice');
+    const modalLogin = document.getElementById('modal-login');
+    const modalRegType = document.getElementById('modal-reg-type');
+    const modalRegForm = document.getElementById('modal-register-form');
 
+    // 2. Referencias a Botones de apertura dentro de los modales
+    const btnOpenLogin = document.getElementById('open-login');
+    const btnOpenRegChoice = document.getElementById('open-register-choice');
+    const btnGoRegClient = document.getElementById('go-reg-client');
 
-    //LOGIN
-    async function handleLogin(){
-        try{
-            const res = await fetch('../json/content.json');
-            const data = await res.json();
-            const usuarios = data.usuarios;
+    const loginForm = document.getElementById('form-login');
+    const registerForm = document.getElementById('form-register');
 
-            const user = usuarios.find(u => u.email === emailInput.value && u.password === passInput.value);
+    // --- LÓGICA DE NAVEGACIÓN ENTRE MODALES ---
+    if(btnOpenLogin) btnOpenLogin.onclick = () => { modalAuth.close(); modalLogin.showModal(); };
+    if(btnOpenRegChoice) btnOpenRegChoice.onclick = () => { modalAuth.close(); modalRegType.showModal(); };
+    if(btnGoRegClient) btnGoRegClient.onclick = () => { modalRegType.close(); modalRegForm.showModal(); };
 
-            if (user){
-                localStorage.setItem('usuario_logeado', JSON.stringify(user));
-                window.location.href= "../pages/profile.html"
-            }else {
-                showError("Email o contraseña incorrectos")
-            }
+    // --- LÓGICA DE LOGIN ---
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-pass').value;
 
-        }catch (e){
-            showError("Email o contraseñas incorrectos");
+            try {
+                const res = await fetch('../json/content.json');
+                const data = await res.json();
+                const user = data.usuarios.find(u => u.email === email && u.password === pass);
+
+                if (user) {
+                    localStorage.setItem('usuario_logeado', JSON.stringify(user));
+                    window.location.href = "../pages/profile.html";
+                } else {
+                    alert("Email o contraseña incorrectos");
+                }
+            } catch (error) { console.error("Error:", error); }
+        });
+    }
+
+    // --- ESPERAR AL HEADER DINÁMICO ---
+    const checkHeader = setInterval(() => {
+        const profileLink = document.getElementById('profile-link');
+        if (profileLink) {
+            clearInterval(checkHeader);
+
+            // Actualizar nombre si ya está logeado
+            actualizarInterfazHeader();
+
+            // Configurar el click del icono de perfil
+            profileLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sesion = localStorage.getItem('usuario_logeado');
+
+                if (sesion) {
+                    window.location.href = "../pages/profile.html";
+                } else {
+                    if (modalAuth) modalAuth.showModal();
+                    else alert("Error: No se encontró el modal de acceso.");
+                }
+            });
         }
-    }
-
-
-    // REGISTRO
-    function handleSignup(){
-        if (!emailInput.checkValidity() || !passInput.checkValidity()){
-            showError("Por favor, rellena los campos correctamente");
-            return;
-        }
-        const nuevoUsuario = {
-            id: Date.now(),
-            username: emailInput.value.split('@')[0],
-            lastname: "",
-            email: emailInput.value,
-            municipality: "No definido",
-            password: passInput.value,
-            rol: "user",
-            car: [],
-            bookings: []
-        };
-        localStorage.setItem('usuario_logeado', JSON.stringify(nuevoUsuario));
-        alert("¡Cuenta creada con exito!");
-        window.location.href = "../pages/profile.html";
-
-    }
-    function showError(){
-        errorMsg.textContent = txt;
-        errorMsg.style.display = 'block';
-    }
-    if(btnLogin) btnLogin.addEventListener('click',handleLogin);
-    if(btnSignup) btnSignup.addEventListener('click', handleSignup);
+    }, 100);
 });
+
+function actualizarInterfazHeader() {
+    const sesion = localStorage.getItem('usuario_logeado');
+    const profileLink = document.getElementById('profile-link');
+
+    if (sesion && profileLink) {
+        const usuario = JSON.parse(sesion);
+        if (!profileLink.querySelector('.welcome-msg')) {
+            const span = document.createElement('span');
+            span.className = 'welcome-msg';
+            span.style.marginLeft = "10px";
+            span.textContent = `Hola, ${usuario.username}`;
+            profileLink.appendChild(span);
+        }
+    }
+}
