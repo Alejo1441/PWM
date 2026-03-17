@@ -8,9 +8,8 @@
 <body>
 
 
-<header xlu-include-file="../partials/Header.html"></header>
-<script src="../javascript/xlu-include-file.js"></script>
-<script> xLuIncludeFile(); </script>
+<!-- HEADER -->
+<div xlu-include-file="../partials/Header.html"></div>
 
 <hr class="Color-Linea">
 
@@ -21,22 +20,21 @@
         <div class="left">
             <h1>¿A que vehículo le quieres realizar el servicio?</h1>
 
-            <div class="car-list">
-                <button class="car-item">coche 1</button>
-                <button class="car-item">coche 2</button>
-                <button class="car-item">coche 3</button>
-                <button class="car-item">coche 4</button>
-                <button class="car-item">coche 5</button>
-                <button class="car-item">coche 6</button>
-            </div>
+            <div class="car-list" id="car-list"></div>
         </div>
 
         <!-- DERECHA -->
         <div class="right">
             <div class="summary">
-                <p><strong>Vehículo seleccionado:</strong> <span id="selectedCar">Ninguno</span></p>
+                <p><strong>Vehículo seleccionado:</strong>
+                    <span id="selectedCar">Ninguno</span>
+                </p>
+
                 <p><strong>Tipo de servicio:</strong> nombre servicio</p>
-                <p><strong>Fecha de la cita:</strong> <span id="reservation-date">Día y fecha</span></p>
+
+                <p><strong>Fecha de la cita:</strong>
+                    <span id="reservation-date">Día y fecha</span>
+                </p>
 
                 <div class="price-block">
                     <p><strong>Precio estimado:</strong></p>
@@ -44,37 +42,20 @@
                 </div>
             </div>
 
-
-            <a href="../pages/Index.html">
-                <button class="confirm-btn" id="confirm-reservation">Confirmar reserva</button>
-            </a>
+            <button class="confirm-btn" id="confirm-reservation">
+                Confirmar reserva
+            </button>
         </div>
 
     </div>
 </div>
 
-<script>
-    const cars = document.querySelectorAll(".car-item");
-    const selectedText = document.getElementById("selectedCar");
+<!-- FOOTER -->
+<div xlu-include-file="../partials/footer.html"></div>
 
-    cars.forEach(car => {
-        car.addEventListener("click", () => {
-
-            // Quitar selección anterior
-            cars.forEach(c => c.classList.remove("active"));
-
-            // Activar el clicado
-            car.classList.add("active");
-
-            // Cambiar texto del resumen
-            selectedText.textContent = car.textContent;
-        });
-    });
-</script>
-
-<footer xlu-include-file="../partials/footer.html"></footer>
+<!-- SCRIPTS (SOLO UNA VEZ) -->
 <script src="../javascript/xlu-include-file.js"></script>
-<script> xLuIncludeFile(); </script>
+<script>xLuIncludeFile();</script>
 
 <script src="../javascript/car_select.js"></script>
 
