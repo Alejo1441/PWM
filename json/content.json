@@ -10,6 +10,17 @@
 
   "usuarios": [
     {
+      "id": 3,
+      "username": "Leon",
+      "lastname": "Kennedy",
+      "email": "Leon@gmail.com",
+      "municipality": "La Aldea",
+      "password": "1234",
+      "rol": "user",
+      "car": ["coche1"],
+      "bookings": []
+    },
+    {
       "id": 1,
       "username": "Jose",
       "lastname": "Juan",

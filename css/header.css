@@ -50,3 +50,31 @@ figure {
     border: 3px solid black;
     width: 250px;
 }
+.header-user-section{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#profile-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+#btn-logout{
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .3s;
+}
+#btn-logout:hover{
+    background-color: #cc0000;
+
+}
+.hidden{
+    display: none; !important;
+}
