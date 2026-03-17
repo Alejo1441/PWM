@@ -1,4 +1,151 @@
 {
+  "configuracion": {
+    "id": 0,
+    "nombreSitio": "Mi Taller Web",
+    "logo": "assets/img/logo.png",
+    "redesSociales": {
+      "twitter": "@taller_info",
+      "instagram": "@taller_web"
+    },
+    "politicas": [
+      {
+        "name_politica": "politica 33",
+        "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+      },
+      {
+        "name_politica": "politica 44",
+        "politica_texto": "Nos hacemos cargo de los daños ocasionados"
+      }
+    ],
+    "preguntas": [
+      {
+        "name_pregunta": "pregunta 33",
+        "pregunta_texto": "Para reservar tienes que reservar"
+      },
+      {
+        "name_pregunta": "pregunta 44",
+        "pregunta_texto": "RESERVA"
+      }
+    ]
+  },
+
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "Jose",
+      "lastname": "Juan",
+      "email": "prueba@gmail.com",
+      "municipality": "La Aldea",
+      "password": "hashed_password",
+      "rol": "admin",
+      "car": ["coche1"],
+      "bookings": []
+    },
+    {
+      "id": 2,
+      "username": "Profe",
+      "lastname": "2",
+      "email": "profe@gmail.com",
+      "municipality": "Las Palmas",
+      "password": "hashed_password",
+      "rol": "user",
+      "car": ["coche2"],
+      "bookings": []
+    }
+  ],
+
+  "talleres": [
+    {
+      "id": 101,
+      "name": "ElPaso2000",
+      "description": "Los más mejores",
+      "image": ["../Fotos/taller-elpaso2000-03.jpg", "../Fotos/tallerCarrizal.jpg"],
+      "speciality": [
+        {
+          "service": "cambiar aceite",
+          "price": 30
+        },
+        {
+          "service": "cambiar rueda",
+          "price": 29
+        }
+      ],
+      "coordinates": {"lat": 10.00, "lng":  10.00 },
+      "reviews": [
+        {
+          "username": "Jose",
+          "stars": 1,
+          "comment": "Basura de taller",
+          "date": "02-03-2026"
+        }
+      ],
+      "politicas": [
+        {
+          "name_politica": "politica 1",
+          "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+        }
+      ],
+      "preguntas": [
+        {
+          "name_pregunta": "pregunta 1",
+          "pregunta_texto": "Para reservar tienes que reservar"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "name": "Koni",
+      "description": "El mejor Taller",
+      "image": ["../Fotos/tallerSalamanca.jpg"],
+      "speciality": [
+        {
+          "service": "cambiar rueda",
+          "price": 33
+        }
+      ],
+      "coordinates": {"lat": 11.00, "lng":  11.00 },
+      "reviews": [
+        {
+          "username": "Jose",
+          "stars": 5,
+          "comment": "El mejor tallerrrrr",
+          "date": "02-03-2026"
+        },
+        {
+          "username": "Jose2",
+          "stars": 3,
+          "comment": "Taller regular",
+          "date": "02-03-2026"
+        }
+      ],
+      "politicas": [
+        {
+          "name_politica": "politica 1",
+          "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+        },
+        {
+          "name_politica": "politica 2",
+          "politica_texto": "Nos hacemos cargo de los daños ocasionados"
+        }
+      ],
+      "preguntas": [
+        {
+          "name_pregunta": "pregunta 1",
+          "pregunta_texto": "Para reservar tienes que reservar"
+        },
+        {
+          "name_pregunta": "pregunta 3",
+          "pregunta_texto": "RESERVA"
+        }
+      ]
+    }
+  ],
+
+  "footer": {
+    "copyright": "2025 Universidad de Las Palmas de Gran Canaria",
+    "enlaces": ["Aviso Legal", "Privacidad"]
+  },
+
   "calendar": {
     "title": "Servicio Ofrecido",
     "startHour": 8,
