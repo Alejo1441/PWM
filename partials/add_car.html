@@ -1,0 +1,26 @@
+<head>
+  <link rel="stylesheet" href="../css/add_car.css">
+</head>
+
+
+<dialog id ="add-car-dialog" class="custom-dialog">
+  <button class ="close-btn" onclick="this.closest('dialog').close()">✖</button>
+  <h2>Añadir nuevo vehiculo</h2>
+
+  <form id="form-car" class="dialog-form">
+    <div class="form-group">
+      <label>Modelo *</label>
+      <input type = "text" required >
+    </div>
+    <div class="form-group">
+      <label>Marca *</label>
+      <input type = "text" required >
+    </div>
+    <div class="form-group">
+      <label>Matricula</label>
+      <input type = "text" required pattern="[0-9]{4}-[A-Z]{3}]" placeholder = "1234 ABC" >
+    </div>
+    <button type="submit" class="btn-black">AÑADIR VEHICULO</button>
+  </form>
+
+</dialog>

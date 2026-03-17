@@ -10,6 +10,7 @@
 <body>
 
 <header xlu-include-file="../partials/Header.html"></header>
+
 <script src="../javascript/xlu-include-file.js"></script>
 <script src="../javascript/auth.js"></script>
 <script> xLuIncludeFile(); </script>
@@ -25,13 +26,13 @@
 
         <div class="management-container" id="cars">
             <h1>Coches en mi cuenta</h1>
-            <ul class="item-list">
+            <ul class="item-list" id="list-cars">
                 <li>Toyota Corolla - 1234 GC</li>
                 <li>Toyota Corolla - 4567 GC</li>
             </ul>
             <div class ="buttons-cars">
-                <button class="button-red"> Añadir </button>
-                <button class="button-red"> Eliminar</button>
+                <button class="button-red" id=" btn-add-car-open"> Añadir vehiculo </button>
+                <button class="button-red" id="btn-delete-car-open"> Eliminar vehiculo</button>
             </div>
         </div>
 
@@ -66,6 +67,7 @@
 
 <footer xlu-include-file="../partials/footer.html"></footer>
 <script src="../javascript/xlu-include-file.js"></script>
+<div xlu-include-file="..partials/add_car.html"></div>
 <script>
     xLuIncludeFile();
 </script>
