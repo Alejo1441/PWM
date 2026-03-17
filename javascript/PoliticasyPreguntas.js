@@ -85,9 +85,77 @@ async function renderizarMain(datos) {
                                                 </article>`;
                     });
                 }
+            }
 
+            if (tipo == 'preguntas') {
+                const preguntas = document.querySelector('#main-content');
+
+                if (preguntas) {
+                    preguntas.innerHTML = '';
+                    datos.configuracion.preguntas.forEach(pregunta => {
+                        preguntas.innerHTML += `<article class="article-container">
+                                                    <details class ="custom-details">
+                                                        <summary>${pregunta.name_pregunta}</summary>
+    
+                                                        <div class="content">
+                                                            <p>${pregunta.pregunta_texto}</p>
+                                                        </div>
+                                                    </details>
+                                                </article>`;
+                    });
+                }
+            }
+
+        }else{
+
+            if (tipo == 'politicas') {
+                const politicas = document.querySelector('#main-content');
+
+                if (politicas) {
+                    politicas.innerHTML = '';
+                    datos.talleres.forEach(taller => {
+                        if (taller.id == idTaller){
+                            taller.politicas.forEach(politica => {
+                                politicas.innerHTML += `<article class="article-container">
+                                                    <details class ="custom-details">
+                                                        <summary>${politica.name_politica}</summary>
+    
+                                                        <div class="content">
+                                                            <p>${politica.politica_texto}</p>
+                                                        </div>
+                                                    </details>
+                                                </article>`;
+                            });
+                        }
+                    });
+                }
+            }
+
+            if (tipo == 'preguntas') {
+                const preguntas = document.querySelector('#main-content');
+
+                if (preguntas) {
+                    preguntas.innerHTML = '';
+                    datos.talleres.forEach(taller => {
+                        if (taller.id == idTaller){
+                            taller.preguntas.forEach(pregunta => {
+                                preguntas.innerHTML += `<article class="article-container">
+                                                    <details class ="custom-details">
+                                                        <summary>${pregunta.name_pregunta}</summary>
+    
+                                                        <div class="content">
+                                                            <p>${pregunta.pregunta_texto}</p>
+                                                        </div>
+                                                    </details>
+                                                </article>`;
+                            });
+                        }
+                    });
+                }
             }
         }
+
+
 
     }catch (error) {
         console.error("Error al pintar el main:", error);

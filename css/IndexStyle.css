@@ -5,10 +5,11 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* 100% del alto de la ventana */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #D6D6D6; /* El gris de fondo es mejor ponérselo al body entero */
+    background-color: #D6D6D6;
+    overflow-x: hidden;
 }
 
 #main-content {
@@ -52,4 +53,42 @@ body {
     height: 250px;
     object-fit: cover;
     border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+    .Home {
+        grid-template-columns: 1fr;
+        padding-top: 140px;
+    }
+
+    .Taller {
+        max-width: 700px;
+
+    }
+
+    .imagen-taller {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .Home {
+        grid-template-columns: 1fr;
+        padding: 20px;
+
+    }
+
+    .Taller {
+        max-width: 100%;
+    }
+
+    #search-form{
+        display: none;
+    }
+
+    .imagen-taller {
+        height: 250px;
+    }
+
 }
