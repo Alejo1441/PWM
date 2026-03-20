@@ -1,15 +1,6 @@
-body {
-    margin: 0;
-    padding: 0;
+*, *::before, *::after {
+    box-sizing: border-box;
 }
-
-/*
-.tu-contenedor-flex * {
-    border: 1px solid #ff0000;
-    background-color: rgba(255, 0, 0, 0.1);
-}
-*/
-
 
 #header_disign {
     width: 100%;
@@ -21,7 +12,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background-color: #dcdcdc
+    background-color: #dcdcdc;
 }
 
 figure {
@@ -36,12 +27,9 @@ figure {
     border: 3px solid black;
 }
 
-
 #search-form {
     display: flex;
-
     gap: 10px;
-
 }
 
 #search-input {
@@ -49,4 +37,10 @@ figure {
     border-radius: 30px;
     border: 3px solid black;
     width: 250px;
+}
+
+@media (max-width: 768px) {
+    #search-form {
+        display: none !important;
+    }
 }
