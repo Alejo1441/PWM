@@ -15,13 +15,18 @@
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 20px;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+}
 
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .footer-section {
@@ -46,21 +51,19 @@
 }
 
 @media (max-width: 1024px) {
-
     .footer-container {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        grid-template-columns: repeat(2, 1fr)
+        gap: 20px;
     }
-
 }
 
 @media (max-width: 768px) {
     .footer-container {
-        flex-direction: column;
-        align-items: center;
         text-align: center;
+        grid-template-columns: 1fr;
+    }
+
+    .footer-column {
+        align-items: center;
     }
 
     .footer-section {

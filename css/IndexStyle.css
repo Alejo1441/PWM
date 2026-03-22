@@ -65,6 +65,7 @@ html, body {
     .Home {
         grid-template-columns: repeat(2, 1fr);
         padding-top: 140px;
+        justify-items: center;
     }
 
     .Taller {
@@ -77,6 +78,8 @@ html, body {
         width: 100%;
         max-width: 100%;
         display: block;
+        margin: 0 auto;
+        object-fit: cover;
     }
 
 }
@@ -90,7 +93,7 @@ html, body {
 
     .Taller {
         max-width: 90%;
-        margin: 0 auto;
+        margin: auto;
     }
 
     .imagen-taller {
