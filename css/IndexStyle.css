@@ -62,11 +62,13 @@ html, body {
 }
 
 @media (max-width: 1024px) {
+
     .Home {
         grid-template-columns: repeat(2, 1fr);
         padding-top: 140px;
         justify-items: center;
     }
+
 
     .Taller {
         max-width: 90%;

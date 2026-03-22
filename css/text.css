@@ -1,3 +1,7 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -10,12 +14,18 @@ body {
 
 .Color-Linea{
     border: 2px solid white;
+    width: 100%;
+}
+
+#main-content{
+    margin: 20px;
+    justify-items: center;
 }
 
 .article-container{
     flex: 1;
-    max-width: 800px;
-    margin: 20px 40px;
+    width: 90%;
+    margin-bottom: 15px;
     font-family: Arial, Helvetica, sans-serif;
 }
 .custom-details{
@@ -39,4 +49,15 @@ body {
     border-top: 1px solid black;
     line-height: 1.6;
     color: black;
+}
+
+@media (min-width:769px) and (max-width: 1024px) {
+    .Titulo{
+        font-size: 2rem;
+    }
+
+    .texto{
+        font-size: 1.5rem;
+
+    }
 }

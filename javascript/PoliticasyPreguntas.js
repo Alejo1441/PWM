@@ -76,10 +76,10 @@ async function renderizarMain(datos) {
                     datos.configuracion.politicas.forEach(politica => {
                         politicas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
-                                                        <summary>${politica.name_politica}</summary>
+                                                        <summary class="Titulo">${politica.name_politica}</summary>
     
                                                         <div class="content">
-                                                            <p>${politica.politica_texto}</p>
+                                                            <p class="texto">${politica.politica_texto}</p>
                                                         </div>
                                                     </details>
                                                 </article>`;
@@ -95,10 +95,10 @@ async function renderizarMain(datos) {
                     datos.configuracion.preguntas.forEach(pregunta => {
                         preguntas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
-                                                        <summary>${pregunta.name_pregunta}</summary>
+                                                        <summary class="Titulo">${pregunta.name_pregunta}</summary>
     
                                                         <div class="content">
-                                                            <p>${pregunta.pregunta_texto}</p>
+                                                            <p class="texto">${pregunta.pregunta_texto}</p>
                                                         </div>
                                                     </details>
                                                 </article>`;
@@ -118,10 +118,10 @@ async function renderizarMain(datos) {
                             taller.politicas.forEach(politica => {
                                 politicas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
-                                                        <summary>${politica.name_politica}</summary>
+                                                        <summary class="Titulo">${politica.name_politica}</summary>
     
                                                         <div class="content">
-                                                            <p>${politica.politica_texto}</p>
+                                                            <p class="texto">${politica.politica_texto}</p>
                                                         </div>
                                                     </details>
                                                 </article>`;
@@ -141,10 +141,10 @@ async function renderizarMain(datos) {
                             taller.preguntas.forEach(pregunta => {
                                 preguntas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
-                                                        <summary>${pregunta.name_pregunta}</summary>
+                                                        <summary class="Titulo">${pregunta.name_pregunta}</summary>
     
                                                         <div class="content">
-                                                            <p>${pregunta.pregunta_texto}</p>
+                                                            <p class="texto">${pregunta.pregunta_texto}</p>
                                                         </div>
                                                     </details>
                                                 </article>`;
@@ -168,7 +168,7 @@ async function renderizarFooter(datos) {
 
     try {
 
-        const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
+        const respuesta = await fetch('../partials/footer.html');
         if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
         const footer = await respuesta.text();
 
