@@ -170,9 +170,14 @@ async function renderizarFooter(datos) {
 
         const respuesta = await fetch('../partials/footer.html');
         if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
-        const footer = await respuesta.text();
+        let footer = await respuesta.text();
+
+        const parametrosURL = new URLSearchParams(window.location.search);
+        let idActual = parametrosURL.get('id') || 0;
+        footer = footer.replaceAll('{{id}}', idActual);
 
         footerContainer.innerHTML = footer;
+
 
 
     } catch (error) {

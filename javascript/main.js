@@ -76,6 +76,9 @@ async function renderizarMain() {
 
         const mainContainer = document.getElementById('main-content');
 
+        const rutaFoto = `../Fotos/Fondo pagina.png`;
+        mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+
         let mainfinal = '<div class="Home">';
 
         talleres.forEach(taller => {

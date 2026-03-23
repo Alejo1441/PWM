@@ -51,6 +51,7 @@ body {
     color: black;
 }
 
+
 @media (min-width:769px) and (max-width: 1024px) {
     .Titulo{
         font-size: 2rem;
