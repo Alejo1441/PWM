@@ -18,7 +18,7 @@
       "password": "1234",
       "rol": "user",
       "car": ["coche1"],
-      "bookings": []
+      "bookings": ["Talleres manolo, Arguineguin, 12/03/2026"]
     },
     {
       "id": 1,

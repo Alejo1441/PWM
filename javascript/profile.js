@@ -100,7 +100,12 @@ function renderDatosUsuarios(user) {
     const listaReservas = document.getElementById("list-bookings");
     if (listaReservas) {
         if (user.bookings && user.bookings.length > 0) {
-            listaReservas.innerHTML = user.bookings.map(b => `<li>${b}</li>`).join("");
+            listaReservas.innerHTML = user.bookings.map((reserva, index) => `
+                <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ccc;">
+                    <span>${reserva}</span>
+                    <button onclick="eliminarReserva(${index})" class="button-red" style="margin-top: 0; padding: 5px 10px; background-color: #ff3b3b; color: white; border: none; border-radius: 4px; cursor: pointer;">❌ Cancelar</button>
+                </li>
+            `).join('');
         } else {
             listaReservas.innerHTML = "<li style='padding: 10px 0;'>No tienes reservas.</li>";
         }
@@ -112,8 +117,19 @@ window.eliminarCoche = function(index) {
     if (confirm("¿Seguro que quieres eliminar este vehículo?")) {
         let usuarioActual = JSON.parse(localStorage.getItem('usuario_logeado'));
 
-        // El método splice elimina 1 elemento en la posición "index"
+
         usuarioActual.car.splice(index, 1);
+
+        guardarCambiosUsuario(usuarioActual);
+    }
+};
+
+window.eliminarReserva = function(index) {
+    if (confirm("¿Seguro que quieres cancelar esta reserva?")) {
+        let usuarioActual = JSON.parse(localStorage.getItem('usuario_logeado'));
+
+        usuarioActual.bookings.splice(index, 1);
+
 
         guardarCambiosUsuario(usuarioActual);
     }
