@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('click', (e) => {
         // Si el elemento clicado tiene el ID de nuestro botón de añadir coche...
         if (e.target && e.target.id === 'btn-add-car-open') {
-            const modalAddCar = document.getElementById('add-car');
+            const modalAddCar = document.getElementById('add-car-dialog');
             if (modalAddCar) {
                 modalAddCar.showModal();
             } else {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
             guardarCambiosUsuario(usuarioActual);
 
             // Cerramos el modal y reseteamos los campos
-            document.getElementById('add-car').close();
+            document.getElementById('add-car-dialog').close();
             e.target.reset();
         }
     });
