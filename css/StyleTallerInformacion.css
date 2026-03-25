@@ -57,6 +57,11 @@ body{
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 25px;
+    transition: transform 0.2s ease;
+}
+
+.botonEspecialidad:hover {
+    transform: scale(1.20);
 }
 
 .Color-Linea{
@@ -74,12 +79,13 @@ body{
 }
 
 .CajaImagen{
-    flex: 1;
+    flex: 1.3;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
     padding: 20px;
+    gap: 20px;
 }
 
 .CajaInfoTalleryResena{
@@ -92,6 +98,7 @@ body{
     flex: 2;
     display: flex;
     padding: 10px;
+    align-items: center;
 }
 
 .Resenas{
@@ -109,22 +116,25 @@ body{
 .resenasyestrella{
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .foto-taller {
     border: 2px solid black;
     width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
 .Cajamapa a{
     width: 100%;
-    height: 100%;
-
+    display: block;
 }
 
 .google-maps{
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: 80%;
     object-fit: cover;
     border: 2px solid black;
     box-sizing: border-box;
@@ -143,9 +153,25 @@ body{
 .texto-resenas {
     font-size: 14px;
     color: #000;
+    font-weight: bold;
 }
 
-@media (max-width: 1024px) {
+.InfoTaller, .texto-h3 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .botonEspecialidad{
+
+        padding: 15px 25px;
+        font-size: 20px;
+
+    }
 
     .CajaInfo{
         display: grid;
@@ -157,6 +183,93 @@ body{
     .CajaImagen{
         padding: 0;
 
+    }
+
+    .InfoTaller{
+        font-size: 2rem;
+    }
+
+    .CajaInfoTalleryResena{
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .estrellas {
+        padding: 8px 15px;
+        font-size: 24px;
+        letter-spacing: 3px;
+    }
+
+    .texto-resenas {
+        font-size: 18px;
+
+    }
+
+    .Resenas{
+        position: static;
+        padding: 10px 0 0 0;
+        margin-top: auto;
+    }
+
+    .texto-h3{
+        font-size: 1.5rem;
+    }
+
+
+    .Cajamapa{
+        grid-column: 1/ - 1;
+        padding: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .Cajamapa a{
+        display: block;
+        width: 100%;
+    }
+
+    .google-maps{
+        width: 100%;
+        height: 250px;
+    }
+}
+
+
+
+@media (max-width: 768px) {
+
+    .cajabotones {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .botonEspecialidad {
+        padding: 10px 20px;
+        font-size: 14px;
+        margin: 10px 5px;
+    }
+
+    .CajaInfo{
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .CajaImagen{
+        padding: 0;
+    }
+
+    .foto-taller {
+        height: 120px;
+        border-radius: 10px;
+    }
+
+    .InfoTaller{
+        font-size: 1rem;
     }
 
     .CajaInfoTalleryResena{

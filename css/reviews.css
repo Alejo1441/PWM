@@ -36,6 +36,8 @@ body{
 .Color-Linea{
     border: 2px solid white;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .logo_circular{
