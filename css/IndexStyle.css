@@ -74,6 +74,19 @@ html, body {
     flex-direction: column;
     gap: 10px;
     box-sizing: border-box;
+
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.Taller:hover {
+
+    transform: scale(1.03);
+    background-color: #e3e3e3;
+
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    z-index: 2;
 }
 
 .imagen-taller {
@@ -89,7 +102,6 @@ html, body {
 
     .Home {
         grid-template-columns: repeat(2, 1fr);
-        padding-top: 140px;
         justify-items: center;
     }
 

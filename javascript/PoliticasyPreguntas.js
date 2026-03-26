@@ -84,8 +84,11 @@ async function renderizarMain(datos) {
         const tipo = parametrosURL.get('tipo');
 
         if (idTaller == 0) {
+
             if (tipo == 'politicas') {
                 const politicas = document.querySelector('#main-content');
+                const rutaFoto = `../Fotos/Fondo pagina.png`;
+                politicas.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
 
                 if (politicas) {
                     politicas.innerHTML = '';
@@ -105,7 +108,8 @@ async function renderizarMain(datos) {
 
             if (tipo == 'preguntas') {
                 const preguntas = document.querySelector('#main-content');
-
+                const rutaFoto = `../Fotos/Fondo pagina.png`;
+                preguntas.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
                 if (preguntas) {
                     preguntas.innerHTML = '';
                     datos.configuracion.preguntas.forEach(pregunta => {
@@ -131,6 +135,12 @@ async function renderizarMain(datos) {
                     politicas.innerHTML = '';
                     datos.talleres.forEach(taller => {
                         if (taller.id == idTaller){
+
+                            if (politicas && taller.image.length > 0) {
+                                const rutaFoto = `../${taller.image[0]}`;
+                                politicas.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+                            }
+
                             taller.politicas.forEach(politica => {
                                 politicas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
@@ -154,6 +164,12 @@ async function renderizarMain(datos) {
                     preguntas.innerHTML = '';
                     datos.talleres.forEach(taller => {
                         if (taller.id == idTaller){
+
+                            if (preguntas && taller.image.length > 0) {
+                                const rutaFoto = `../${taller.image[0]}`;
+                                preguntas.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+                            }
+
                             taller.preguntas.forEach(pregunta => {
                                 preguntas.innerHTML += `<article class="article-container">
                                                     <details class ="custom-details">
