@@ -13,7 +13,6 @@ body{
     border: 2px solid white;
 }
 
-
 .page{
     min-height:100vh;
     display:flex;
@@ -25,12 +24,16 @@ body{
 .container{
     width:min(1400px, 95vw);
     display:grid;
-    grid-template-columns: 420px 1fr;  /* antes 320px */
+    grid-template-columns: 420px 1fr;
     gap:90px;
     align-items:center;
 }
 
 /* IZQUIERDA */
+.left{
+    width:100%;
+}
+
 .title{
     font-size:22px;
     font-weight:700;
@@ -61,6 +64,10 @@ body{
     font-size:18px;
 }
 
+.nav-btn:hover{
+    background:#eaeaea;
+}
+
 .selects{
     display:flex;
     gap:8px;
@@ -71,6 +78,8 @@ select{
     padding:0 10px;
     border:1px solid #ddd;
     border-radius:10px;
+    background:white;
+    cursor:pointer;
 }
 
 .dow{
@@ -88,13 +97,19 @@ select{
     gap:6px;
 }
 
-/* Ocultar radios */
+/* Como ahora los días los genera JS con botones, esto ya no hace falta realmente,
+   pero lo dejo por si quieres reutilizar algo */
 .grid input{
     display:none;
 }
 
+.empty-day{
+    height:45px;
+}
+
 .day{
     height:45px;
+    border:none;
     border-radius:12px;
     display:flex;
     align-items:center;
@@ -108,17 +123,60 @@ select{
     background:#eaeaea;
 }
 
-/* Seleccionado */
-.grid input:checked + .day{
+.day.today{
+    border:2px solid #ff0000;
+}
+
+.day.selected{
     background:#111;
     color:#fff;
 }
 
+.selected-date-text{
+    width:380px;
+    margin-top:16px;
+    font-size:15px;
+    font-weight:700;
+    color:#222;
+}
+
+.btn-reserva {
+    display:block;
+    width:380px;
+    margin-top:20px;
+    padding:15px;
+    background-color:#ff0000;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-reserva:hover{
+    background-color:#cc0000;
+}
+
 /* DERECHA */
+.right{
+    width:100%;
+}
+
 .slots{
     background:#bfbfbf;
     border-radius:8px;
     padding:18px;
+    width:100%;
+    max-width:650px;
+}
+
+.slots-title{
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:18px;
+    text-align:center;
 }
 
 .slots-grid{
@@ -128,34 +186,99 @@ select{
 }
 
 .slot{
-    height:70px;
+    min-height:70px;
     display:flex;
     align-items:center;
     justify-content:center;
     font-weight:700;
+    border:none;
+    border-radius:10px;
+    padding:10px;
+    cursor:pointer;
+    background:white;
+    transition:transform 0.2s ease, background 0.2s ease;
 }
 
 .slot.available{
     color:#1d7a2c;
+    background:#eaf8ea;
+}
+
+.slot.available:hover{
+    transform:scale(1.03);
 }
 
 .slot.busy{
     color:#c11b1b;
+    background:#ffe6e6;
+    cursor:not-allowed;
 }
-.btn-reserva {
-    display: block;
-    width: 380px;
-    margin-top: 20px;
-    padding:15px;
-    background-color: #ff0000;
-    color:white;
-    border:none;
-    border-radius: 12px;
-    font-size:16px;
-    font-weight: bold;
-    cursor:pointer;
-    transition: background 0.3s ease;
+
+.slot.selected{
+    outline:3px solid #111;
 }
-.btn-reserva:hover{
-    background-color: #cc0000;
+
+/* TABLET */
+@media (max-width: 992px){
+    .container{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .left,
+    .right{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .slots{
+        max-width:380px;
+    }
+
+    .slots-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOVIL */
+@media (max-width: 576px){
+    .page{
+        padding:25px 15px;
+    }
+
+    .calendar,
+    .btn-reserva,
+    .selected-date-text,
+    .slots{
+        width:100%;
+        max-width:100%;
+    }
+
+    .container{
+        width:100%;
+    }
+
+    .selects{
+        gap:6px;
+    }
+
+    select{
+        width:100px;
+        padding:0 6px;
+    }
+
+    .day{
+        height:40px;
+        font-size:13px;
+    }
+
+    .slots-grid{
+        grid-template-columns:1fr;
+    }
+
+    .slot{
+        min-height:55px;
+        font-size:14px;
+    }
 }
