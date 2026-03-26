@@ -3,49 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Reviews</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/reviews.css">
 </head>
 
 <body>
-<header xlu-include-file="../partials/Header.html"></header>
-<script src="../javascript/xlu-include-file.js"></script>
-<script src="../javascript/auth.js"></script>
-<script> xLuIncludeFile(); </script>
 
-<hr class="Color-Linea">
+    <header id="site-header"></header>
 
-<div class="reviews">
-    <h1>Reseñas</h1>
+    <hr class="Color-Linea">
 
+    <main class="reviews">
+        <h1 class="nombre-taller">Reseñas</h1>
+        <div class="Resenas">
 
-
-    <div class="Resenas">
-
-        <div class="item-resena">
-            <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-            <div class="resenasyestrella">
-                <span class="estrellas">★★★★★</span>
-                <p class="texto-resenas"> El Mejor Taller</p>
+            <div class="resena">
+                <div class="item-resena">
+                    <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
+                    <div class="resenasyestrella">
+                        <span class="estrellas">★★★★★</span>
+                        <p class="texto-resenas"> El Mejor Taller</p>
+                    </div>
+                </div>
             </div>
+
+
         </div>
 
-        <div class="item-resena">
-            <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-            <div class="resenasyestrella">
-                <span class="estrellas">★★★★★</span>
-                <p class="texto-resenas"> El Mejor Taller</p>
-            </div>
-        </div>
+    </main>
 
-    </div>
+    <footer id="site-footer"></footer>
 
-
-
-</div>
-
-<footer xlu-include-file="../partials/footer.html"></footer>
-<script src="../javascript/xlu-include-file.js"></script>
-<script>xLuIncludeFile();</script>
+    <script src="../javascript/reviews.js"></script>
 
 </body>
 </html>

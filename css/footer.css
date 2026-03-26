@@ -1,51 +1,89 @@
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
-}
-
-main .content{
-    flex: 1;
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.main-footer{
-    background-color: #000;
-    color: #fff;
-    padding: 16px;
-    font-family: sans-serif;
+#site-footer {
+    margin-top: auto;
     width: 100%;
 }
 
-.footer-container{
+.main-footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    font-family: sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.footer-container {
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;     /*distribuye columnas*/
-    align-items:  flex-start;   /*alinea*/
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.footer-section{
+
+.footer-column {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: center;
+
+}
+
+.footer-section {
     flex: 1;
     min-width: 200px;
-    margin-bottom: 20px ;
 }
-.footer-section ul{
+
+.footer-section ul {
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
-.footer-section a{
+
+.footer-section a {
     color: #fff;
     text-decoration: none;
     transition: opacity 0.3s;
 }
-.footer-section a:hover{
+
+.footer-section a:hover {
     opacity: 0.8;
 }
-.footer-contact{
-    text-align: right;
+
+@media (max-width: 1024px) {
+    .footer-container {
+        display: grid;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer-column {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        text-align: center;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        align-items: center;
+        text-align: center;
+        grid-template-columns: 1fr;
+    }
+
+    .footer-column {
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-section {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 }
