@@ -92,7 +92,23 @@ async function renderizarMain() {
                 cajaBotones.innerHTML = '';
 
                 tallerSeleccionado.speciality.forEach(especialidad => {
-                    cajaBotones.innerHTML += `<a href="../pages/calendar.html" class="botonEspecialidad">${especialidad.service}</a>`;
+                    const boton = document.createElement('a');
+                    boton.href = `../pages/calendar.html?id=${tallerSeleccionado.id}`;
+                    boton.className = 'botonEspecialidad';
+                    boton.textContent = especialidad.service;
+
+                    boton.addEventListener('click', () => {
+                        const selectedService = {
+                            workshopId: tallerSeleccionado.id,
+                            workshopName: tallerSeleccionado.name,
+                            serviceName: especialidad.service,
+                            price: especialidad.price
+                        };
+
+                        localStorage.setItem('selectedService', JSON.stringify(selectedService));
+                    });
+
+                    cajaBotones.appendChild(boton);
                 });
             }
 

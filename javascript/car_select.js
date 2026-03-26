@@ -3,11 +3,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedText = document.getElementById("selectedCar");
     const dateElement = document.getElementById("reservation-date");
     const confirmBtn = document.getElementById("confirm-reservation");
+    const serviceElement = document.getElementById("selected-service");
+    const priceElement = document.getElementById("selected-price");
 
     if (dateElement) {
         const reservation = JSON.parse(localStorage.getItem("reservation"));
         if (reservation) {
             dateElement.textContent = `${reservation.date} ${reservation.time}`;
+        }
+    }
+
+    const selectedService = JSON.parse(localStorage.getItem("selectedService"));
+    if (selectedService) {
+        if (serviceElement) {
+            serviceElement.textContent = selectedService.serviceName;
+        }
+
+        if (priceElement) {
+            priceElement.textContent = `${selectedService.price} €`;
         }
     }
 
@@ -48,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmBtn.addEventListener("click", () => {
             const reservation = JSON.parse(localStorage.getItem("reservation"));
             const selectedCar = JSON.parse(localStorage.getItem("selectedCar"));
+            const selectedService = JSON.parse(localStorage.getItem("selectedService"));
 
             if (!reservation) {
                 alert("No hay ninguna reserva seleccionada.");
@@ -59,9 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            if (!selectedService) {
+                alert("Selecciona primero un servicio.");
+                return;
+            }
+
             alert("Reserva confirmada correctamente");
+
             localStorage.removeItem("reservation");
             localStorage.removeItem("selectedCar");
+            localStorage.removeItem("selectedService");
+
             window.location.href = "../pages/Index.html";
         });
     }
