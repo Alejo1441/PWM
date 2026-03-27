@@ -121,13 +121,15 @@ async function renderizarFooter(datos) {
 
     try {
 
-        const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
+        const respuesta = await fetch('./partials/footer.html'); // Ajusta tu ruta
         if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
         let footer = await respuesta.text();
 
-        const parametrosURL = new URLSearchParams(window.location.search);
-        let idActual = parametrosURL.get('id') || 0;
-        footer = footer.replaceAll('{{id}}', idActual);
+        footer = footer.replaceAll('../partials/', './partials/');
+
+        // 3. REPARAR EL ID:
+        // En el index no hay ID de taller, así que ponemos 0
+        footer = footer.replaceAll('{{id}}', '0');
 
         footerContainer.innerHTML = footer;
 

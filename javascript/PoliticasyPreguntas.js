@@ -66,8 +66,10 @@ async function renderizarMain(datos) {
         const parametrosURL = new URLSearchParams(window.location.search);
         const idTaller = parametrosURL.get('id');
         const tipo = parametrosURL.get('tipo');
+        const contenedor = document.querySelector('#main-content');
+        if (!contenedor) return;
 
-        if (idTaller == 0) {
+        if (!idTaller || idTaller == 0 || idTaller === '{{id}}') {
             if (tipo == 'politicas') {
                 const politicas = document.querySelector('#main-content');
 
