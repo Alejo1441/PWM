@@ -13,13 +13,37 @@ body{
     border:2px solid white;
 }
 
-/* ESTRUCTURA GENERAL */
+
+#search-form {
+    display: none !important;
+}
+
 .page{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:40px 30px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    z-index: -1;
+
+    background-image: var(--bg-taller);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(10px);
+    opacity: 0.6;
 }
 
 .container{
@@ -74,7 +98,7 @@ body{
     color:#fff;
 }
 
-/* COLUMNA DERECHA */
+
 .right{
     width:100%;
 }
@@ -145,7 +169,7 @@ body{
     }
 }
 
-/* MÓVIL */
+
 @media (max-width: 576px){
     .page{
         padding:25px 15px;

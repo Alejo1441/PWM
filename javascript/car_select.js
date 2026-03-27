@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
+// 🔥 CAMBIO 1: Sustituimos DOMContentLoaded por "load"
+window.addEventListener("load", async () => {
     const carList = document.getElementById("car-list");
     const selectedText = document.getElementById("selectedCar");
     const dateElement = document.getElementById("reservation-date");
     const confirmBtn = document.getElementById("confirm-reservation");
-    const typeServiceElement = document.querySelector(".summary p:nth-child(2)");
+    const typeServiceElement = document.getElementById("info-servicio-taller");
 
     const sesion = JSON.parse(localStorage.getItem("usuario_logeado"));
     if(!sesion){
@@ -11,11 +12,49 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
     const reservation = JSON.parse(localStorage.getItem("reservation"));
+    const parametrosURL = new URLSearchParams(window.location.search);
+
+    const respuesta = await fetch('../json/content.json');
+    if (!respuesta.ok) throw new Error("Error al cargar el JSON");
+    const datos = await respuesta.json();
+
+    const idActual = parametrosURL.get('id');
+    const servicioActual = parametrosURL.get('especialidad');
+
+    const tallerseleccionado = datos.talleres.find(taller => taller.id == idActual);
+    const mainContainer = document.querySelector('.page');
+
+    if(tallerseleccionado){
+        if (mainContainer && tallerseleccionado.image.length > 0) {
+            const rutaFoto = `../${tallerseleccionado.image[0]}`;
+            mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+        }
+    }
+
     if (reservation){
         dateElement.textContent = `${reservation.date} a las ${reservation.time}`;
-        if (typeServiceElement){
-            typeServiceElement.innerHTML = `<strong>Taller:</strong> ${reservation.taller}`;
+        const priceElement = document.querySelector(".price");
+
+
+        if(tallerseleccionado && servicioActual){
+            // 🔥 CAMBIO 2: Limpiamos los textos de espacios e invisibles y pasamos a minúsculas
+            const servicioLimpio = servicioActual.trim().toLowerCase();
+            const servicioseleccionado = tallerseleccionado.speciality.find(servicio =>
+                servicio.service.trim().toLowerCase() === servicioLimpio
+            );
+
+            if(servicioseleccionado){
+                if (typeServiceElement){
+                    typeServiceElement.innerHTML = `<p><strong>Taller:</strong> ${tallerseleccionado.name}</p>
+                                                    <p><strong>Tipo de servicio:</strong> ${servicioseleccionado.service}</p>`;
+                }
+
+                if (priceElement){
+                    priceElement.textContent = `${servicioseleccionado.price} €`;
+                }
+            }
         }
+
     }
 
     if (carList) {
@@ -25,18 +64,18 @@ document.addEventListener("DOMContentLoaded", () => {
             carList.innerHTML += "<p>  sin coches, vaya al perfil para agregar uno. </p>";
         }else{
             sesion.car.forEach((carString) =>{
-               const button = document.createElement("button");
-               button.type ="button";
-               button.className ="car-item";
-               button.textContent = carString;
+                const button = document.createElement("button");
+                button.type ="button";
+                button.className ="car-item";
+                button.textContent = carString;
 
-               button.addEventListener("click", () => {
-                  document.querySelectorAll(".car-item").forEach(item => item.classList.remove("active"));
-                  button.classList.add("active");
-                  selectedText.textContent = carString;
-                  localStorage.setItem("selectedCar", carString);
-               });
-               carList.appendChild(button);
+                button.addEventListener("click", () => {
+                    document.querySelectorAll(".car-item").forEach(item => item.classList.remove("active"));
+                    button.classList.add("active");
+                    selectedText.textContent = carString;
+                    localStorage.setItem("selectedCar", carString);
+                });
+                carList.appendChild(button);
             });
 
         }

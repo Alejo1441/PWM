@@ -116,7 +116,7 @@ async function renderizarMain() {
                 cajaBotones.innerHTML = '';
 
                 tallerSeleccionado.speciality.forEach(especialidad => {
-                    cajaBotones.innerHTML += `<a href="../pages/calendar.html" class="botonEspecialidad">${especialidad.service}</a>`;
+                    cajaBotones.innerHTML += `<a href="../pages/calendar.html?id=${tallerSeleccionado.id}&especialidad=${especialidad.service}" class="botonEspecialidad">${especialidad.service}</a>`;
                 });
             }
 
@@ -139,7 +139,8 @@ async function renderizarMain() {
                 enlaceResenas.textContent = `${numeroResenas} Reseñas`;
                 enlaceResenas.href = `reviews.html?id=${tallerSeleccionado.id}`;
             }
-            document.title = `${tallerSeleccionado.name} - Mi Taller Web`;
+
+            document.title = `${tallerSeleccionado.name}`;
 
         } else {
             console.error("No existe ningún taller con el ID:", idTaller);

@@ -3,8 +3,26 @@ let currentDate = new Date();
 let selectedDate = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+    const parametrosURL = new URLSearchParams(window.location.search);
+    const respuesta = await fetch('../json/content.json');
+    if (!respuesta.ok) throw new Error("Error al cargar el JSON");
+    const datos = await respuesta.json();
+
+    const idActual = parametrosURL.get('id');
+    const tallerseleccionado = datos.talleres.find(taller => taller.id == idActual);
+    const mainContainer = document.querySelector('.page');
+
+    if(tallerseleccionado){
+        if (mainContainer && tallerseleccionado.image.length > 0) {
+            const rutaFoto = `../${tallerseleccionado.image[0]}`;
+            mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+        }
+    }
+
     await loadCalendarData();
     initializeCalendar();
+
 });
 
 async function loadCalendarData() {
@@ -62,11 +80,11 @@ function initializeCalendar() {
             taller: localStorage.getItem("temp_taller_name") || "Taller"
         };
 
-        // guardar en localStorage
-        localStorage.setItem("reservation", JSON.stringify(reservation));
 
-        // ir a la siguiente página
-        window.location.href = "../pages/car_select.html";
+        localStorage.setItem("reservation", JSON.stringify(reservation));
+        const parametrosActuales = window.location.search;
+
+        window.location.href = "../pages/car_select.html" + parametrosActuales;
     });
 
 
@@ -162,7 +180,6 @@ function renderCalendar() {
     const today = new Date();
     const todayString = formatDate(today.getFullYear(), today.getMonth(), today.getDate());
 
-    // Convertir domingo=0 a que siga saliendo primero
     for (let i = 0; i < firstDay; i++) {
         const emptyCell = document.createElement("div");
         emptyCell.className = "empty-day";
@@ -194,7 +211,6 @@ function renderCalendar() {
         grid.appendChild(dayButton);
     }
 
-    // Seleccionar automáticamente hoy si está en el mes actual
     if (
         today.getFullYear() === year &&
         today.getMonth() === month

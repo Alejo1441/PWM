@@ -9,6 +9,10 @@ body{
     background:#d9d9d9;
 }
 
+#search-form {
+    display: none !important;
+}
+
 .Color-Linea{
     border: 2px solid white;
 }
@@ -19,6 +23,26 @@ body{
     justify-content:center;
     align-items:center;
     padding:40px 30px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.page::before {
+    content: "";
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    z-index: -1;
+
+    background-image: var(--bg-taller);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(10px);
+    opacity: 0.6;
 }
 
 .container{
@@ -221,15 +245,36 @@ select{
 /* TABLET */
 @media (max-width: 992px){
     .container{
-        grid-template-columns:1fr;
-        gap:40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
 
-    .left,
-    .right{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
+    .left {
+        display: contents;
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        order: 2;
+    }
+
+    .title,
+    .calendar,
+    .selected-date-text {
+        order: 1;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-reserva {
+        order: 3;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
     }
 
     .slots{
@@ -241,10 +286,30 @@ select{
     }
 }
 
-/* MOVIL */
-@media (max-width: 576px){
+@media (max-width: 768px){
     .page{
         padding:25px 15px;
+    }
+
+    .container{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .left,
+    .right {
+        display: contents;
+    }
+
+    .title { order: 1; }
+    .calendar { order: 2; }
+    .selected-date-text { order: 3; }
+    .slots { order: 4; }
+
+    .btn-reserva {
+        order: 5;
+        margin-top: 20px;
     }
 
     .calendar,
@@ -253,10 +318,6 @@ select{
     .slots{
         width:100%;
         max-width:100%;
-    }
-
-    .container{
-        width:100%;
     }
 
     .selects{
