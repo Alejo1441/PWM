@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Reserva confirmada correctamente");
             localStorage.removeItem("reservation");
             localStorage.removeItem("selectedCar");
-            window.location.href = "../pages/Index.html";
+            window.location.href = "../Index.html";
         });
     }
 });

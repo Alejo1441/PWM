@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function cargarDatos() {
     try {
         // 1. Esperamos (await) a que se descargue el JSON
-        const respuesta = await fetch('../json/content.json');
+        const respuesta = await fetch('./json/content.json');
 
         if (!respuesta.ok) throw new Error("Error al cargar el JSON");
 
@@ -36,7 +36,7 @@ async function renderizarHeader(config) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
+        const respuesta = await fetch('./partials/Header.html'); // Ajusta tu ruta
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
@@ -51,7 +51,11 @@ async function renderizarHeader(config) {
 
         const imagen_perfil = headerContainer.querySelector('#Taller-image');
         if(imagen_perfil){
-            imagen_perfil.src = "../Fotos/Nuestro logo.png";
+            imagen_perfil.src = "./Fotos/Nuestro logo.png";
+        }
+        const rediririr_inicio =headerContainer.querySelector('#home-link');
+        if(rediririr_inicio){
+            rediririr_inicio.href = "index.html";
         }
 
 
@@ -64,11 +68,11 @@ async function renderizarMain() {
 
     try {
 
-        const respuesta = await fetch('../partials/Talleres-Previsualizacion.html');
+        const respuesta = await fetch('./partials/Talleres-Previsualizacion.html');
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
         const main = await respuesta.text();
 
-        const respuestaJson = await fetch('../json/content.json');
+        const respuestaJson = await fetch('./json/content.json');
         if (!respuestaJson.ok) throw new Error("Error cargando el JSON");
         const datosGenerales = await respuestaJson.json();
 

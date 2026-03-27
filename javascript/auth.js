@@ -1,16 +1,30 @@
-document.addEventListener('DOMContentLoaded',async () => {
+// --- 1. CONFIGURACIÓN GLOBAL DE RUTAS ---
+// Comprobamos si la palabra "pages" está en la URL
 
+// --- 1. CONFIGURACIÓN GLOBAL DE RUTAS ---
+// Comprobamos si estamos metidos en CUALQUIER subcarpeta (pages o partials)
+const ruta = window.location.pathname;
+const enSubcarpeta = ruta.includes('/pages/') || ruta.includes('/partials/');
+
+// Si estamos en una subcarpeta, retrocedemos (../). Si estamos en la raíz, bajamos (./)
+const prefijo = enSubcarpeta ? '../' : './';
+const rutaPerfil = enSubcarpeta ? '../pages/profile.html' : './pages/profile.html';
+const rutaIndex = enSubcarpeta ? '../index.html' : './index.html';
+
+// ... (El resto del código hacia abajo se queda igual) ...
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // --- 2. CARGA DEL JSON ---
     if(!localStorage.getItem("usuarios_registrados")) {
         try {
-            const res = await fetch('../json/content.json');
+            const res = await fetch(prefijo + 'json/content.json');
             const data = await res.json();
-            // Guardamos los usuarios del JSON en el navegador para poder añadir más
             localStorage.setItem('usuarios_registrados', JSON.stringify(data.usuarios));
         } catch (error) {
             console.error("Error al cargar JSON inicial:", error);
         }
     }
-
 
     // 1. Referencias a los Diálogos (Modales)
     const modalAuth = document.getElementById('modal-auth-choice');
@@ -18,11 +32,10 @@ document.addEventListener('DOMContentLoaded',async () => {
     const modalRegType = document.getElementById('modal-reg-type');
     const modalRegForm = document.getElementById('modal-register-form');
 
-    // 2. Referencias a Botones de apertura dentro de los modales
+    // 2. Referencias a Botones
     const btnOpenLogin = document.getElementById('open-login');
     const btnOpenRegChoice = document.getElementById('open-register-choice');
     const btnGoRegClient = document.getElementById('go-reg-client');
-
     const loginForm = document.getElementById('form-login');
     const registerForm = document.getElementById('form-register');
 
@@ -38,18 +51,19 @@ document.addEventListener('DOMContentLoaded',async () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-pass').value;
 
-            // Ahora leemos la memoria del navegador, no el fetch directo
             const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios_registrados')) || [];
             const user = usuariosGuardados.find(u => u.email === email && u.password === pass);
 
             if (user) {
                 localStorage.setItem('usuario_logeado', JSON.stringify(user));
-                window.location.href = "../pages/profile.html";
+                window.location.href = rutaPerfil; // Usa la ruta inteligente
             } else {
                 alert("Email o contraseña incorrectos");
             }
         });
     }
+
+    // --- LÓGICA DE REGISTRO ---
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -67,16 +81,13 @@ document.addEventListener('DOMContentLoaded',async () => {
                 return;
             }
 
-            // Traemos la lista actual de usuarios
             let usuariosGuardados = JSON.parse(localStorage.getItem('usuarios_registrados')) || [];
 
-            // Verificamos que el email no exista ya
             if (usuariosGuardados.find(u => u.email === email)) {
                 alert("Este email ya está registrado.");
                 return;
             }
 
-            // Creamos el usuario
             const nuevoUsuario = {
                 id: Date.now(),
                 username: nombre,
@@ -89,14 +100,12 @@ document.addEventListener('DOMContentLoaded',async () => {
                 bookings: []
             };
 
-            // Lo añadimos a la lista y guardamos la lista actualizada
             usuariosGuardados.push(nuevoUsuario);
             localStorage.setItem('usuarios_registrados', JSON.stringify(usuariosGuardados));
-
-            // Iniciamos sesión automáticamente
             localStorage.setItem('usuario_logeado', JSON.stringify(nuevoUsuario));
+
             alert("Cuenta creada con éxito");
-            window.location.href = "../pages/profile.html";
+            window.location.href = rutaPerfil; // Usa la ruta inteligente
         });
     }
 
@@ -106,16 +115,14 @@ document.addEventListener('DOMContentLoaded',async () => {
         if (profileLink) {
             clearInterval(checkHeader);
 
-            // Actualizar nombre si ya está logeado
             actualizarInterfazHeader();
 
-            // Configurar el click del icono de perfil
             profileLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 const sesion = localStorage.getItem('usuario_logeado');
 
                 if (sesion) {
-                    window.location.href = "../pages/profile.html";
+                    window.location.href = rutaPerfil; // Usa la ruta inteligente
                 } else {
                     const modalAuth = document.getElementById('modal-auth-choice');
                     if (modalAuth) modalAuth.showModal();
@@ -146,7 +153,7 @@ function actualizarInterfazHeader() {
 
             btnLogout.onclick = () => {
                 localStorage.removeItem('usuario_logeado');
-                window.location.href = "../pages/index.html";
+                window.location.href = rutaIndex; // Usa la ruta inteligente
             };
         }
     } else {

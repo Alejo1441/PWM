@@ -36,7 +36,7 @@ async function renderizarHeader(config) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
+        const respuesta = await fetch('../partials/Header.html');
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
