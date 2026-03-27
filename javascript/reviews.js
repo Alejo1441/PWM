@@ -11,7 +11,7 @@ async function cargarDatos() {
         const datos = await respuesta.json();
 
         if (document.getElementById('site-header')) {
-            await renderizarHeader(datos.configuracion);
+            await renderizarHeader(datos);
         }
 
         if (document.querySelector('.reviews')) {
@@ -27,11 +27,11 @@ async function cargarDatos() {
     }
 }
 
-async function renderizarHeader(config) {
+async function renderizarHeader(datos) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
+        const respuesta = await fetch('../partials/Header.html');
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
@@ -39,9 +39,33 @@ async function renderizarHeader(config) {
 
         headerContainer.innerHTML = header;
 
-        const logo = headerContainer.querySelector('.logo_circular');
-        if (logo) {
-            logo.alt = `Logo de ${config.nombreSitio}`;
+        const formularioBuscador = document.getElementById('search-form');
+        const inputBuscador = document.getElementById('search-input');
+
+        if (formularioBuscador && inputBuscador) {
+            formularioBuscador.addEventListener('submit', async function(evento) {
+                evento.preventDefault();
+                const palabra = inputBuscador.value.trim().toLowerCase();
+
+                if (palabra !== "") {
+                    try {
+
+                        const tallerEncontrado = datos.talleres.find(taller =>
+                            taller.name.toLowerCase().includes(palabra)
+                        );
+
+
+                        if (tallerEncontrado) {
+                            window.location.href = `../pages/Taller-Informacion.html?id=${tallerEncontrado.id}`;
+                        } else {
+                            alert(`Lo sentimos, no hemos encontrado ningún taller llamado "${palabra}".`);
+                        }
+
+                    } catch (error) {
+                        console.error("Fallo al buscar el taller:", error);
+                    }
+                }
+            });
         }
 
 
@@ -81,10 +105,10 @@ async function renderizarMain(datos) {
                     const valoracion = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars)
                     resena.innerHTML += `<div class="item-resena">
                                             <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-                                                <span class="estrellas">${valoracion}</span>
+                                                <p class="nombre-usuario">${review.username}: </p>
                                                 <p class="texto-resenas"> ${review.comment}</p>
-                                            </div>
-                                         </div>`;
+                                                <span class="estrellas">${valoracion}</span>
+                                            </div>`;
                 });
             }
 

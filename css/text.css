@@ -51,6 +51,9 @@ body {
     color: black;
 }
 
+#search-form {
+    display: none !important;
+}
 
 @media (min-width:769px) and (max-width: 1024px) {
     .Titulo{

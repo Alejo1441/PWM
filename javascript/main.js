@@ -6,17 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Lógica de lectura usando async/await
 async function cargarDatos() {
     try {
-        // 1. Esperamos (await) a que se descargue el JSON
+
         const respuesta = await fetch('./json/content.json');
 
         if (!respuesta.ok) throw new Error("Error al cargar el JSON");
 
-        // 2. Esperamos (await) a que se convierta en objeto JS
         const datos = await respuesta.json();
 
-        // 3. Renderizamos las partes de la página
         if (document.getElementById('site-header')) {
-            await renderizarHeader(datos.configuracion);
+            await renderizarHeader(datos);
         }
 
         if (document.getElementById('main-content')) {
@@ -32,11 +30,11 @@ async function cargarDatos() {
     }
 }
 
-async function renderizarHeader(config) {
+async function renderizarHeader(datos) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        const respuesta = await fetch('./partials/Header.html'); // Ajusta tu ruta
+        const respuesta = await fetch('./partials/Header.html');
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
@@ -44,9 +42,33 @@ async function renderizarHeader(config) {
 
         headerContainer.innerHTML = header;
 
-        const logo = headerContainer.querySelector('.logo_circular');
-        if (logo) {
-            logo.alt = `Logo de ${config.nombreSitio}`;
+        const formularioBuscador = document.getElementById('search-form');
+        const inputBuscador = document.getElementById('search-input');
+
+        if (formularioBuscador && inputBuscador) {
+            formularioBuscador.addEventListener('submit', async function(evento) {
+                evento.preventDefault();
+                const palabra = inputBuscador.value.trim().toLowerCase();
+
+                if (palabra !== "") {
+                    try {
+
+                        const tallerEncontrado = datos.talleres.find(taller =>
+                            taller.name.toLowerCase().includes(palabra)
+                        );
+
+
+                        if (tallerEncontrado) {
+                            window.location.href = `pages/Taller-Informacion.html?id=${tallerEncontrado.id}`;
+                        } else {
+                            alert(`Lo sentimos, no hemos encontrado ningún taller llamado "${palabra}".`);
+                        }
+
+                    } catch (error) {
+                        console.error("Fallo al buscar el taller:", error);
+                    }
+                }
+            });
         }
 
         const imagen_perfil = headerContainer.querySelector('#Taller-image');
@@ -130,8 +152,6 @@ async function renderizarFooter(datos) {
 
         footer = footer.replaceAll('../partials/', './partials/');
 
-        // 3. REPARAR EL ID:
-        // En el index no hay ID de taller, así que ponemos 0
         footer = footer.replaceAll('{{id}}', '0');
 
         footerContainer.innerHTML = footer;
@@ -143,20 +163,17 @@ async function renderizarFooter(datos) {
 }
 
 document.addEventListener('click', (e) => {
-    // Si el elemento clicado (o su padre) es nuestro enlace de taller
     const enlaceTaller = e.target.closest('.check-auth');
 
     if (enlaceTaller) {
-        e.preventDefault(); // Evitamos que navegue a '#'
+        e.preventDefault();
 
         const sesion = localStorage.getItem('usuario_logeado');
         const idTaller = enlaceTaller.getAttribute('data-id');
 
         if (sesion) {
-            // SI HAY SESIÓN: Vamos a la página del taller
             window.location.href = `./pages/taller-informacion.html?id=${idTaller}`;
         } else {
-            // NO HAY SESIÓN: Abrimos el modal de elección (el que ya tienes en auth.js)
             const modalAuth = document.getElementById('modal-auth-choice');
             if (modalAuth) {
                 modalAuth.showModal();

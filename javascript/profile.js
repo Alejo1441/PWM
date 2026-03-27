@@ -1,16 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- 1. CARGA INICIAL DEL USUARIO ---
+    const mainContainer = document.querySelector('.profile-container');
+
+    if (mainContainer) {
+        const rutaFoto = `../Fotos/Fondo pagina.png`;
+        mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+    }
+
     const sesion = localStorage.getItem('usuario_logeado');
     if (!sesion) {
-        window.location.href = "../partials/log.html"; // Redirigir si no hay sesión
-        return; //CAMBIAR
+        window.location.href = "../partials/log.html";
+        return;
     }
 
     let usuarioActual = JSON.parse(sesion);
     renderDatosUsuarios(usuarioActual);
 
-    // --- 2. GESTIÓN DE PESTAÑAS (TABS) ---
     const btnCars = document.getElementById('btn-cars');
     const btnBooking = document.getElementById('btn-booking');
     const panelCars = document.getElementById('cars');
@@ -27,9 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- 3. DELEGACIÓN DE EVENTOS (ABRIR MODAL Y ENVIAR FORMULARIO) ---
-
-    // Escuchar TODOS los clics de la página
     document.addEventListener('click', (e) => {
         // Si el elemento clicado tiene el ID de nuestro botón de añadir coche...
         if (e.target && e.target.id === 'btn-add-car-open') {
@@ -42,36 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Escuchar TODOS los envíos de formularios de la página
     document.addEventListener('submit', (e) => {
-        // Si el formulario enviado es el de nuestro modal...
         if (e.target && e.target.id === 'form-car') {
-            e.preventDefault(); // Evita que la página se recargue al enviar
+            e.preventDefault();
 
-            // Capturamos los inputs dentro de este formulario concreto
             const inputs = e.target.querySelectorAll('input');
             const modelo = inputs[0].value;
             const marca = inputs[1].value;
             const matricula = inputs[2].value;
 
-            // Formateamos cómo queremos que se guarde
             const textoCoche = `${marca} ${modelo} - ${matricula}`;
 
-            // Refrescamos la variable del usuario actual y le añadimos el coche al array
             usuarioActual = JSON.parse(localStorage.getItem('usuario_logeado'));
             usuarioActual.car.push(textoCoche);
-
-            // Guardamos los cambios
             guardarCambiosUsuario(usuarioActual);
 
-            // Cerramos el modal y reseteamos los campos
             document.getElementById('add-car-dialog').close();
             e.target.reset();
         }
     });
 });
-
-// --- FUNCIONES AUXILIARES ---
 
 function renderDatosUsuarios(user) {
     // 1. Pintar datos básicos
@@ -81,7 +73,6 @@ function renderDatosUsuarios(user) {
     if (nombre) nombre.textContent = `${user.username} ${user.lastname}`;
     if (email) email.textContent = user.email;
 
-    // 2. Pintar la lista de coches (Con botón de eliminar dinámico)
     const listaCoches = document.getElementById("list-cars");
     if (listaCoches) {
         if (user.car && user.car.length > 0) {
@@ -96,7 +87,6 @@ function renderDatosUsuarios(user) {
         }
     }
 
-    // 3. Pintar reservas
     const listaReservas = document.getElementById("list-bookings");
     if (listaReservas) {
         if (user.bookings && user.bookings.length > 0) {
@@ -112,7 +102,6 @@ function renderDatosUsuarios(user) {
     }
 }
 
-// Función global para eliminar un coche según su posición en el array (index)
 window.eliminarCoche = function(index) {
     if (confirm("¿Seguro que quieres eliminar este vehículo?")) {
         let usuarioActual = JSON.parse(localStorage.getItem('usuario_logeado'));
@@ -135,12 +124,11 @@ window.eliminarReserva = function(index) {
     }
 };
 
-// Función maestra para guardar la información y repintar la pantalla
 function guardarCambiosUsuario(userModificado) {
-    // Actualizar la sesión actual
+
     localStorage.setItem('usuario_logeado', JSON.stringify(userModificado));
 
-    // Buscar al usuario en la "base de datos" general y actualizarlo ahí también
+
     let baseDatos = JSON.parse(localStorage.getItem('usuarios_registrados')) || [];
     const posicionDB = baseDatos.findIndex(u => u.email === userModificado.email);
 
@@ -149,6 +137,6 @@ function guardarCambiosUsuario(userModificado) {
         localStorage.setItem('usuarios_registrados', JSON.stringify(baseDatos));
     }
 
-    // Volver a dibujar la interfaz con los datos nuevos (sin recargar)
     renderDatosUsuarios(userModificado);
 }
+

@@ -1,4 +1,3 @@
-
 html,body{
     height: 100%;
     margin: 0;
@@ -12,11 +11,39 @@ body{
 
 .Color-Linea{
     border: 2px solid white;
+    width: 100%;
+    margin: 0;
+}
+
+.Linea-Vertical{
+    border: 2px solid white;
+    height: 100%;
+    margin: 0;
 }
 
 .profile-container {
     display: flex;
     flex:1;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.profile-container::before {
+    content: "";
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    z-index: -1;
+
+    background-image: var(--bg-taller);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(10px);
+    opacity: 0.6;
 }
 
 .profile-managment, .profile-info{
@@ -73,4 +100,8 @@ body{
     padding: 10px 0;
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
+}
+
+#search-form {
+    display: none !important;
 }

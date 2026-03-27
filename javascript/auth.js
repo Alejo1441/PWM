@@ -1,21 +1,13 @@
-// --- 1. CONFIGURACIÓN GLOBAL DE RUTAS ---
-// Comprobamos si la palabra "pages" está en la URL
 
-// --- 1. CONFIGURACIÓN GLOBAL DE RUTAS ---
-// Comprobamos si estamos metidos en CUALQUIER subcarpeta (pages o partials)
 const ruta = window.location.pathname;
 const enSubcarpeta = ruta.includes('/pages/') || ruta.includes('/partials/');
 
-// Si estamos en una subcarpeta, retrocedemos (../). Si estamos en la raíz, bajamos (./)
 const prefijo = enSubcarpeta ? '../' : './';
 const rutaPerfil = enSubcarpeta ? '../pages/profile.html' : './pages/profile.html';
 const rutaIndex = enSubcarpeta ? '../index.html' : './index.html';
 
-// ... (El resto del código hacia abajo se queda igual) ...
-
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // --- 2. CARGA DEL JSON ---
     if(!localStorage.getItem("usuarios_registrados")) {
         try {
             const res = await fetch(prefijo + 'json/content.json');
@@ -26,25 +18,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // 1. Referencias a los Diálogos (Modales)
+
     const modalAuth = document.getElementById('modal-auth-choice');
     const modalLogin = document.getElementById('modal-login');
     const modalRegType = document.getElementById('modal-reg-type');
     const modalRegForm = document.getElementById('modal-register-form');
 
-    // 2. Referencias a Botones
     const btnOpenLogin = document.getElementById('open-login');
     const btnOpenRegChoice = document.getElementById('open-register-choice');
     const btnGoRegClient = document.getElementById('go-reg-client');
     const loginForm = document.getElementById('form-login');
     const registerForm = document.getElementById('form-register');
 
-    // --- LÓGICA DE NAVEGACIÓN ENTRE MODALES ---
     if(btnOpenLogin) btnOpenLogin.onclick = () => { modalAuth.close(); modalLogin.showModal(); };
     if(btnOpenRegChoice) btnOpenRegChoice.onclick = () => { modalAuth.close(); modalRegType.showModal(); };
     if(btnGoRegClient) btnGoRegClient.onclick = () => { modalRegType.close(); modalRegForm.showModal(); };
 
-    // --- LÓGICA DE LOGIN ---
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -63,7 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // --- LÓGICA DE REGISTRO ---
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -105,11 +93,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             localStorage.setItem('usuario_logeado', JSON.stringify(nuevoUsuario));
 
             alert("Cuenta creada con éxito");
-            window.location.href = rutaPerfil; // Usa la ruta inteligente
+            window.location.href = rutaPerfil;
         });
     }
 
-    // --- ESPERAR AL HEADER DINÁMICO ---
     const checkHeader = setInterval(() => {
         const profileLink = document.getElementById('profile-link');
         if (profileLink) {
@@ -146,14 +133,14 @@ function actualizarInterfazHeader() {
             span.className = 'welcome-msg';
             span.style.marginLeft = "10px";
             span.textContent = `Hola, ${usuario.username}`;
-            profileLink.appendChild(span);
+            profileLink.prepend(span);
         }
         if(btnLogout) {
             btnLogout.classList.remove('hidden');
 
             btnLogout.onclick = () => {
                 localStorage.removeItem('usuario_logeado');
-                window.location.href = rutaIndex; // Usa la ruta inteligente
+                window.location.href = rutaIndex;
             };
         }
     } else {

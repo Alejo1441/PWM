@@ -36,6 +36,7 @@ body{
 .Color-Linea{
     border: 2px solid white;
     width: 100%;
+    margin: 0;
 }
 
 .logo_circular{
@@ -79,7 +80,7 @@ body{
 .item-resena {
     display: flex;
     align-items: center; /* Centra la imagen con el texto verticalmente */
-    gap: 15px;           /* Separación entre la foto de perfil y las estrellas */
+    gap: 5px;           /* Separación entre la foto de perfil y las estrellas */
     margin-bottom: 30px; /* Separación hacia abajo para la siguiente reseña */
 }
 
