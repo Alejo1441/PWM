@@ -1,5 +1,6 @@
 // 🔥 CAMBIO 1: Sustituimos DOMContentLoaded por "load"
 window.addEventListener("load", async () => {
+    await cargarComponentesBase();
     const carList = document.getElementById("car-list");
     const selectedText = document.getElementById("selectedCar");
     const dateElement = document.getElementById("reservation-date");
@@ -121,5 +122,24 @@ function guardarRervaEnDB(userModificado){
     if (index !== -1) {
         baseDatos[index] = userModificado;
         localStorage.setItem('usuarios_registrados', JSON.stringify(baseDatos));
+    }
+}
+async function cargarComponentesBase() {
+    try {
+        const resJson = await fetch('../json/content.json');
+        const datos = await resJson.json();
+
+        // Cargar Header
+        const resHeader = await fetch('../partials/Header.html');
+        document.getElementById('site-header').innerHTML = await resHeader.text();
+
+        // Cargar Footer
+        const resFooter = await fetch('../partials/footer.html');
+        let footerHtml = await resFooter.text();
+        // Reemplazamos el ID por 0 para políticas generales
+        document.getElementById('site-footer').innerHTML = footerHtml.replaceAll('{{id}}', '0');
+
+    } catch (e) {
+        console.error("Error cargando componentes:", e);
     }
 }

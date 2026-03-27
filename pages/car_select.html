@@ -8,56 +8,42 @@
 </head>
 <body>
 
-
-<div xlu-include-file="../partials/Header.html"></div>
-
+<header id="site-header"></header>
 <hr class="Color-Linea">
 
-<div class="page">
+<main class="page">
     <div class="container">
-
         <div class="left">
-            <h1>¿A que vehículo le quieres realizar el servicio?</h1>
-
+            <h1>¿A qué vehículo le quieres realizar el servicio?</h1>
             <div class="car-list" id="car-list"></div>
         </div>
 
         <div class="right">
             <div class="summary">
-                <p><strong>Vehículo seleccionado:</strong>
-                    <span id="selectedCar">Ninguno</span>
-                </p>
-
+                <p><strong>Vehículo seleccionado:</strong> <span id="selectedCar">Ninguno</span></p>
                 <div id="info-servicio-taller">
                     <p><strong>Tipo de servicio:</strong> nombre servicio</p>
                 </div>
-
-                <p><strong>Fecha de la cita:</strong>
-                    <span id="reservation-date">Día y fecha</span>
-                </p>
-
+                <p><strong>Fecha de la cita:</strong> <span id="reservation-date">Día y fecha</span></p>
                 <div class="price-block">
                     <p><strong>Precio estimado:</strong></p>
                     <div class="price">Precio</div>
                 </div>
             </div>
-
-            <button class="confirm-btn" id="confirm-reservation">
-                Confirmar reserva
-            </button>
+            <button class="confirm-btn" id="confirm-reservation">Confirmar reserva</button>
         </div>
-
     </div>
-</div>
+</main>
 
-
-<div xlu-include-file="../partials/footer.html"></div>
+<footer id="site-footer"></footer>
 
 <script src="../javascript/xlu-include-file.js"></script>
-<script>xLuIncludeFile();</script>
-
-<script src="../javascript/car_select.js"></script>
+<script>
+    // Inyectamos los archivos ANTES de cargar la lógica de los botones
+    xLuIncludeFile();
+</script>
 <script src="../javascript/auth.js"></script>
+<script src="../javascript/car_select.js"></script>
 
 </body>
 </html>
