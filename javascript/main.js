@@ -97,11 +97,14 @@ async function renderizarMain() {
             const estrellasVisuales = '★'.repeat(promedio) + '☆'.repeat(5 - promedio);
 
             let tarjetaTaller = main
+                .replaceAll('./pages/taller-informacion.html?id={{id}}', '#')
                 .replaceAll('{{id}}', taller.id)
                 .replaceAll('{{nombre}}', taller.name)
                 .replaceAll('{{imagen}}', taller.image[0])
                 .replaceAll('{{resenas}}', numeroResenas)
                 .replaceAll('★★★★★', estrellasVisuales);
+
+            tarjetaTaller = tarjetaTaller.replace('<a ', `<a class="check-auth" data-id="${taller.id}" `);
 
             mainfinal += tarjetaTaller;
 
@@ -138,3 +141,28 @@ async function renderizarFooter(datos) {
         console.error("Error al pintar el footer:", error);
     }
 }
+
+document.addEventListener('click', (e) => {
+    // Si el elemento clicado (o su padre) es nuestro enlace de taller
+    const enlaceTaller = e.target.closest('.check-auth');
+
+    if (enlaceTaller) {
+        e.preventDefault(); // Evitamos que navegue a '#'
+
+        const sesion = localStorage.getItem('usuario_logeado');
+        const idTaller = enlaceTaller.getAttribute('data-id');
+
+        if (sesion) {
+            // SI HAY SESIÓN: Vamos a la página del taller
+            window.location.href = `./pages/taller-informacion.html?id=${idTaller}`;
+        } else {
+            // NO HAY SESIÓN: Abrimos el modal de elección (el que ya tienes en auth.js)
+            const modalAuth = document.getElementById('modal-auth-choice');
+            if (modalAuth) {
+                modalAuth.showModal();
+            } else {
+                alert("Por favor, inicia sesión para ver los detalles del taller.");
+            }
+        }
+    }
+});
