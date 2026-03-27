@@ -1,6 +1,7 @@
 # PWM
 
 # Nombre del proyecto: AutoHub
+
 # Componentes del grupo
 
   -Alejo Santana, Alejandro
@@ -72,10 +73,70 @@ lore-Ipsum.
 - también tenemos log y quest, que son formularios y diálogos hechos, que aunque todavía no están implementados, se añadirán en la siguiente
 iteración
 
+# Nuevo Listado de detalles del Sprint 2
 
-# Otros
-- hemos realizado un par de tareas en javaScript, aparte de la de poder añadir templates a las páginas, como es el caso del footer y header
-ya, que estas son de un archivo visto en clase, una para poder seleccionar botones en la página de calendar(esta se encuentra dentro del html del propio calendar) y también en la parte del perfil para 
-poder cambiar entre los datos de los coches en posesión de un individuo y las reservas que posee, este último se encuentra en la carpeta de javascript y se llama
-profile.js.
+# Nombre y ubicacion de los nuevos mockups
+El nombre de los mockups responsive, es mockups_responsive y se encuentra en el directorio raiz
+
+# Listado de paginas HTML
+
+Index.html
+- Se encuentra en el directorio principal, no dentro de ninguna carpeta, siguiendo las recomendaciones de nuestro profesor
+    hemos decidido que lo mejor que podíamos hacer es sacar el index fuera, para que se vea a simple vista y hemos realizado
+    la refactorización adecuada para ello
+- En el index nos encontramos con 2 formularios cuando hacemos click en el botón del perfil o en las imágenes
+    de cualquier taller, en el de iniciar sesión, la contraseña y el correo deben coincidir con alguno de los valores del JSON
+    es decir, con un usuario ya creado por ejemplo (usuario: Leon@gmail.com y pass: 1234), el otro formulario que hay en esta
+    pagina es el de registrarse, las validaciones que hacemos, es que hay campos que no pueden estar vacios, que el correo, debe
+    poseer un "@" y que la contraseña como minimo tiene que ser de 4 caracteres
+- en el apartado de resposive, en el index, suceden varias cosas, el header se hace mas pequeño y desaparace el buscador,
+    los talleres se posicionana uno debajo de otro en modo movil, y en el footer cada elemento se posiciona cada elemento, como
+    las politicas o redes sociales, uno debajo de otro
+- los datos que se cargan del JSON, en el index son varias, uno, son del perfil, ya que al iniciar sesión aparece el nombre
+    de usuario de cada usuario, también se cargan los nombre de los talleres, en cuanto a los templates en esta pagina hay 3 elementos
+    los article que son Talleres-previsualisación.html, que son los talleres, el footer y el header.
+
+Calendar.html
+- en cuanto a responsive en esta pagina estan el footer, el header, y los elementos que poseen esta pagina como el calendario, con las horas
+y el boton de reserva, se muestran de forma vertical para una mejor visualización
+- templates usados son los del footer y header, y los datos del JSON obtenidos es el nombre del taller y la especialidad
+
+car_select-html
+- es practicamente igual que calnedar, en cuanto a footer y header y la visualicon de los elementos como la seleccion del coche y
+ de la información mostrado, en formato vertical
+- los templates usados son footer y header, y los datos del JSON obtenidos son, los vehiculos del usuario logeado, nombre del taller
+y precio por el servicio prestado
+
+profile.html
+- footer y header igual que en las otras paginas, en cuanto al diseño responsive se refiere, y como esta pagina es sencilla, simplemente
+hacemos que los botnes de reservas y coches sean mas pequeños y se adapten a los diferentes dispositivos
+- los templates usados son footer y header, luego los datos que obtenemos del JSON en esta pagina son, el numero de vehiculos que tenga
+, nombre y apellidos y las reservas que tenga
+- En esta pagina, hay un formulario para añadir coche a la cuenta, en el cual hay 3 campos, marca, modelo y contraseña, en el cual,
+los tres campos son requeridos, para este Sprint hemos decidido que podamos poner cualquier nombre y demas, ya que lo ideal, seria que 
+fuera un desplegable y que pudieras escribir y seleccionar la marca y matricula
+
+reviews.html
+- es resposive como las otras paginas, esta es bastante mas sencilla ya que, al ser solo reseñas, y no poseer mas elementos,
+la mayor dificultad fue, como en el resto de paginas, implementar el footer y el header
+- tenemos dos templates de siempre footer y header, y aparte tenemos template dentro de review.js, que dependiendo del taller
+que sea, pone una reseñas u otras, y del JSON, tambien obtenemos a traves de reviews.js los datos de cada taller, igual que con
+el template.
+
+Taller-información.html
+- en cuanto a responsive, lo que hacemos aqui, es lo mismo con el footer y header que las demas, y luego se juntan mas las
+imagenes del taller, y luego la foto del mapa la movemos debajo de las fotos del taller para que sea visble de forma correcta
+- los templates que usamos son footer, header y los datos que cargamos del JSON, son las especialidades de los talleres y 
+la cantidad de reseñas que posee el taller, mas la media de la valoración de todas las reseñas
+
+# Usuarios de prueba
+
+Usuario: Leon@gmail.com
+
+Pass:1234
+
+tambien se pueden crear nuevos usuarios, aunque no se guardan en el JSON, pero es completamente usable.
+
+# Ubicación del JSON
+se encuentra en la carpeta JSON y es el archivo content.json
 
