@@ -10,11 +10,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function loadCalendarData() {
     try {
         const response = await fetch("../json/content.json");
-        if (!response.ok) {
-            throw new Error("No se pudo cargar el JSON");
+        const data = await response.json();
+
+        const params = new URLSearchParams(window.location.search);
+        const idTaller = params.get('id');
+        const servicio = params.get('servicio');
+
+        const taller = data.talleres.find(t => t.id ==idTaller);
+
+        const title = document.getElementById("calendar-title");
+        if (taller) {
+            const nombreCompleto =`${taller.name} (${servicio})`;
+            title.textContent = `Reservar cita en: ${taller.name}`;
+            localStorage.setItem("temp_taller_name", taller.name);
         }
 
-        const data = await response.json();
+
         calendarData = data.calendar;
     } catch (error) {
         console.error("Error cargando el calendario:", error);
@@ -47,7 +58,8 @@ function initializeCalendar() {
 
         const reservation = {
             date: selectedDate,
-            time: selectedSlot.dataset.time
+            time: selectedSlot.dataset.time,
+            taller: localStorage.getItem("temp_taller_name") || "Taller"
         };
 
         // guardar en localStorage
@@ -57,7 +69,7 @@ function initializeCalendar() {
         window.location.href = "../pages/car_select.html";
     });
 
-    title.textContent = calendarData.title;
+
 
     fillMonthSelect(monthSelect);
     fillYearSelect(yearSelect);
