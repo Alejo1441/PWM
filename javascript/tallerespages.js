@@ -19,7 +19,7 @@ async function cargarDatos() {
         }
 
         if (document.getElementById('site-footer')) {
-            renderizarFooter(datos.footer);
+            renderizarFooter(datos);
         }
 
     } catch (error) {
@@ -172,9 +172,23 @@ async function renderizarFooter(datos) {
 
         const parametrosURL = new URLSearchParams(window.location.search);
         let idActual = parametrosURL.get('id') || 0;
-        footer = footer.replaceAll('{{id}}', idActual);
 
+        footer = footer.replaceAll('{{id}}', idActual);
         footerContainer.innerHTML = footer;
+
+        const tallerSeleccionado = datos.talleres.find(taller => taller.id == idActual);
+
+        if(tallerSeleccionado){
+            const telefono = document.querySelector('#footer-number');
+            if(telefono){
+                telefono.textContent = `telefono:  ${tallerSeleccionado.informacioncontacto[0].telefono}`;
+            }
+
+            const mail = document.querySelector('#footer-mail');
+            if(mail){
+                mail.textContent = `correo electronico: ${tallerSeleccionado.informacioncontacto[0].correo}`;
+            }
+        }
 
     } catch (error) {
         console.error("Error al pintar el footer:", error);

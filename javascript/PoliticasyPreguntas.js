@@ -16,7 +16,7 @@ async function cargarDatos() {
 
         // 3. Renderizamos las partes de la página
         if (document.getElementById('site-header')) {
-            await renderizarHeader(datos.configuracion);
+            await renderizarHeader(datos);
         }
 
         if (document.getElementById('main-content')) {
@@ -32,7 +32,7 @@ async function cargarDatos() {
     }
 }
 
-async function renderizarHeader(config) {
+async function renderizarHeader(datos) {
     const headerContainer = document.getElementById('site-header');
 
     try {
@@ -44,14 +44,19 @@ async function renderizarHeader(config) {
 
         headerContainer.innerHTML = header;
 
-        const logo = headerContainer.querySelector('.logo_circular');
-        if (logo) {
-            logo.alt = `Logo de ${config.nombreSitio}`;
-        }
-
         const imagen_perfil = headerContainer.querySelector('#Taller-image');
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idTaller = parametrosURL.get('id');
+
         if(imagen_perfil){
-            imagen_perfil.src = "../Fotos/Nuestro logo.png";
+            if (!idTaller || idTaller == 0 || idTaller === '{{id}}') {
+                imagen_perfil.src = "../Fotos/Nuestro logo.png";
+            }else{
+                const tallerSeleccionado = datos.talleres.find(taller => taller.id == idTaller);
+                if(tallerSeleccionado){
+                    imagen_perfil.src = `${tallerSeleccionado.image[0]}`;
+                }
+            }
         }
 
 
@@ -69,7 +74,13 @@ async function renderizarMain(datos) {
         const contenedor = document.querySelector('#main-content');
         if (!contenedor) return;
 
+        const tallerSeleccionado = datos.talleres.find(taller => taller.id == idTaller);
+
         if (!idTaller || idTaller == 0 || idTaller === '{{id}}') {
+
+            const rutaFoto = `../Fotos/Fondo pagina.png`;
+            contenedor.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+
             if (tipo == 'politicas') {
                 const politicas = document.querySelector('#main-content');
 
@@ -109,6 +120,11 @@ async function renderizarMain(datos) {
             }
 
         }else{
+
+            if (contenedor && tallerSeleccionado.image.length > 0) {
+                const rutaFoto = `../${tallerSeleccionado.image[0]}`;
+                contenedor.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
+            }
 
             if (tipo == 'politicas') {
                 const politicas = document.querySelector('#main-content');

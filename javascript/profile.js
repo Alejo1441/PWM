@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
         mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
     }
 
+    const headerContainer = document.querySelector('#Taller-image');
+    if(headerContainer) {
+        headerContainer.src = "../Fotos/Nuestro logo.png";
+    }
+
     const sesion = localStorage.getItem('usuario_logeado');
     if (!sesion) {
         window.location.href = "../partials/log.html";

@@ -9,15 +9,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!respuesta.ok) throw new Error("Error al cargar el JSON");
     const datos = await respuesta.json();
 
+
+
     const idActual = parametrosURL.get('id');
+
     const tallerseleccionado = datos.talleres.find(taller => taller.id == idActual);
     const mainContainer = document.querySelector('.page');
+    const headerContainer = document.querySelector('#Taller-image');
 
     if(tallerseleccionado){
         if (mainContainer && tallerseleccionado.image.length > 0) {
             const rutaFoto = `../${tallerseleccionado.image[0]}`;
             mainContainer.style.setProperty('--bg-taller', `url('${rutaFoto}')`);
         }
+
+        if(headerContainer && tallerseleccionado.image.length > 0) {
+             headerContainer.src = `${tallerseleccionado.image[0]}`;
+        }
+
     }
 
     await loadCalendarData();

@@ -97,7 +97,7 @@
           "price": 60
         }
       ],
-      "coordinates": {"lat": 10.00, "lng":  10.00 },
+      "coordinates": {"lat": 110.00, "lng":  360.00 },
       "reviews": [
         {
           "username": "Jose",
@@ -137,6 +137,12 @@
           "name_pregunta": "¿Tienen ofertas por flota?",
           "pregunta_texto": "Sí, disponemos de descuentos especiales para empresas que traigan más de tres vehículos al mes para mantenimiento preventivo."
         }
+      ],
+      "informacioncontacto": [
+        {
+          "telefono": "111111111",
+          "correo": "elpaso2000@gmail.com"
+        }
       ]
     },
     {
@@ -158,7 +164,7 @@
           "price": 15
         }
       ],
-      "coordinates": {"lat": 11.00, "lng":  11.00 },
+      "coordinates": {"lat": 360.00, "lng":  110.00 },
       "reviews": [
         {
           "username": "Jose",
@@ -211,6 +217,12 @@
         {
           "name_pregunta": "¿Hacen alineación?",
           "pregunta_texto": "Sí, realizamos alineación 3D de precisión necesaria tras cualquier intervención en los elementos de la suspensión."
+        }
+      ],
+      "informacioncontacto": [
+        {
+          "telefono": "222222222",
+          "correo": "koni@gmail.com"
         }
       ]
     }

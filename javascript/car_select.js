@@ -129,14 +129,26 @@ async function cargarComponentesBase() {
         const resJson = await fetch('../json/content.json');
         const datos = await resJson.json();
 
-        // Cargar Header
+        const headerContainer = document.getElementById('site-header');
         const resHeader = await fetch('../partials/Header.html');
-        document.getElementById('site-header').innerHTML = await resHeader.text();
+        headerContainer.innerHTML = await resHeader.text();
 
-        // Cargar Footer
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idTaller = parametrosURL.get('id');
+
+        if (!idTaller) throw new Error("Falta el ID del taller en la URL");
+        const tallerSeleccionado = datos.talleres.find(taller => taller.id == idTaller);
+
+        if(tallerSeleccionado){
+            const imagen_perfil = headerContainer.querySelector('#Taller-image');
+            if(imagen_perfil){
+                imagen_perfil.src = `${tallerSeleccionado.image[0]}`;
+            }
+        }
+
         const resFooter = await fetch('../partials/footer.html');
         let footerHtml = await resFooter.text();
-        // Reemplazamos el ID por 0 para políticas generales
+
         document.getElementById('site-footer').innerHTML = footerHtml.replaceAll('{{id}}', '0');
 
     } catch (e) {
