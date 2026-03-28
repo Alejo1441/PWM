@@ -1,9 +1,8 @@
-// Esperamos a que el HTML cargue completamente
+
 document.addEventListener('DOMContentLoaded', () => {
     cargarDatos();
 });
 
-// Lógica de lectura usando async/await
 async function cargarDatos() {
     try {
 
@@ -18,7 +17,7 @@ async function cargarDatos() {
         }
 
         if (document.getElementById('main-content')) {
-           await renderizarMain();
+           await renderizarMain(datos);
         }
 
         if (document.getElementById('site-footer')) {
@@ -86,7 +85,7 @@ async function renderizarHeader(datos) {
     }
 }
 
-async function renderizarMain() {
+async function renderizarMain(datos) {
 
     try {
 
@@ -94,11 +93,7 @@ async function renderizarMain() {
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
         const main = await respuesta.text();
 
-        const respuestaJson = await fetch('./json/content.json');
-        if (!respuestaJson.ok) throw new Error("Error cargando el JSON");
-        const datosGenerales = await respuestaJson.json();
-
-        const talleres = datosGenerales.talleres.slice(0,2);
+        const talleres = datos.talleres.slice(0,2);
 
         const mainContainer = document.getElementById('main-content');
 

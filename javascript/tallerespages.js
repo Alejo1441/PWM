@@ -21,7 +21,7 @@ async function cargarDatos() {
         if (document.getElementById('site-footer')) {
             renderizarFooter(datos);
         }
-
+9
     } catch (error) {
         console.error("Fallo en el Corazón de Datos:", error);
     }
@@ -31,7 +31,7 @@ async function renderizarHeader(datos) {
     const headerContainer = document.getElementById('site-header');
 
     try {
-        const respuesta = await fetch('../partials/Header.html'); // Ajusta tu ruta
+        const respuesta = await fetch('../partials/Header.html');
 
         if (!respuesta.ok) throw new Error("Error cargando el HTML del header");
 
@@ -128,7 +128,6 @@ async function renderizarMain(datos) {
                     cajaBotones.innerHTML += `<a href="../pages/calendar.html?id=${tallerSeleccionado.id}&especialidad=${especialidad.service}" class="botonEspecialidad">${especialidad.service}</a>`;
                 });
             }
-
             const numeroResenas = tallerSeleccionado.reviews.length;
             let promedio = 0;
 
@@ -166,7 +165,7 @@ async function renderizarFooter(datos) {
 
     try {
 
-        const respuesta = await fetch('../partials/footer.html'); // Ajusta tu ruta
+        const respuesta = await fetch('../partials/footer.html');
         if (!respuesta.ok) throw new Error("Error cargando el HTML del footer");
         let footer = await respuesta.text();
 
