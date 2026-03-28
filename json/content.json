@@ -91,10 +91,6 @@
         {
           "service": "Alineacion dirección",
           "price": 45
-        },
-        {
-          "service": "Carga de aire acondicionado",
-          "price": 60
         }
       ],
       "coordinates": {"lat": 110.00, "lng":  360.00 },
