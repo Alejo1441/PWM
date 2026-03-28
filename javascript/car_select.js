@@ -1,4 +1,4 @@
-// 🔥 CAMBIO 1: Sustituimos DOMContentLoaded por "load"
+
 window.addEventListener("load", async () => {
     await cargarComponentesBase();
     const carList = document.getElementById("car-list");

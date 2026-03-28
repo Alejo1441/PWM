@@ -9,22 +9,30 @@
     },
     "politicas": [
       {
-        "name_politica": "politica 33",
-        "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+        "name_politica": "Protección de Datos",
+        "politica_texto": "De acuerdo con el RGPD, sus datos personales solo serán utilizados para la gestión de citas y comunicaciones relacionadas con su vehículo."
       },
       {
-        "name_politica": "politica 44",
-        "politica_texto": "Nos hacemos cargo de los daños ocasionados"
+        "name_politica": "Garantía de Reparación",
+        "politica_texto": "Todas nuestras reparaciones cuentan con una garantía de 6 meses o 2.000 kilómetros, cubriendo mano de obra y piezas defectuosas."
+      },
+      {
+        "name_politica": "Derecho de Admisión",
+        "politica_texto": "El taller se reserva el derecho de no admitir vehículos que presenten modificaciones ilegales o condiciones de higiene extremas que impidan el trabajo."
       }
     ],
     "preguntas": [
       {
-        "name_pregunta": "pregunta 33",
-        "pregunta_texto": "Para reservar tienes que reservar"
+        "name_pregunta": "Cancelación de citas",
+        "pregunta_texto": "Puede cancelar su cita hasta con 24 horas de antelación sin coste alguno a través de su perfil de usuario."
       },
       {
-        "name_pregunta": "pregunta 44",
-        "pregunta_texto": "RESERVA"
+        "name_pregunta": "Métodos de pago",
+        "pregunta_texto": "Aceptamos pagos en efectivo, tarjeta de crédito/debito y pagos mediante dispositivos móviles (Apple Pay/Google Pay)."
+      },
+      {
+        "name_pregunta": "Presupuesto sin compromiso",
+        "pregunta_texto": "Ofrecemos una revisión inicial gratuita para elaborar el presupuesto, siempre que la reparación se realice en nuestro centro."
       }
     ]
   },
@@ -69,16 +77,24 @@
     {
       "id": 101,
       "name": "ElPaso2000",
-      "description": "Los más mejores",
+      "description": "Líderes en mecánica rápida y neumáticos. Contamos con tecnología de diagnóstico de última generación para asegurar que su vehículo rinda al máximo nivel de seguridad y eficiencia.",
       "image": ["../Fotos/taller-elpaso2000-03.jpg", "../Fotos/tallerCarrizal.jpg"],
       "speciality": [
         {
-          "service": "cambiar aceite",
+          "service": "Cambio de aceite",
           "price": 30
         },
         {
-          "service": "cambiar rueda",
+          "service": "Cambio de ruedas",
           "price": 29
+        },
+        {
+          "service": "Alineacion dirección",
+          "price": 45
+        },
+        {
+          "service": "Carga de aire acondicionado",
+          "price": 60
         }
       ],
       "coordinates": {"lat": 10.00, "lng":  10.00 },
@@ -88,30 +104,58 @@
           "stars": 1,
           "comment": "Basura de taller",
           "date": "02-03-2026"
+        },
+        {
+          "username": "Marta_88",
+          "stars": 4,
+          "comment": "Rápidos y profesionales con los neumáticos, aunque tardaron un poco en darme la factura.",
+          "date": "15-03-2026"
+        },
+        {
+          "username": "Carlos_Mec",
+          "stars": 5,
+          "comment": "El mejor precio de la zona para el cambio de aceite. Muy recomendados.",
+          "date": "20-03-2026"
         }
       ],
       "politicas": [
         {
-          "name_politica": "politica 1",
-          "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+          "name_politica": "Recogida de vehículos",
+          "politica_texto": "Los vehículos deben ser retirados en un plazo máximo de 48 horas tras el aviso de finalización de trabajo para evitar cargos por pupilaje."
+        },
+        {
+          "name_politica": "Uso de piezas del cliente",
+          "politica_texto": "Por razones de seguridad y garantía, no instalamos piezas aportadas por el cliente que no hayan sido adquiridas a través de nuestros proveedores oficiales."
         }
       ],
       "preguntas": [
         {
-          "name_pregunta": "pregunta 1",
-          "pregunta_texto": "Para reservar tienes que reservar"
+          "name_pregunta": "Repuestos",
+          "pregunta_texto": "Solo utilizamos recambios originales o certificados de primer equipo para garantizar la longevidad de su motor."
+        },
+        {
+          "name_pregunta": "¿Tienen ofertas por flota?",
+          "pregunta_texto": "Sí, disponemos de descuentos especiales para empresas que traigan más de tres vehículos al mes para mantenimiento preventivo."
         }
       ]
     },
     {
       "id": 102,
       "name": "Koni",
-      "description": "El mejor Taller",
+      "description": "Especialistas en sistemas de suspensión y preparación deportiva. Ofrecemos un servicio personalizado para conductores exigentes que buscan mejorar el confort y la estabilidad de su automóvil.",
       "image": ["../Fotos/tallerSalamanca.jpg"],
       "speciality": [
         {
-          "service": "cambiar rueda",
+          "service": "Cambio de ruedas",
           "price": 33
+        },
+        {
+          "service": "Revision de suspensión",
+          "price": 25
+        },
+        {
+          "service": "Equilibrado de precisión",
+          "price": 15
         }
       ],
       "coordinates": {"lat": 11.00, "lng":  11.00 },
@@ -127,26 +171,46 @@
           "stars": 3,
           "comment": "Taller regular",
           "date": "02-03-2026"
+        },
+        {
+          "username": "Racer_Canario",
+          "stars": 5,
+          "comment": "Increíble ajuste de la suspensión. Mi coche parece otro en las curvas. Muy expertos.",
+          "date": "10-03-2026"
+        },
+        {
+          "username": "LauraV",
+          "stars": 2,
+          "comment": "Son buenos, pero los precios son algo elevados comparados con otros talleres de la zona.",
+          "date": "22-03-2026"
         }
       ],
       "politicas": [
         {
-          "name_politica": "politica 1",
-          "politica_texto": "No nos hacemos cargo de los daños ocasionados"
+          "name_politica": "Piezas sustituidas",
+          "politica_texto": "El cliente tiene derecho a solicitar y llevarse las piezas viejas sustituidas de su vehículo, salvo en reparaciones bajo garantía."
         },
         {
-          "name_politica": "politica 2",
-          "politica_texto": "Nos hacemos cargo de los daños ocasionados"
+          "name_politica": "Presupuesto previo",
+          "politica_texto": "No se realizará ninguna reparación adicional no contemplada en el presupuesto inicial sin la autorización expresa del cliente."
+        },
+        {
+          "name_politica": "Prueba en carretera",
+          "politica_texto": "Toda reparación de suspensión conlleva una prueba dinámica en carretera realizada por nuestros técnicos para verificar la seguridad."
         }
       ],
       "preguntas": [
         {
-          "name_pregunta": "pregunta 1",
-          "pregunta_texto": "Para reservar tienes que reservar"
+          "name_pregunta": "Tiempo de espera",
+          "pregunta_texto": "Para cambios de neumáticos, el tiempo estimado es de 45 minutos si dispone de cita previa confirmada."
         },
         {
-          "name_pregunta": "pregunta 3",
-          "pregunta_texto": "RESERVA"
+          "name_pregunta": "Vehículo de sustitución",
+          "pregunta_texto": "Disponemos de flota de cortesía gratuita para reparaciones que superen los tres días de estancia en el taller."
+        },
+        {
+          "name_pregunta": "¿Hacen alineación?",
+          "pregunta_texto": "Sí, realizamos alineación 3D de precisión necesaria tras cualquier intervención en los elementos de la suspensión."
         }
       ]
     }

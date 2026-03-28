@@ -15,7 +15,7 @@ async function cargarDatos() {
         }
 
         if (document.querySelector('.TallerInfo')) {
-            await renderizarMain();
+            await renderizarMain(datos);
         }
 
         if (document.getElementById('site-footer')) {
@@ -39,8 +39,22 @@ async function renderizarHeader(datos) {
 
         headerContainer.innerHTML = header;
 
+        const parametrosURL = new URLSearchParams(window.location.search);
+        const idTaller = parametrosURL.get('id');
+
+        if (!idTaller) throw new Error("Falta el ID del taller en la URL");
+        const tallerSeleccionado = datos.talleres.find(taller => taller.id == idTaller);
+
+        if(tallerSeleccionado){
+            const imagen_perfil = headerContainer.querySelector('#Taller-image');
+            if(imagen_perfil){
+                imagen_perfil.src = `${tallerSeleccionado.image[0]}`;
+            }
+        }
+
         const formularioBuscador = document.getElementById('search-form');
         const inputBuscador = document.getElementById('search-input');
+
 
         if (formularioBuscador && inputBuscador) {
             formularioBuscador.addEventListener('submit', async function(evento) {
@@ -74,7 +88,7 @@ async function renderizarHeader(datos) {
     }
 }
 
-async function renderizarMain() {
+async function renderizarMain(datos) {
 
     try {
 
@@ -83,12 +97,7 @@ async function renderizarMain() {
 
         if (!idTaller) throw new Error("Falta el ID del taller en la URL");
 
-        const respuestaJson = await fetch('../json/content.json');
-        if (!respuestaJson.ok) throw new Error("Error al cargar el JSON");
-
-        const datosGenerales = await respuestaJson.json();
-
-        const tallerSeleccionado = datosGenerales.talleres.find(t => t.id == idTaller);
+        const tallerSeleccionado = datos.talleres.find(taller => taller.id == idTaller);
 
         if (tallerSeleccionado) {
 
@@ -136,7 +145,7 @@ async function renderizarMain() {
             if (spanEstrellas) spanEstrellas.textContent = estrellasVisuales;
 
             if (enlaceResenas) {
-                enlaceResenas.textContent = `${numeroResenas} Reseñas`;
+                enlaceResenas.textContent = `${tallerSeleccionado.name}: ${numeroResenas} Reseñas`;
                 enlaceResenas.href = `reviews.html?id=${tallerSeleccionado.id}`;
             }
 
