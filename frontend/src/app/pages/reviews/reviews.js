@@ -104,7 +104,7 @@ async function renderizarMain(datos) {
                 tallerSeleccionado.reviews.forEach(review => {
                     const valoracion = '★'.repeat(review.stars) + '☆'.repeat(5 - review.stars)
                     resena.innerHTML += `<div class="item-resena">
-                                            <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
+                                            <img src="../../../../../old_code/Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
                                                 <p class="nombre-usuario">${review.username}: </p>
                                                 <p class="texto-resenas"> ${review.comment}</p>
                                                 <span class="estrellas">${valoracion}</span>

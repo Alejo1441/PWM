@@ -1,7 +1,6 @@
-/* Color de fondo gris para toda la página (opcional, según tu diseño) */
 body {
     background-color: #dcdcdc;
-    font-family: Arial, sans-serif; /* Para que el texto se vea limpio */
+    font-family: Arial, sans-serif;
 }
 
 /*
