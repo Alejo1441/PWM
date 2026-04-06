@@ -9,7 +9,7 @@ window.addEventListener("load", async () => {
 
     const sesion = JSON.parse(localStorage.getItem("usuario_logeado"));
     if(!sesion){
-        window.location.href = "../index.html";
+        window.location.href = "../../Index.html";
         return;
     }
     const reservation = JSON.parse(localStorage.getItem("reservation"));
@@ -108,7 +108,7 @@ window.addEventListener("load", async () => {
             localStorage.removeItem("selectedCar");
             localStorage.removeItem("temp_taller_name");
 
-            window.location.href = "../pages/profile.html";
+            window.location.href = "../../pages/profile.html";
         });
     }
 });

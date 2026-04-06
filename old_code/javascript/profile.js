@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sesion = localStorage.getItem('usuario_logeado');
     if (!sesion) {
-        window.location.href = "../partials/log.html";
+        window.location.href = "../../partials/log.html";
         return;
     }
 

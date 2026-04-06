@@ -70,7 +70,7 @@ async function renderizarHeader(datos) {
 
 
                         if (tallerEncontrado) {
-                            window.location.href = `../pages/Taller-Informacion.html?id=${tallerEncontrado.id}`;
+                            window.location.href = `../../pages/Taller-Informacion.html`;
                         } else {
                             alert(`Lo sentimos, no hemos encontrado ningún taller llamado "${palabra}".`);
                         }
