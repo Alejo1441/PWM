@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<body>
+
+<header xlu-include-file="../partials/Header.html"></header>
+
+<script src="../javascript/xlu-include-file.js"></script>
+<script src="../javascript/auth.js"></script>
+<script> xLuIncludeFile(); </script>
+
+<hr class="Color-Linea">
+
+<main class="profile-container">
+  <section class="profile-managment">
+    <div class="tabs-container">
+      <button id="btn-cars" class="tab active" >Coches en posesion</button>
+      <button id="btn-booking" class="tab " >Reservas</button>
+    </div>
+
+    <div class="management-container" id="cars">
+      <h1>Coches en mi cuenta</h1>
+      <ul class="item-list" id="list-cars">
+      </ul>
+      <div class ="buttons-cars">
+        <button class="button-red" id="btn-add-car-open"> Añadir vehiculo </button>
+      </div>
+    </div>
+
+    <div class="management-container hide" id="booking">
+      <h1>Reservas</h1>
+      <ul class="item-list" id="list-bookings"></ul>
+
+    </div>
+  </section>
+
+  <hr class="Linea-Vertical">
+
+  <section class="profile-info">
+    <div class="info-container">
+      <div class="data-user">
+        <p><strong>Nombre:</strong> <span id="user-fullname">Cargando... </span> </p>
+        <p><strong>Correo:</strong><span id="user-email">Cargando... </span></p>
+        <p><strong>Contraseña:</strong> *********</p>
+        <button class="button-red">Editar perfil</button>
+      </div>
+    </div>
+  </section>
+
+
+
+
+</main>
+
+<footer xlu-include-file="../partials/footer.html"></footer>
+<script src="../javascript/xlu-include-file.js"></script>
+<div xlu-include-file="../partials/add_car.html"></div>
+<script>
+  xLuIncludeFile();
+</script>
+
+
+<script src="../javascript/profile.js"></script>
+
+
+
+
+</body>
+</html>
