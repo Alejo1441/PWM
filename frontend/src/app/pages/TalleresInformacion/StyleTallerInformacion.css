@@ -13,6 +13,10 @@ body{
 }
 */
 
+.bi-1-square{
+  background-color: red;
+}
+
 .TallerInfo{
 
     font-family: Arial, Helvetica, sans-serif;
