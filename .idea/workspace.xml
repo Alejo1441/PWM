@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ba9a54c7-d846-4dce-a8b8-b6ae972cdef2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/components/footer/footer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/footer/footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/footer/footer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/footer/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/footer/footer.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="package.json" />
+        <option value="JavaScript File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="JoseSprint2" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JoseOjeda14&quot;
+  }
+}</component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="d7a1a9a7-0f2c-40b3-9df0-0367b5d2810f" />
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Alejo1441/PWM.git&quot;,
+    &quot;accountId&quot;: &quot;d7a1a9a7-0f2c-40b3-9df0-0367b5d2810f&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="39l4GwaNhBHimfQI2oUlp7k7Uca" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.Especialidad-Taller.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.Header.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.Index.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.TalesPrevisualization.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.Taller-Informacion.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.TallerInformacion.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.Talleres-Previsualizacion.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.calendar.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.car_select.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.footer.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.profile.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.reviews.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.text.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Sprint-3&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\josem\\WebstormProjects\\PWM\\frontend\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\josem\\WebstormProjects\\PWM\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\josem\WebstormProjects\PWM\frontend\src\app\components\footer" />
+      <recent name="C:\Users\josem\WebstormProjects\PWM\frontend\src\app\components\Header" />
+      <recent name="C:\Users\josem\WebstormProjects\PWM\frontend\src\app\components" />
+      <recent name="C:\Users\josem\WebstormProjects\PWM\frontend\src\app\components\text" />
+      <recent name="C:\Users\josem\WebstormProjects\PWM\frontend\src\app\components\TalleresPrevisualizacion\text" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ba9a54c7-d846-4dce-a8b8-b6ae972cdef2" name="Changes" comment="" />
+      <created>1771257233366</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771257233366</updated>
+      <workItem from="1771257234284" duration="3294000" />
+      <workItem from="1771333169230" duration="4288000" />
+      <workItem from="1771337618623" duration="128000" />
+      <workItem from="1771859306610" duration="5682000" />
+      <workItem from="1771887231529" duration="3263000" />
+      <workItem from="1771890582230" duration="25000" />
+      <workItem from="1771890642993" duration="39000" />
+      <workItem from="1771890689129" duration="14000" />
+      <workItem from="1771959712261" duration="5524000" />
+      <workItem from="1772031917871" duration="156000" />
+      <workItem from="1772039096905" duration="3490000" />
+      <workItem from="1772149961793" duration="673000" />
+      <workItem from="1772464676637" duration="5086000" />
+      <workItem from="1772565189339" duration="5732000" />
+      <workItem from="1773068797981" duration="9924000" />
+      <workItem from="1773170386359" duration="5319000" />
+      <workItem from="1773499533904" duration="4353000" />
+      <workItem from="1773666265940" duration="10436000" />
+      <workItem from="1773774365069" duration="6065000" />
+      <workItem from="1774032479949" duration="5475000" />
+      <workItem from="1774042803978" duration="227000" />
+      <workItem from="1774181259218" duration="59743000" />
+      <workItem from="1775485435593" duration="4629000" />
+      <workItem from="1775586661372" duration="5054000" />
+      <workItem from="1776091905296" duration="3900000" />
+      <workItem from="1776190855186" duration="1333000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
