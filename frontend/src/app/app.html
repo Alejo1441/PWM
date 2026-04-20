@@ -1,8 +1,15 @@
-@if (showLayout()) {
-  <app-header></app-header>
-  <app-footer></app-footer>
-}
+<div class="d-flex flex-column min-vh-100">
 
-<main [class.main-content]="showLayout()">
-  <router-outlet></router-outlet>
-</main>
+  @if (showLayout()) {
+    <app-header></app-header>
+  }
+
+  <main class="flex-grow-1" [class.main-content]="showLayout()">
+    <router-outlet></router-outlet>
+  </main>
+
+  @if (showLayout()) {
+    <app-footer></app-footer>
+  }
+
+</div>

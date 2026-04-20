@@ -1,22 +1,3 @@
-body{
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/*
-.tu-contenedor-flex * {
-    border: 1px solid #ff0000;
-    background-color: rgba(255, 0, 0, 0.1);
-}
-*/
-
-.bi-1-square{
-  background-color: red;
-}
-
 .TallerInfo{
 
     font-family: Arial, Helvetica, sans-serif;
@@ -48,6 +29,49 @@ body{
     opacity: 0.6;
 }
 
+
+.Color-Linea{
+    border: 2px solid white;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.estrellas {
+    background-color: white;
+    border: 2px solid #ffcc00;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.texto-resenas {
+    font-size: 14px;
+    color: #000;
+}
+
+
+
+/*
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.tu-contenedor-flex * {
+    border: 1px solid #ff0000;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.bi-1-square{
+  background-color: red;
+}
+
 .cajabotones{
     display: flex;
     gap: 10px;
@@ -61,13 +85,6 @@ body{
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 25px;
-}
-
-.Color-Linea{
-    border: 2px solid white;
-    width: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 .CajaInfo{
@@ -136,20 +153,6 @@ body{
     border-radius:25px;
 }
 
-.estrellas {
-    background-color: white;
-    border: 2px solid #ffcc00;
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: 18px;
-    letter-spacing: 2px;
-}
-
-.texto-resenas {
-    font-size: 14px;
-    color: #000;
-}
-
 @media (max-width: 1024px) {
 
     .CajaInfo{
@@ -194,3 +197,4 @@ body{
         height: 250px;
     }
 }
+*/
