@@ -9,7 +9,7 @@ window.addEventListener("load", async () => {
 
   const sesion = JSON.parse(localStorage.getItem("usuario_logeado"));
   if(!sesion){
-    window.location.href = "../../Index.html";
+    window.location.href = "../../../../../old_code/Index.html";
     return;
   }
   const reservation = JSON.parse(localStorage.getItem("reservation"));

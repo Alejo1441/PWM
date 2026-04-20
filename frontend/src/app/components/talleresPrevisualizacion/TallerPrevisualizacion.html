@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Talleres</title>
-    <link rel="stylesheet" href="StyleTalleres.css">
-</head>
-<body>
+<main class="container py-5">
+  <div class="d-flex justify-content-center flex-wrap gap-4">
 
-<main>
-    <div class="tu-contenedor-flex">
-        <article class="Taller">
+    <article class="card border-0 shadow rounded-4 p-3" style="width: 20rem;">
 
-            <header>
-                <a href="./pages/Taller-Informacion.html?id={{id}}">
-                    <img src="{{imagen}}" alt="Foto del Taller {{nombre}}" class="imagen-taller">
-                </a>
-                <h3 class="texto-h3">{{nombre}}</h3>
-            </header>
+      <a href="./pages/Taller-Informacion.html">
+        <img src="../../assets/taller-elpaso2000-03.jpg" class="card-img-top rounded-3 object-fit-cover" alt="Foto del Taller " style="height: 200px;">
+      </a>
 
-            <footer class="resenas">
-                <div class="estrellas-contenedor">
-                    <span class="estrellas">★★★★★</span>
-                </div>
-                <a href="./pages/reviews.html?id={{id}}" class="texto-resenas">{{resenas}} Reseñas</a>
-            </footer>
+      <div class="card-body px-0 pb-0 pt-3">
 
-        </article>
-    </div>
+        <h5 class="card-title fw-normal mb-3"> <!--{{nombre}} --></h5>
+
+        <footer class="d-flex align-items-center gap-3">
+
+          <div class="border border-warning border-2 rounded px-2 py-1 d-inline-flex align-items-center">
+            <span class="text-dark" style="letter-spacing: 2px;">★★★★☆</span>
+          </div>
+
+          <a href="./pages/reviews.html" class="text-dark text-decoration-underline small">
+            <!--{{resenas}} --> Reseñas
+          </a>
+
+        </footer>
+
+      </div>
+
+    </article>
+
+  </div>
 </main>
-
-</body>
-</html>
