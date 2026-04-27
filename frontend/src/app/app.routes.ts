@@ -5,4 +5,6 @@ import { Home} from './pages/Home/home';
 export const routes: Routes = [
   { path: 'TallerInfo', component: TallerInformacion },
   { path: 'home', component: Home},
+  {path: '', component: Home},
+  {path: '**',redirectTo: '',pathMatch: 'full'},
 ];
