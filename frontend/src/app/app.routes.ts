@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
-import { TallerInformacion} from './pages/TalleresInformacion/TallerInformacion';
-import { Home} from './pages/Home/home';
+import { Home } from './pages/Home/home';
+import { Login } from './pages/login/login';
+import { Profile } from './pages/profile/profile'; // <--- MIRA ESTO
 
 export const routes: Routes = [
-  { path: 'TallerInfo', component: TallerInformacion },
-  { path: 'home', component: Home},
-  {path: '', component: Home},
-  {path: '**',redirectTo: '',pathMatch: 'full'},
+  { path: 'home', component: Home },
+  { path: 'login', component: Login },
+  { path: 'profile', component: Profile }, // <--- DEBE COINCIDIR CON LA CLASE
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
