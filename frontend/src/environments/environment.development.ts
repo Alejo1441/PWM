@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyAswREdMMSncLLs-1_cNYJCW8bzqMDtu4w',
+    apiKey: "AIzaSyAswREdMMSnclLs-1_cNYJCW8bzqMDtu4w",
     authDomain: 'autohub-1d277.firebaseapp.com',
     projectId: 'autohub-1d277',
     storageBucket: 'autohub-1d277.firebasestorage.app',

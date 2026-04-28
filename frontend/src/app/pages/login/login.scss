@@ -1,0 +1,102 @@
+
+.login-container {
+  max-width: 450px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+
+.opciones {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.opciones button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.opciones button:hover {
+  color: #0056b3;
+}
+
+/* Título de la sección */
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Separación de los campos del formulario */
+form div {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #444;
+  font-size: 14px;
+}
+
+/* Estilo de los inputs */
+input {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+  background-color: #f9fafb;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+  outline: none;
+  background-color: #ffffff;
+}
+
+/* Botón principal (Entrar / Registrarse) */
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #0d6efd; /* Azul Bootstrap */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #0b5ed7;
+}
+
+button[type="submit"]:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+
+button[type="submit"]:disabled {
+  background-color: #a5c5f3;
+  cursor: not-allowed;
+}

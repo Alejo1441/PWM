@@ -1,32 +1,31 @@
-html,body{
-  height: 100%;
-  margin: 0;
+
+:host {
+  display: block;
+  min-height: 80vh;
 }
 
-body{
-  display: flex;
-  flex-direction: column;
-  background-color: #dcdcdc
-}
-
-.Color-Linea{
+.Color-Linea {
   border: 2px solid white;
   width: 100%;
   margin: 0;
 }
 
-.Linea-Vertical{
+.Linea-Vertical {
   border: 2px solid white;
-  height: 100%;
-  margin: 0;
+  height: auto;
+  margin: 0 20px;
 }
+
 
 .profile-container {
   display: flex;
-  flex:1;
+  flex: 1;
   position: relative;
   z-index: 1;
   overflow: hidden;
+  min-height: 70vh;
+  /* Evitamos márgenes blancos por debajo */
+  padding-bottom: 20px;
 }
 
 .profile-container::before {
@@ -37,71 +36,224 @@ body{
   width: 110%;
   height: 110%;
   z-index: -1;
-
-  background-image: var(--bg-taller);
+  background-image: var(--bg-taller, url('https://images.unsplash.com/photo-1562426509-5044a121aa49?auto=format&fit=crop&w=1920&q=80'));
   background-size: cover;
   background-position: center;
-
   filter: blur(10px);
   opacity: 0.6;
 }
 
-.profile-managment, .profile-info{
+/* --- SECCIONES INTERIORES --- */
+.profile-managment, .profile-info {
   flex: 1;
   padding: 40px;
+  background-color: rgba(255, 255, 255, 0.85);
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.tabs-container{
+
+/* --- PESTAÑAS (TABS) --- */
+.tabs-container {
   display: flex;
   margin-bottom: 20px;
 }
 
-.tab{
+.tab {
   flex: 1;
   padding: 15px;
   border: 1px solid #000;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.3s;
 }
-.tab.active{
+
+.tab.active {
   background-color: #000;
   color: #fff;
 }
-.tab:not(.active){
+
+.tab:not(.active) {
   background-color: #fff;
   color: #000;
 }
-.profile-info{
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-.button-red{
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 10px;
-  transition: background 0.35s;
-}
-.button-red:hover{
-  background-color: #cc0000;
-}
-.hide{
-  display: none;
-}
+
+/* --- LISTAS DE COCHES Y RESERVAS --- */
 .item-list {
   margin: 20px 0;
   list-style: none;
+  padding-left: 0;
   border-top: 1px solid #ccc;
 }
+
 .item-list li {
-  padding: 10px 0;
+  padding: 15px 0;
   border-bottom: 1px solid #eee;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#search-form {
-  display: none !important;
+/* Aquí quitamos la línea blanca/gris del final de la lista */
+.item-list li:last-child {
+  border-bottom: none;
 }
+
+/* --- BOTONES --- */
+.button-red {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: background 0.35s;
+}
+
+.button-red:hover:not(:disabled) {
+  background-color: #cc0000;
+}
+
+.button-red:disabled {
+  background-color: #ff9999;
+  cursor: not-allowed;
+}
+
+.button-red-small {
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: background 0.3s;
+}
+
+.button-red-small:hover {
+  background-color: #cc0000;
+}
+
+/* --- DATOS DEL USUARIO --- */
+.data-user p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  word-break: break-all; /* Evita que correos largos rompan el diseño en móvil */
+}
+
+.data-user strong {
+  color: #333;
+}
+
+/* --- CSS DEL MODAL FLOTANTE --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  animation: aparecer 0.3s ease-out;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.add-car-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-car-form input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.add-car-form input:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.button-grey {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.button-grey:hover {
+  background-color: #5a6268;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   DISEÑO RESPONSIVE (Móviles y Tablets)
+   ========================================= */
+@media screen and (max-width: 850px) {
+  /* Ponemos las cajas una debajo de la otra */
+  .profile-container {
+    flex-direction: column;
+    margin: 0;
+    padding: 10px;
+  }
+
+  /* Ocultamos la línea vertical blanca porque en móvil estorba */
+  .Linea-Vertical {
+    display: none;
+  }
+
+  /* Ajustamos los márgenes interiores para pantallas pequeñas */
+  .profile-managment, .profile-info {
+    margin: 10px 0;
+    padding: 20px;
+  }
+
+  /* Botones de coches más cómodos para el dedo */
+  .item-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }}

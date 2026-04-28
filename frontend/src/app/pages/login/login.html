@@ -1,0 +1,52 @@
+<div class="login-container">
+    <div class="opciones">
+        <button (click)="toggleMode(true)">Iniciar Sesión</button>
+        <button (click)="toggleMode(false)">Crear Cuenta</button>
+    </div>
+
+    @if (isLoginMode) {
+        <h2>Iniciar Sesión</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="enviarLogin()">
+            <div>
+                <label>Email:</label>
+                <input type="email" formControlName="email">
+            </div>
+            <div>
+                <label>Contraseña:</label>
+                <input type="password" formControlName="password">
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+        </form>
+    }
+
+    @if (!isLoginMode) {
+        <h2>Crear Cuenta</h2>
+        <form [formGroup]="registerForm" (ngSubmit)="enviarRegistro()">
+            <div>
+                <label>Nombre:</label>
+                <input type="text" formControlName="nombre">
+            </div>
+            <div>
+                <label>Apellido:</label>
+                <input type="text" formControlName="apellido">
+            </div>
+            <div>
+                <label>Email:</label>
+                <input type="email" formControlName="email">
+            </div>
+            <div>
+                <label>Municipio:</label>
+                <input type="text" formControlName="municipio">
+            </div>
+            <div>
+                <label>Contraseña:</label>
+                <input type="password" formControlName="password">
+            </div>
+            <div>
+                <label>Confirmar Contraseña:</label>
+                <input type="password" formControlName="confirmPassword">
+            </div>
+            <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
+        </form>
+    }
+</div>
