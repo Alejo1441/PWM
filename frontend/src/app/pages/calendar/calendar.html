@@ -1,64 +1,84 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>booking date</title>
-  <link rel="stylesheet" href="../css/calendar.css">
-</head>
-<body>
-
-<div xlu-include-file="../partials/Header.html"></div>
-
 <hr class="Color-Linea">
 
-<div class="page">
-  <div class="container">
+<div class="page" [style.--bg-taller]="(tallerInfo && tallerInfo.image && tallerInfo.image.length > 0) ? 'url(' + tallerInfo.image[0] + ')' : ''">
+    <div class="container">
 
-    <div class="left">
-      <h1 class="title" id="calendar-title">Servicio Ofrecido</h1>
+        <div class="left">
+            <h1 class="title">
+                Reservar cita en: {{ tallerInfo?.name || 'Cargando taller...' }}
+            </h1>
 
-      <div class="calendar">
-        <div class="cal-header">
-          <button class="nav-btn" id="prev-month" type="button">‹</button>
+            <div class="calendar">
+                <div class="cal-header">
+                    <button class="nav-btn" type="button" (click)="changeMonth(-1)">‹</button>
 
-          <div class="selects">
-            <select id="month-select"></select>
-            <select id="year-select"></select>
-          </div>
+                    <div class="selects">
+                        <select
+                            #monthSelect
+                            [ngModel]="currentDate.getMonth()"
+                            (change)="updateMonth(monthSelect.value)">
+                            <option *ngFor="let m of months; let i = index" [value]="i">{{ m }}</option>
+                        </select>
 
-          <button class="nav-btn" id="next-month" type="button">›</button>
+                        <select
+                            #yearSelect
+                            [ngModel]="currentDate.getFullYear()"
+                            (change)="updateYear(yearSelect.value)">
+                            <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+                        </select>
+                    </div>
+
+                    <button class="nav-btn" type="button" (click)="changeMonth(1)">›</button>
+                </div>
+
+                <div class="dow">
+                    <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+                </div>
+
+                <div class="grid">
+                    <div *ngFor="let empty of emptyDays" class="empty-day"></div>
+
+                    <button
+                            *ngFor="let day of daysInMonth"
+                            type="button"
+                            class="day"
+                            [class.selected]="selectedDate === formatDate(currentDate.getFullYear(), currentDate.getMonth(), day)"
+                            (click)="selectDate(formatDate(currentDate.getFullYear(), currentDate.getMonth(), day))">
+                        {{ day }}
+                    </button>
+                </div>
+            </div>
+
+            <p class="selected-date-text">
+                Fecha seleccionada: <strong>{{ selectedDate }}</strong>
+            </p>
+
+            <button
+                    class="btn-reserva"
+                    type="button"
+                    (click)="confirmarReserva()"
+                    [disabled]="!selectedSlot">
+                Reservar fecha
+            </button>
         </div>
 
-        <div class="dow">
-          <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+        <div class="right">
+            <div class="slots">
+                <h2 class="slots-title">Horas disponibles</h2>
+                <div class="slots-grid">
+                    <button
+                            *ngFor="let slot of getSlots()"
+                            type="button"
+                            class="slot"
+                            [class.busy]="isSlotBusy(slot)"
+                            [class.selected]="selectedSlot === slot"
+                            [disabled]="isSlotBusy(slot)"
+                            (click)="selectedSlot = slot">
+                        {{ slot }}
+                    </button>
+                </div>
+            </div>
         </div>
 
-        <div class="grid" id="calendar-grid"></div>
-      </div>
-
-      <p id="selected-date-text" class="selected-date-text">Fecha seleccionada:</p>
-
-      <button class="btn-reserva" id="reserve-btn" type="button">Reservar fecha</button>
     </div>
-
-    <div class="right">
-      <div class="slots">
-        <h2 class="slots-title">Horas disponibles</h2>
-        <div class="slots-grid" id="slots-grid"></div>
-      </div>
-    </div>
-
-  </div>
 </div>
-
-
-<div xlu-include-file="../partials/footer.html"></div>
-
-<script src="../javascript/xlu-include-file.js"></script>
-<script>xLuIncludeFile();</script>
-
-<script src="../javascript/calendar.js"></script>
-<script src="../javascript/auth.js"></script>
-
-</body>
-</html>

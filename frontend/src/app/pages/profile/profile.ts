@@ -20,7 +20,6 @@ export class Profile implements OnInit {
     usuarioInfo: any = null;
     activePanel: 'cars' | 'booking' = 'cars';
 
-    // Variable para controlar si el modal se ve o no
     showModal: boolean = false;
 
     cocheForm = new FormGroup({
@@ -45,14 +44,13 @@ export class Profile implements OnInit {
         this.activePanel = panel;
     }
 
-    // Funciones para abrir y cerrar el modal
     abrirModal() {
         this.showModal = true;
     }
 
     cerrarModal() {
         this.showModal = false;
-        this.cocheForm.reset(); // Vaciamos el formulario al cancelar
+        this.cocheForm.reset();
     }
 
     async anadirVehiculo() {
@@ -66,7 +64,7 @@ export class Profile implements OnInit {
                     vehiculos: arrayUnion(textoCoche)
                 });
                 alert('Coche añadido correctamente');
-                this.cerrarModal(); // Cerramos el modal tras añadir con éxito
+                this.cerrarModal();
             } catch (e) {
                 console.error("Error al añadir coche:", e);
             }
@@ -84,12 +82,13 @@ export class Profile implements OnInit {
         }
     }
 
-    async eliminarReserva(reservaTexto: string) {
+
+    async eliminarReserva(reservaObj: any) {
         if (confirm("¿Seguro que quieres cancelar esta reserva?")) {
             const user = this.auth.currentUser;
             if (user) {
                 await updateDoc(doc(this.db, 'usuarios', user.uid), {
-                    reservas: arrayRemove(reservaTexto)
+                    reservas: arrayRemove(reservaObj)
                 });
             }
         }

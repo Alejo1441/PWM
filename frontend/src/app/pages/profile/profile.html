@@ -41,7 +41,7 @@
             <h1>Reservas</h1>
             <ul class="item-list">
                 <li *ngFor="let reserva of usuarioInfo.reservas" class="booking-item">
-                    <span>{{ reserva }}</span>
+                    <span>{{ reserva.taller }} - {{ reserva.fecha }} a las {{ reserva.hora }} ({{ reserva.vehiculo }})</span>
                     <button (click)="eliminarReserva(reserva)" class="button-red-small">❌ Cancelar</button>
                 </li>
 
