@@ -1,49 +1,58 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Car selection</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/car_select.css">
-</head>
-<body>
-
-<header id="site-header"></header>
 <hr class="Color-Linea">
 
-<main class="page">
-  <div class="container">
-    <div class="left">
-      <h1>¿A qué vehículo le quieres realizar el servicio?</h1>
-      <div class="car-list" id="car-list"></div>
-    </div>
+<main class="page" [style.--bg-taller]="(tallerInfo && tallerInfo.image && tallerInfo.image.length > 0) ? 'url(' + tallerInfo.image[0] + ')' : ''">
+    <div class="container">
 
-    <div class="right">
-      <div class="summary">
-        <p><strong>Vehículo seleccionado:</strong> <span id="selectedCar">Ninguno</span></p>
-        <div id="info-servicio-taller">
-          <p><strong>Tipo de servicio:</strong> nombre servicio</p>
+        <div class="left">
+            <h1>¿A qué vehículo le quieres realizar el servicio?</h1>
+
+            <div class="car-list">
+                <div *ngIf="cochesUsuario.length === 0" class="no-cars-msg">
+                    <p>No tienes vehículos registrados.</p>
+                    <button (click)="irAlPerfil()" class="btn-link">Ir al perfil para agregar uno</button>
+                </div>
+
+                <button
+                        *ngFor="let coche of cochesUsuario"
+                        type="button"
+                        class="car-item"
+                        [class.active]="cocheSeleccionado === coche"
+                        (click)="cocheSeleccionado = coche">
+                    {{ coche }}
+                </button>
+            </div>
         </div>
-        <p><strong>Fecha de la cita:</strong> <span id="reservation-date">Día y fecha</span></p>
-        <div class="price-block">
-          <p><strong>Precio estimado:</strong></p>
-          <div class="price">Precio</div>
+
+        <div class="right">
+            <div class="summary">
+
+                <p><strong>Vehículo seleccionado:</strong>
+                    <span [class.text-danger]="!cocheSeleccionado">{{ cocheSeleccionado || 'Ninguno' }}</span>
+                </p>
+
+                <div class="info-extra">
+                    <p><strong>Taller:</strong> {{ reservaInfo?.taller }}</p>
+                    <p><strong>Servicio:</strong> {{ reservaInfo?.servicio }}</p>
+                </div>
+
+                <p><strong>Cita:</strong>
+                    <span>{{ reservaInfo?.date }} - {{ reservaInfo?.time }}</span>
+                </p>
+
+                <div class="price-block">
+                    <p><strong>Precio estimado:</strong></p>
+                    <div class="price">{{ precioEstimado }}</div>
+                </div>
+
+            </div>
+
+            <button
+                    class="confirm-btn"
+                    (click)="confirmarReserva()"
+                    [disabled]="!cocheSeleccionado">
+                Confirmar reserva
+            </button>
+
         </div>
-      </div>
-      <button class="confirm-btn" id="confirm-reservation">Confirmar reserva</button>
     </div>
-  </div>
 </main>
-
-<footer id="site-footer"></footer>
-
-<script src="../javascript/xlu-include-file.js"></script>
-<script>
-  // Inyectamos los archivos ANTES de cargar la lógica de los botones
-  xLuIncludeFile();
-</script>
-<script src="../javascript/auth.js"></script>
-<script src="../javascript/car_select.js"></script>
-
-</body>
-</html>
