@@ -56,6 +56,38 @@
 
     <section class="profile-info">
         <div class="info-container">
+
+            <!-- Nueva sección para la foto de perfil -->
+            <div class="profile-picture-container text-center mb-4">
+                <!-- Mostramos la imagen de Firebase si existe, si no, una por defecto -->
+                <img
+                        [src]="usuarioInfo.fotoPerfil || '../../assets/fotoperfil.webp'"
+                        alt="Foto de perfil"
+                        class="logo_circular rounded-circle border border-dark border-3 mb-2"
+                        style="width: 150px; height: 150px; object-fit: cover;"
+                >
+
+                <!-- Input oculto para seleccionar archivo -->
+                <input
+                        type="file"
+                        #fileInput
+                        style="display: none"
+                        (change)="onFileSelected($event)"
+                        accept="image/*"
+                >
+
+                <!-- Botón que activa el input oculto -->
+                <div>
+                    <button
+                            class="button-grey"
+                            (click)="fileInput.click()"
+                            [disabled]="subiendoImagen">
+                        {{ subiendoImagen ? 'Subiendo...' : 'Cambiar Foto' }}
+                    </button>
+                </div>
+            </div>
+            <!-- Fin sección foto de perfil -->
+
             <div class="data-user">
                 <p><strong>Nombre:</strong> <span>{{ usuarioInfo.nombre }} {{ usuarioInfo.apellido }}</span></p>
                 <p><strong>Correo:</strong> <span>{{ usuarioInfo.email }}</span></p>

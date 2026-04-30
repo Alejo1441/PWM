@@ -23,7 +23,12 @@
             </button>
 
             <a (click)="manejarClicPerfil()" id="profile-link" class="d-flex align-items-center gap-3 text-decoration-none text-dark fw-bold" style="cursor: pointer;">
-                <img id="profile-image" src="../../assets/fotoperfil.webp" alt="perfil" class="logo_circular rounded-circle border border-dark border-3">
+                <img
+                        id="profile-image"
+                        [src]="fotoPerfilUrl || '../../assets/fotoperfil.webp'"
+                        alt="perfil"
+                        class="logo_circular rounded-circle border border-dark border-3"
+                        style="width: 50px; height: 50px; object-fit: cover;">
             </a>
 
         </div>

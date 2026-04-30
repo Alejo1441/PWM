@@ -2,7 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, doc, getDoc, updateDoc, arrayUnion } from '@angular/fire/firestore';
+import { DatabaseService } from '../../services/database';
+import { TallerService } from '../../services/taller';
 
 @Component({
     selector: 'app-car-select',
@@ -15,7 +16,8 @@ export class CarSelect implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
     private auth = inject(Auth);
-    private db = inject(Firestore);
+    private dbService = inject(DatabaseService); // Nuevo
+    private tallerService = inject(TallerService); // Nuevo
 
     reservaInfo: any = null;
     tallerInfo: any = null;
@@ -24,14 +26,12 @@ export class CarSelect implements OnInit {
     precioEstimado: number | string = 'Calculando...';
 
     async ngOnInit() {
-        // 1. Verificar sesión
         const usuarioActual = this.auth.currentUser;
         if (!usuarioActual) {
             this.router.navigate(['/login']);
             return;
         }
 
-        // 2. Recuperar reserva temporal
         const reservaGuardada = localStorage.getItem("reservation");
         if (!reservaGuardada) {
             this.router.navigate(['/home']);
@@ -39,25 +39,18 @@ export class CarSelect implements OnInit {
         }
         this.reservaInfo = JSON.parse(reservaGuardada);
 
-        // 3. Cargar datos del usuario (Coches)
-        const userDocRef = doc(this.db, 'usuarios', usuarioActual.uid);
-        const userDocSnap = await getDoc(userDocRef);
-
-        if (userDocSnap.exists()) {
-            const userData = userDocSnap.data();
-            // CAMBIO CLAVE: Usamos 'vehiculos' que es tu nombre de campo en Firebase
+        // Usamos el servicio de base de datos
+        const userData = await this.dbService.getUserOnce(usuarioActual.uid);
+        if (userData) {
             this.cochesUsuario = userData['vehiculos'] || [];
-            console.log("Vehículos cargados:", this.cochesUsuario);
         }
 
-        // 4. Cargar datos del taller (Fondo y Precio)
         const idTaller = this.route.snapshot.paramMap.get('id');
         if (idTaller) {
-            const tallerRef = doc(this.db, 'talleres', idTaller);
-            const tallerSnap = await getDoc(tallerRef);
-
-            if (tallerSnap.exists()) {
-                this.tallerInfo = tallerSnap.data();
+            // Usamos el servicio de talleres
+            const tallerData = await this.tallerService.getTallerById(idTaller);
+            if (tallerData) {
+                this.tallerInfo = tallerData;
                 this.calcularPrecio();
             }
         }
@@ -71,6 +64,7 @@ export class CarSelect implements OnInit {
         );
         this.precioEstimado = servicioEncontrado ? `${servicioEncontrado.price} €` : 'A consultar';
     }
+
     irAlPerfil() {
         this.router.navigate(['/profile']);
     }
@@ -84,7 +78,6 @@ export class CarSelect implements OnInit {
         const usuarioActual = this.auth.currentUser;
         if (!usuarioActual) return;
 
-        // Estructura de la reserva que irá al Perfil
         const nuevaReserva = {
             taller: this.reservaInfo.taller,
             fecha: this.reservaInfo.date,
@@ -97,12 +90,8 @@ export class CarSelect implements OnInit {
         };
 
         try {
-            const userDocRef = doc(this.db, 'usuarios', usuarioActual.uid);
 
-            // Guardamos la reserva dentro del array 'reservas' del usuario
-            await updateDoc(userDocRef, {
-                reservas: arrayUnion(nuevaReserva)
-            });
+            await this.dbService.addReserva(usuarioActual.uid, nuevaReserva);
 
             alert("¡Reserva confirmada! Ya puedes verla en tu perfil.");
             localStorage.removeItem("reservation");

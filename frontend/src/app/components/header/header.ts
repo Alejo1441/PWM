@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth, onAuthStateChanged, signOut } from '@angular/fire/auth'; // Importamos signOut
 import { CommonModule } from '@angular/common';
-
+import { DatabaseService } from '../../services/database'; // Inyectamos tu servicio
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,13 +13,23 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent implements OnInit {
   private auth = inject(Auth);
   private router = inject(Router);
+  private dbService = inject(DatabaseService);
 
   usuarioLogueado = false;
+  fotoPerfilUrl: string | null = null;
 
   ngOnInit() {
-    // Escuchamos si el usuario entra o sale para mostrar/ocultar el botón
     onAuthStateChanged(this.auth, (user) => {
-      this.usuarioLogueado = !!user; // Si existe user, es true
+      if (user) {
+        this.usuarioLogueado = true;
+        // Obtenemos la URL de la imagen en tiempo real desde Firebase
+        this.dbService.listenUser(user.uid, (data) => {
+          this.fotoPerfilUrl = data?.fotoPerfil || null;
+        });
+      } else {
+        this.usuarioLogueado = false;
+        this.fotoPerfilUrl = null;
+      }
     });
   }
 

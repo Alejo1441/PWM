@@ -1,9 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { doc, setDoc, Firestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router'; // <-- 1. Importamos el Router
-
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,11 +10,9 @@ import { Router } from '@angular/router'; // <-- 1. Importamos el Router
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login{
-  // Inyectamos los servicios
-  private auth = inject(Auth);
-  private db = inject(Firestore);
-  private router = inject(Router); // <-- 2. Inyectamos el Router en la clase
+export class Login {
+  private authService = inject(AuthService); // Usamos el servicio
+  private router = inject(Router);
 
   isLoginMode = true;
 
@@ -38,17 +34,14 @@ export class Login{
     this.isLoginMode = modoLogin;
   }
 
-  // --- FUNCIÓN DE LOGIN REAL ---
   async enviarLogin() {
     if (this.loginForm.valid) {
-      const email = this.loginForm.value.email!;
-      const password = this.loginForm.value.password!;
+      const { email, password } = this.loginForm.value;
 
       try {
-        const credenciales = await signInWithEmailAndPassword(this.auth, email, password);
-        console.log('¡Login exitoso!', credenciales.user.email);
-
-        // 3. Redirigimos al perfil tras el éxito
+        // Llamada limpia al servicio
+        await this.authService.login(email!, password!);
+        console.log('¡Login exitoso!');
         this.router.navigate(['/profile']);
 
       } catch (error: any) {
@@ -60,7 +53,6 @@ export class Login{
     }
   }
 
-  // --- FUNCIÓN DE REGISTRO REAL ---
   async enviarRegistro() {
     if (this.registerForm.valid) {
       if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
@@ -68,27 +60,12 @@ export class Login{
         return;
       }
 
-      const { email, password, nombre, apellido, municipio } = this.registerForm.value;
-
       try {
-        // 1. Creamos el usuario en Authentication (Esto auto-inicia la sesión)
-        const credenciales = await createUserWithEmailAndPassword(this.auth, email!, password!);
-        const uid = credenciales.user.uid;
-
-        // 2. Creamos su ficha en la base de datos Firestore
-        await setDoc(doc(this.db, 'usuarios', uid), {
-          nombre: nombre,
-          apellido: apellido,
-          email: email,
-          municipio: municipio,
-          rol: 'cliente', // Por defecto todos son clientes
-          fechaRegistro: new Date()
-        });
+        // Le pasamos los valores del formulario al servicio
+        await this.authService.registrarUsuario(this.registerForm.value, this.registerForm.value.password!);
 
         console.log('¡Usuario y Perfil creados!');
         alert('Cuenta creada con éxito. ¡Bienvenido!');
-
-        // 3. Como ya está logueado automáticamente, lo mandamos al perfil
         this.router.navigate(['/profile']);
 
       } catch (error: any) {

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { TallerService } from '../../services/taller'; // Ajusta la ruta si es diferente
 
 @Component({
     selector: 'app-calendar',
@@ -14,16 +14,14 @@ import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 export class Calendar implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
-    private db = inject(Firestore);
+    private tallerService = inject(TallerService); // Usamos el servicio
 
-    // Estado
     currentDate: Date = new Date();
     selectedDate: string | null = null;
     selectedSlot: string | null = null;
     tallerInfo: any = null;
     servicioNombre: string = '';
 
-    // Datos de configuración
     calendarData = {
         startHour: 8,
         endHour: 18,
@@ -36,31 +34,23 @@ export class Calendar implements OnInit {
     emptyDays: any[] = [];
 
     async ngOnInit() {
-        // 1. Obtenemos parámetros de la URL
         const idTaller = this.route.snapshot.paramMap.get('id');
         this.servicioNombre = this.route.snapshot.queryParamMap.get('servicio') || 'Servicio General';
 
-        // 2. ¡DIBUJAMOS EL CALENDARIO INMEDIATAMENTE! (Esto arregla el bug visual)
         this.generateYears();
         this.renderCalendar();
 
-        // 3. Pedimos los datos a Firebase
         if (idTaller) {
             try {
-                console.log("Buscando en Firebase el taller con ID:", idTaller);
-
-                const docRef = doc(this.db, 'talleres', idTaller);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    this.tallerInfo = docSnap.data();
-                    console.log("¡Datos del taller descargados!", this.tallerInfo);
+                // Llamada súper limpia al servicio
+                const data = await this.tallerService.getTallerById(idTaller);
+                if (data) {
+                    this.tallerInfo = data;
                 } else {
-                    console.warn("Firebase dice que NO EXISTE un documento con el ID:", idTaller);
-                    this.tallerInfo = { name: 'Taller no encontrado' }; // Para que no se quede cargando
+                    this.tallerInfo = { name: 'Taller no encontrado' };
                 }
             } catch (error) {
-                console.error("Error al intentar leer de Firebase:", error);
+                console.error("Error al obtener taller:", error);
                 this.tallerInfo = { name: 'Error de conexión' };
             }
         }
@@ -77,14 +67,12 @@ export class Calendar implements OnInit {
     renderCalendar() {
         const year = this.currentDate.getFullYear();
         const month = this.currentDate.getMonth();
-
         const firstDay = new Date(year, month, 1).getDay();
         const daysCount = new Date(year, month + 1, 0).getDate();
 
         this.emptyDays = Array(firstDay).fill(null);
         this.daysInMonth = Array.from({ length: daysCount }, (_, i) => i + 1);
 
-        // Selección por defecto al cambiar de mes
         const today = new Date();
         if (today.getFullYear() === year && today.getMonth() === month) {
             this.selectDate(this.formatDate(year, month, today.getDate()));
@@ -114,7 +102,6 @@ export class Calendar implements OnInit {
         return busy.includes(slot);
     }
 
-    // Métodos para los selectores
     updateMonth(newMonth: any) {
         this.currentDate.setMonth(parseInt(newMonth));
         this.renderCalendar();
@@ -140,7 +127,6 @@ export class Calendar implements OnInit {
             return;
         }
 
-        // 1. Empaquetamos la información del día, hora y taller
         const reservation = {
             date: this.selectedDate,
             time: this.selectedSlot,
@@ -148,14 +134,9 @@ export class Calendar implements OnInit {
             servicio: this.servicioNombre
         };
 
-        // 2. Lo guardamos en la memoria temporal del navegador
         localStorage.setItem("reservation", JSON.stringify(reservation));
-
-        // 3. Rescatamos el ID del taller de la URL actual
         const idTaller = this.route.snapshot.paramMap.get('id');
 
-        // 4. Navegamos a car_select pasándole el ID del taller
-        // Mantenemos los queryParams por si había información del servicio (?servicio=...)
         if (idTaller) {
             this.router.navigate(['/car_select', idTaller], { queryParamsHandling: 'preserve' });
         } else {
