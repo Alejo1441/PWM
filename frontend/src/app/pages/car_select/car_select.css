@@ -110,6 +110,10 @@ body{
   font-size:18px;
 }
 
+.summary-value{
+  margin-left:6px;
+}
+
 .summary p{
   margin-bottom:18px;
   line-height:1.4;

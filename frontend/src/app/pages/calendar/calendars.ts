@@ -37,7 +37,6 @@ export class Calendar implements OnInit {
   ];
 
   years: number[] = [];
-
   days: CalendarDay[] = [];
   slots: Slot[] = [];
 
@@ -55,14 +54,27 @@ export class Calendar implements OnInit {
       private route: ActivatedRoute
   ) {}
 
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
   ngOnInit(): void {
     this.fillYears();
 
     const idTaller = this.route.snapshot.queryParamMap.get('id');
-    const servicio = this.route.snapshot.queryParamMap.get('servicio');
 
-    if (idTaller) {
-      localStorage.setItem('temp_taller_id', idTaller);
+    const servicio =
+        this.route.snapshot.queryParamMap.get('servicio') ||
+        this.route.snapshot.queryParamMap.get('especialidad');
+
+    if (this.isBrowser()) {
+      if (idTaller) {
+        localStorage.setItem('temp_taller_id', idTaller);
+      }
+
+      if (servicio) {
+        localStorage.setItem('selectedServiceName', servicio);
+      }
     }
 
     if (servicio) {
@@ -189,15 +201,32 @@ export class Calendar implements OnInit {
       return;
     }
 
+    const servicio =
+        this.route.snapshot.queryParamMap.get('servicio') ||
+        this.route.snapshot.queryParamMap.get('especialidad') ||
+        '';
+
     const reservation = {
       date: this.selectedDate,
       time: this.selectedSlot,
-      taller: localStorage.getItem('temp_taller_name') || 'Taller'
+      taller: this.isBrowser()
+          ? localStorage.getItem('temp_taller_name') || 'Taller'
+          : 'Taller',
+      servicio: servicio
     };
 
-    localStorage.setItem('reservation', JSON.stringify(reservation));
+    if (this.isBrowser()) {
+      localStorage.setItem('reservation', JSON.stringify(reservation));
 
-    const queryParams = this.route.snapshot.queryParams;
+      if (servicio) {
+        localStorage.setItem('selectedServiceName', servicio);
+      }
+    }
+
+    const queryParams = {
+      ...this.route.snapshot.queryParams,
+      especialidad: servicio
+    };
 
     this.router.navigate(['/car_select'], { queryParams });
   }
