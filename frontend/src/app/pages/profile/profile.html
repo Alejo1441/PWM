@@ -93,9 +93,28 @@
                 <p><strong>Correo:</strong> <span>{{ usuarioInfo.email }}</span></p>
                 <p><strong>Municipio:</strong> <span>{{ usuarioInfo.municipio }}</span></p>
                 <p><strong>Contraseña:</strong> *********</p>
-                <button class="button-red">Editar perfil</button>
+                <button class="button-red" (click)="Editar()">Editar perfil</button>
             </div>
         </div>
+
+        @if(editar){
+          <form [formGroup]="updateForm" (ngSubmit)="guardarCambios()">
+            <div>
+              <label>Nombre:</label>
+              <input type="text" formControlName="nombre">
+            </div>
+            <div>
+              <label>Apellido:</label>
+              <input type="text" formControlName="apellido">
+            </div>
+            <div>
+              <label>Municipio:</label>
+              <input type="text" formControlName="municipio">
+            </div>
+            <button type="submit" [disabled]="updateForm.invalid">Actualizar Perfil</button>
+          </form>
+        }
+
     </section>
 
     <div class="modal-overlay" *ngIf="showModal">

@@ -11,7 +11,7 @@ import { StorageService } from '../../services/storage'; // Inyectamos el nuevo 
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule],
     templateUrl: './profile.html',
-    styleUrl: './profile.css'
+    styleUrls: ['./profile.css', '../login/login.scss']
 })
 export class Profile implements OnInit {
     private auth = inject(Auth);
@@ -107,4 +107,45 @@ export class Profile implements OnInit {
             }
         }
     }
+
+    editar:boolean = false;
+    Editar(){
+      this.editar = !this.editar;
+    }
+
+    guardarCambios() {
+      // Comprobamos que el formulario sea válido antes de enviar
+      if (this.updateForm.valid) {
+
+        // Extraemos los valores directamente del formulario
+        const nombre = this.updateForm.value.nombre;
+        const apellido = this.updateForm.value.apellido;
+        const municipio = this.updateForm.value.municipio;
+
+        // Ahora sí, llamamos a tu función de Firebase con los datos correctos
+        // (Añadimos '!' o un fallback si TypeScript se queja de que pueden ser null)
+        this.actualizarUsuario(nombre!, apellido!, municipio!);
+
+      } else {
+        console.log("Por favor, rellena todos los campos.");
+      }
+    }
+
+    updateForm = new FormGroup({
+      nombre: new FormControl('', Validators.required),
+      apellido: new FormControl('', Validators.required),
+      municipio: new FormControl('', Validators.required),
+    });
+
+    async actualizarUsuario(nombre: string, apellido: string, municipio: string) {
+      const user = this.auth.currentUser;
+      if (user) {
+        await updateDoc(doc(this.db, 'usuarios', user.uid), {
+          nombre: nombre,
+          apellido: apellido,
+          municipio: municipio,
+        });
+      }
+    }
+
 }
