@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/text.css">
-</head>
-<body>
+<main id="main-content" class="py-5">
+    <h1 class="text-center mb-5 text-dark fw-bold">{{ tituloPagina }}</h1>
 
-<header id="site-header"></header>
+    <div class="d-flex flex-column align-items-center w-100">
 
-<hr class="Color-Linea">
+        <article class="article-container" *ngFor="let item of itemsA_Mostrar">
+            <details class="custom-details bg-white shadow-sm mb-3 w-75">
+                <summary class="Titulo fw-bold p-3" style="cursor: pointer;">
+                    {{ item.titulo }}
+                </summary>
+                <div class="content p-3 border-top">
+                    <p class="texto m-0">{{ item.texto }}</p>
+                </div>
+            </details>
+        </article>
 
-<main id="main-content"></main>
+        <div *ngIf="itemsA_Mostrar.length === 0 && !cargando" class="text-center mt-5">
+            <p class="alert alert-warning">No se han encontrado datos para esta sección.</p>
+        </div>
 
-<footer id="site-footer"></footer>
-<script src="../javascript/PoliticasyPreguntas.js"></script>
-
-
-<script src="../javascript/auth.js"></script>
-
-</body>
-</html>
+    </div>
+</main>

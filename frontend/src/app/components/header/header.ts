@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,RouterModule } from '@angular/router';
 import { Auth, onAuthStateChanged, signOut } from '@angular/fire/auth'; // Importamos signOut
 import { CommonModule } from '@angular/common';
-import { DatabaseService } from '../../services/database'; // Inyectamos tu servicio
+import { DatabaseService } from '../../services/database';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })

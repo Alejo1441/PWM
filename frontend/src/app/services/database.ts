@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext} from '@angular/core';
 import { Firestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot } from '@angular/fire/firestore';
 
 @Injectable({
@@ -6,6 +6,10 @@ import { Firestore, doc, getDoc, updateDoc, arrayUnion, arrayRemove, onSnapshot 
 })
 export class DatabaseService {
   private db = inject(Firestore);
+  private injector = inject(EnvironmentInjector);
+
+
+
 
   // Escucha el perfil del usuario en tiempo real
   listenUser(uid: string, callback: (data: any) => void) {
@@ -44,6 +48,26 @@ export class DatabaseService {
   async removeReserva(uid: string, reservaObj: any) {
     return updateDoc(doc(this.db, 'usuarios', uid), {
       reservas: arrayRemove(reservaObj)
+    });
+  }
+
+  async getConfiguracionGeneral() {
+    // Usamos runInInjectionContext para evitar el error de destabilización
+    return runInInjectionContext(this.injector, async () => {
+      try {
+        const docRef = doc(this.db, 'configuracion', 'general'); // Verifica minúsculas en Firebase
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          console.error("Documento 'configuracion/general' no existe en Firestore");
+          return null;
+        }
+      } catch (error) {
+        console.error("Error obteniendo configuración:", error);
+        return null;
+      }
     });
   }
 }

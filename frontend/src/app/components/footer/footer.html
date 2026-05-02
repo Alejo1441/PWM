@@ -1,28 +1,30 @@
 <footer class="bg-black text-white py-4 mt-auto w-100">
-  <div class="container-fluid px-5">
+    <div class="container-fluid px-5">
 
-    <div class="row align-items-center text-center text-md-start gy-4">
+        <div class="row align-items-center text-center text-md-start gy-4">
 
-      <div class="col-12 col-md-3">
-        <a href="text.htm" class="text-white text-decoration-none">Politicas de privacidad</a>
-      </div>
+            <div class="col-12 col-md-3">
+                <!-- CAMBIO: Apuntamos a /text que es como se llama en app.routes.ts -->
+                <a routerLink="/text" [queryParams]="{ tipo: 'politicas' }" class="text-white text-decoration-none" style="cursor: pointer;">Politicas de privacidad</a>
+            </div>
 
-      <div class="col-12 col-md-3">
-        <a href="text.html" class="text-white text-decoration-none">Preguntas frecuentes</a>
-      </div>
+            <div class="col-12 col-md-3">
+                <!-- CAMBIO: Apuntamos a /text -->
+                <a routerLink="/text" [queryParams]="{ tipo: 'preguntas' }" class="text-white text-decoration-none" style="cursor: pointer;">Preguntas frecuentes</a>
+            </div>
 
-      <div class="col-12 col-md-3">
-        <a href="https://x.com/alealejo44" target="_blank" class="text-white text-decoration-none">redes sociales</a>
-      </div>
+            <div class="col-12 col-md-3">
+                <a href="https://x.com/alealejo44" target="_blank" class="text-white text-decoration-none">redes sociales</a>
+            </div>
 
-      <div class="col-12 col-md-3">
-        <address class="mb-0 fst-italic">
-          <p class="mb-2 fw-bold">Informacion de contacto</p>
-          <p class="mb-1">telefono: 333333333</p>
-          <p class="mb-0">correo electronico: <a href="mailto:tutallerdeconfi@gmail.com" class="text-white text-decoration-none">tutallerdeconfi@gmail.com</a></p>
-        </address>
-      </div>
+            <div class="col-12 col-md-3">
+                <address class="mb-0 fst-italic">
+                    <p class="mb-2 fw-bold">Informacion de contacto</p>
+                    <p class="mb-1">telefono: 333333333</p>
+                    <p class="mb-0">correo electronico: <a href="mailto:tutallerdeconfi&#64;gmail.com" class="text-white text-decoration-none">tutallerdeconfi&#64;gmail.com</a></p>
+                </address>
+            </div>
 
+        </div>
     </div>
-  </div>
 </footer>

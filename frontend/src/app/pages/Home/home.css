@@ -1,0 +1,36 @@
+/* --- CONTENEDOR PRINCIPAL --- */
+.talleres-container {
+    display: flex;
+    flex-direction: row;        /* Pone los elementos uno al lado del otro */
+    justify-content: center;    /* Los centra en la pantalla */
+    gap: 50px;                  /* Espacio entre las dos imágenes/talleres */
+    padding: 40px 20px;
+    max-width: 1200px;          /* Para que en pantallas gigantes no se separen demasiado */
+    margin: 0 auto;
+}
+
+/* --- TAMAÑO DE LOS TALLERES (PC) --- */
+.taller-card {
+    flex: 1;                    /* Hace que los dos ocupen el mismo espacio */
+    max-width: 450px;           /* <-- AQUÍ CONTROLAS EL TAMAÑO MÁXIMO DEL ARTÍCULO */
+    width: 100%;
+}
+
+
+/* =========================================
+   DISEÑO RESPONSIVE (Tablets y Móviles)
+   ========================================= */
+
+/* Cuando la pantalla mida 900px o menos (Tablets y Móviles)... */
+@media screen and (max-width: 900px) {
+
+    .talleres-container {
+        flex-direction: column;   /* ...los apila uno debajo del otro */
+        align-items: center;      /* Los centra en vertical */
+        gap: 40px;                /* Espacio entre ellos cuando están apilados */
+    }
+
+    .taller-card {
+        max-width: 600px;         /* Permite que se estiren un poco más al estar solos en su fila */
+    }
+}

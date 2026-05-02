@@ -1,43 +1,68 @@
-
 <hr class="Color-Linea">
 
-<main class="container-fluid px-4 py-4 TallerInfo ">
+<!-- Contenedor para la imagen de fondo dinámica (Sin estilos inline) -->
+<div class="fondo-taller-dinamico" *ngIf="tallerInfo">
+    <img [src]="getImageUrl(tallerInfo.image ? tallerInfo.image[0] : '')" alt="Fondo dinámico">
+</div>
 
-  <div class="d-flex flex-wrap gap-3 mb-4">
-    <a href="../pages/calendar.html" class="btn btn-dark text-white rounded-pill px-4 fw-bold">Cambio de aceite</a>
-    <a href="../pages/calendar.html" class="btn btn-dark text-white rounded-pill px-4 fw-bold">Cambio de ruedas</a>
-    <a href="../pages/calendar.html" class="btn btn-dark text-white rounded-pill px-4 fw-bold">Alineación dirección</a>
-  </div>
+<main class="container-fluid px-4 py-4 TallerInfo" *ngIf="tallerInfo">
 
-  <hr class="Color-Linea">
-
-  <div class="row gy-4 align-items-center">
-
-    <div class="col-12 col-lg-3 d-flex flex-column gap-3">
-      <img src="../../assets/imagen.png" alt="Foto1" class="img-fluid rounded border border-dark border-2 w-100">
-      <img src="../../assets/imagen.png" alt="Foto2" class="img-fluid rounded border border-dark border-2 w-100">
+    <!-- Botones de especialidad: Pasamos el ID en la ruta y el servicio como parámetro -->
+    <div class="d-flex flex-wrap gap-3 mb-4 cajabotones" *ngIf="tallerInfo.speciality && tallerInfo.speciality.length > 0; else noServicios">
+        <a *ngFor="let especialidad of tallerInfo.speciality"
+           [routerLink]="['/calendar', tallerInfo.id]"
+           [queryParams]="{ servicio: especialidad.service }"
+           class="btn btn-dark text-white rounded-pill px-4 fw-bold botonEspecialidad">
+            {{ especialidad.service }}
+        </a>
     </div>
 
-    <div class="col-12 col-lg-5 px-lg-4">
-      <p class="fs-6 fw-medium text-dark mb-5">
-        Información Taller
-      </p>
+    <ng-template #noServicios>
+        <div class="alert alert-warning w-100">No hay servicios registrados para este taller.</div>
+    </ng-template>
 
-      <div class="mt-5">
-        <h3 class="fs-5 fw-bold text-dark mb-2">Talleres cercanos a tu ubicación</h3>
-        <div class="d-flex align-items-center gap-2">
-          <span class="text-dark fs-5 estrellas">★★★★☆</span>
-          <a href="reviews.html" class="text-dark text-decoration-underline fw-bold texto-resenas">Nº Reseñas</a>
+    <hr class="Color-Linea">
+
+    <div class="row gy-4 align-items-center">
+
+        <div class="col-12 col-lg-3 d-flex flex-column gap-3 CajaImagen">
+            <ng-container *ngIf="tallerInfo.image && tallerInfo.image.length > 0; else sinFotos">
+                <img *ngFor="let imgUrl of tallerInfo.image"
+                     [src]="getImageUrl(imgUrl)"
+                     alt="Foto de {{ tallerInfo.name }}"
+                     class="img-fluid rounded border border-dark border-2 w-100 foto-taller">
+            </ng-container>
+
+            <ng-template #sinFotos>
+                <img src="../../assets/imagen.png" alt="Foto por defecto" class="img-fluid rounded border border-dark border-2 w-100">
+            </ng-template>
         </div>
-      </div>
+
+        <div class="col-12 col-lg-5 px-lg-4">
+            <p class="fs-6 fw-medium text-dark mb-5 InfoTaller">
+                {{ tallerInfo.description || 'Sin descripción disponible.' }}
+            </p>
+
+            <div class="mt-5">
+                <h3 class="fs-5 fw-bold text-dark mb-2">Talleres cercanos a tu ubicación</h3>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-dark fs-5 estrellas">{{ promedioEstrellas }}</span>
+                    <a [routerLink]="['/reviews', tallerInfo.id]" class="text-dark text-decoration-underline fw-bold texto-resenas">
+                        {{ tallerInfo.name }}: {{ numeroResenas }} Reseñas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <a href="https://www.google.com/maps/" class="d-block" target="_blank">
+                <img src="../../assets/mapa.png" alt="Mapa Talleres" class="img-fluid rounded-4 border border-dark border-2 shadow w-100 map-image">
+            </a>
+        </div>
+
     </div>
-
-    <div class="col-12 col-lg-4">
-      <a href="https://www.google.com/maps/" class="d-block">
-        <img src="../../assets/mapa.png" alt="Mapa Talleres" class="img-fluid rounded-4 border border-dark border-2 shadow w-100" style="object-fit: cover;">
-      </a>
-    </div>
-
-  </div>
-
 </main>
+
+<div class="text-center py-5" *ngIf="!tallerInfo">
+    <p>Cargando información del taller...</p>
+</div>

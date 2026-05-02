@@ -1,8 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TallerService } from '../../services/taller'; // Ajusta la ruta si es diferente
+import { TallerService } from '../../services/taller';
 
 @Component({
     selector: 'app-calendar',
@@ -14,7 +14,8 @@ import { TallerService } from '../../services/taller'; // Ajusta la ruta si es d
 export class Calendar implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
-    private tallerService = inject(TallerService); // Usamos el servicio
+    private tallerService = inject(TallerService);
+    private cdr = inject(ChangeDetectorRef); // Inyectamos el actualizador visual
 
     currentDate: Date = new Date();
     selectedDate: string | null = null;
@@ -42,10 +43,17 @@ export class Calendar implements OnInit {
 
         if (idTaller) {
             try {
-                // Llamada súper limpia al servicio
                 const data = await this.tallerService.getTallerById(idTaller);
                 if (data) {
                     this.tallerInfo = data;
+
+                    // --- TRADUCTOR FIREBASE ---
+                    // Para que tu fondo HTML no rompa el código
+                    if (this.tallerInfo.fotoperfil) {
+                        this.tallerInfo.image = [this.tallerInfo.fotoperfil];
+                    }
+
+                    this.cdr.detectChanges(); // OBLIGAMOS a Angular a pintar el nombre
                 } else {
                     this.tallerInfo = { name: 'Taller no encontrado' };
                 }

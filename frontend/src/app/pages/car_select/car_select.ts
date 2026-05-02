@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Auth } from '@angular/fire/auth';
@@ -16,8 +16,9 @@ export class CarSelect implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
     private auth = inject(Auth);
-    private dbService = inject(DatabaseService); // Nuevo
-    private tallerService = inject(TallerService); // Nuevo
+    private dbService = inject(DatabaseService);
+    private tallerService = inject(TallerService);
+    private cdr = inject(ChangeDetectorRef); // Forzamos actualización visual
 
     reservaInfo: any = null;
     tallerInfo: any = null;
@@ -39,7 +40,6 @@ export class CarSelect implements OnInit {
         }
         this.reservaInfo = JSON.parse(reservaGuardada);
 
-        // Usamos el servicio de base de datos
         const userData = await this.dbService.getUserOnce(usuarioActual.uid);
         if (userData) {
             this.cochesUsuario = userData['vehiculos'] || [];
@@ -47,18 +47,34 @@ export class CarSelect implements OnInit {
 
         const idTaller = this.route.snapshot.paramMap.get('id');
         if (idTaller) {
-            // Usamos el servicio de talleres
             const tallerData = await this.tallerService.getTallerById(idTaller);
             if (tallerData) {
                 this.tallerInfo = tallerData;
+
+                // --- TRADUCTOR DE FIREBASE ---
+                // Convertimos tu Map de precios al Array que el código necesita
+                if (this.tallerInfo.service) {
+                    this.tallerInfo.speciality = Object.keys(this.tallerInfo.service).map(nombreServicio => {
+                        return { service: nombreServicio, price: this.tallerInfo.service[nombreServicio] };
+                    });
+                }
+                // Traducimos la foto para que no se rompa el fondo de CSS
+                if (this.tallerInfo.fotoperfil) {
+                    this.tallerInfo.image = [this.tallerInfo.fotoperfil];
+                }
+
                 this.calcularPrecio();
+                this.cdr.detectChanges(); // Actualizamos la pantalla
             }
         }
     }
 
     calcularPrecio() {
         if (!this.tallerInfo || !this.reservaInfo.servicio) return;
+
         const servicioBuscado = this.reservaInfo.servicio.trim().toLowerCase();
+
+        // Busca el servicio. IMPORTANTE: Si reservaInfo.servicio es "Servicio General", no lo encontrará.
         const servicioEncontrado = this.tallerInfo.speciality?.find((s: any) =>
             s.service.trim().toLowerCase() === servicioBuscado
         );
@@ -90,13 +106,10 @@ export class CarSelect implements OnInit {
         };
 
         try {
-
             await this.dbService.addReserva(usuarioActual.uid, nuevaReserva);
-
             alert("¡Reserva confirmada! Ya puedes verla en tu perfil.");
             localStorage.removeItem("reservation");
             this.router.navigate(['/profile']);
-
         } catch (error) {
             console.error("Error guardando reserva:", error);
             alert("Error al confirmar la reserva");

@@ -1,91 +1,13 @@
-*, *::before, *::after {
-    box-sizing: border-box;
+.fondo-taller-dinamico {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1; opacity: 0.3; pointer-events: none;
 }
-
-html, body {
-    height: 100%;
-    margin: 0;
+.fondo-taller-dinamico img {
+    width: 100%; height: 100%; object-fit: cover;
 }
-body {
-    display: flex;
-    flex-direction: column;
-    background-color: #D6D6D6;
-}
-
-.Color-Linea{
-    border: 2px solid white;
-    width: 100%;
-    margin: 0;
-}
-
-#main-content{
-    width: 100%;
-    height: 100%;
-    justify-items: center;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-
-#main-content::before {
-
-    content: "";
-    position: absolute;
-    top: -5%;
-    left: -5%;
-    width: 110%;
-    height: 110%;
-    z-index: -1;
-
-    background-image: var(--bg-taller);
-    background-size: cover;
-    background-position: center;
-
-    filter: blur(10px);
-    opacity: 0.6;
-}
-
-.article-container{
-    flex: 1;
-    margin: 20px;
-    width: 90%;
-    margin-bottom: 15px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-.custom-details{
-    border:1px solid black;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 10px;
-    transition: all 0.3s ease;
-}
-.custom-details summary{
-    font-weight: bold;
-    cursor: pointer;
-    list-style: none;
-    padding: 10px;
-}
-.custom-details summary:hover{
-    color: #007BFF;
-}
-.custom-details .content{
-    padding: 10px;
-    border-top: 1px solid black;
-    line-height: 1.6;
-    color: black;
-}
-
-#search-form {
-    display: none !important;
-}
-
-@media (min-width:769px) and (max-width: 1024px) {
-    .Titulo{
-        font-size: 2rem;
-    }
-
-    .texto{
-        font-size: 1.5rem;
-
-    }
-}
+.article-container { width: 90%; max-width: 800px; margin-bottom: 15px; }
+.custom-details { border: 2px solid #333; border-radius: 8px; padding: 10px; transition: all 0.3s ease; cursor: pointer; }
+.custom-details summary { font-weight: bold; padding: 10px; list-style: none; }
+.custom-details summary:hover { color: #007BFF; }
+.custom-details .content { padding: 15px 10px 5px 10px; border-top: 1px solid #ccc; margin-top: 10px; }

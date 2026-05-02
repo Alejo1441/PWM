@@ -1,41 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Reviews</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/reviews.css">
-</head>
+<hr class="Color-Linea">
 
-<body>
+<!-- Inyectamos la URL directamente en la variable CSS del main -->
+<main class="reviews"
+      *ngIf="tallerInfo"
+      [style.--bg-taller]="'url(' + getImageUrl(tallerInfo.image ? tallerInfo.image[0] : '') + ')'">
 
-    <header id="site-header"></header>
+    <h1 class="nombre-taller">Reviews del Taller '{{ tallerInfo.name }}'</h1>
 
-    <hr class="Color-Linea">
+    <div class="Resenas resena">
 
-    <main class="reviews">
-        <h1 class="nombre-taller">Reseñas</h1>
-        <div class="Resenas">
-
-            <div class="resena">
-                <div class="item-resena">
-                    <img src="../Fotos/fotoperfil.webp" alt="perfil" class="logo_circular">
-                    <div class="resenasyestrella">
-                        <span class="estrellas">★★★★★</span>
-                        <p class="texto-resenas"> El Mejor Taller</p>
-                    </div>
-                </div>
+        <div *ngFor="let review of tallerInfo.reviews" class="item-resena">
+            <img src="../../assets/fotoperfil.webp" alt="perfil" class="logo_circular">
+            <div class="resenasyestrella">
+                <p class="nombre-usuario fw-bold m-0">{{ review.username }}:</p>
+                <span class="estrellas">{{ getEstrellasVisuales(review.stars) }}</span>
+                <p class="texto-resenas m-0">{{ review.comment }}</p>
             </div>
-
-
         </div>
 
-    </main>
+        <div *ngIf="!tallerInfo.reviews || tallerInfo.reviews.length === 0" class="text-center w-100 py-4">
+            <p>Este taller aún no tiene reseñas.</p>
+        </div>
 
-    <footer id="site-footer"></footer>
+    </div>
+</main>
 
-    <script src="../javascript/reviews.js"></script>
-    <script src="../javascript/auth.js"></script>
-
-</body>
-</html>
+<div class="text-center py-5" *ngIf="!tallerInfo">
+    <p>Cargando reseñas...</p>
+</div>
