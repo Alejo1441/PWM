@@ -25,6 +25,12 @@ export class DatabaseService {
     return docSnap.exists() ? docSnap.data() : null;
   }
 
+  async updateUser(uid: string, nombre: string, apellido: string, municipio: string){
+    const userRef = doc(this.db, `usuarios/${uid}`);
+    const userUpdate = { nombre: nombre, apellido: apellido, municipio: municipio };
+    return await updateDoc(userRef, userUpdate);
+  }
+
   // Modificar vehículos
   async addVehiculo(uid: string, vehiculoTexto: string) {
     return updateDoc(doc(this.db, 'usuarios', uid), {

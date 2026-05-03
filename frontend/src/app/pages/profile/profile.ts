@@ -113,18 +113,34 @@ export class Profile implements OnInit {
       this.editar = !this.editar;
     }
 
-    guardarCambios() {
+    async guardarCambios() {
       // Comprobamos que el formulario sea válido antes de enviar
+      const user = this.auth.currentUser;
+
+      if (!user) {
+        console.error("No hay ningún usuario autenticado.");
+        return;
+      }
+
       if (this.updateForm.valid) {
 
         // Extraemos los valores directamente del formulario
-        const nombre = this.updateForm.value.nombre;
-        const apellido = this.updateForm.value.apellido;
-        const municipio = this.updateForm.value.municipio;
+        const nombre = this.updateForm.value.nombre!;
+        const apellido = this.updateForm.value.apellido!;
+        const municipio = this.updateForm.value.municipio!;
+        const uid = user.uid;
 
         // Ahora sí, llamamos a tu función de Firebase con los datos correctos
         // (Añadimos '!' o un fallback si TypeScript se queja de que pueden ser null)
-        this.actualizarUsuario(nombre!, apellido!, municipio!);
+        try {
+          await this.dbService.updateUser(uid, nombre, apellido, municipio);
+          alert('Perfil actualizado con éxito');
+
+          this.updateForm.reset();
+          this.Editar(); // Opcional: Esto cerrará el formulario tras guardar
+        } catch (error) {
+          console.error("Error al actualizar el perfil:", error);
+        }
 
       } else {
         console.log("Por favor, rellena todos los campos.");
@@ -136,16 +152,5 @@ export class Profile implements OnInit {
       apellido: new FormControl('', Validators.required),
       municipio: new FormControl('', Validators.required),
     });
-
-    async actualizarUsuario(nombre: string, apellido: string, municipio: string) {
-      const user = this.auth.currentUser;
-      if (user) {
-        await updateDoc(doc(this.db, 'usuarios', user.uid), {
-          nombre: nombre,
-          apellido: apellido,
-          municipio: municipio,
-        });
-      }
-    }
 
 }
