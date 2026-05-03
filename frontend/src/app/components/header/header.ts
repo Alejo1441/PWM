@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router,RouterModule } from '@angular/router';
-import { Auth, onAuthStateChanged, signOut } from '@angular/fire/auth'; // Importamos signOut
+import { Auth, onAuthStateChanged, signOut } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { DatabaseService } from '../../services/database';
 
@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.usuarioLogueado = true;
-        // Obtenemos la URL de la imagen en tiempo real desde Firebase
+
         this.dbService.listenUser(user.uid, (data) => {
           this.fotoPerfilUrl = data?.fotoPerfil || null;
         });
@@ -46,7 +46,7 @@ export class HeaderComponent implements OnInit {
     try {
       await signOut(this.auth);
       console.log("Sesión cerrada");
-      this.router.navigate(['/home']); // Al salir, lo mandamos al Home
+      this.router.navigate(['/home']);
     } catch (error) {
       console.error("Error al cerrar sesión", error);
     }

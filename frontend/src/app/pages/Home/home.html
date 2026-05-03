@@ -1,18 +1,18 @@
 <section class="talleres-container d-flex flex-wrap gap-4 justify-content-center p-4">
 
-    <!-- Iteramos sobre la lista de talleres -->
+
     <div *ngFor="let taller of talleres"
          class="taller-card card shadow-sm"
          style="width: 18rem; cursor: pointer; transition: transform 0.2s;"
-         (click)="irAlTaller(taller.id)"> <!-- Evento Clic -->
+         (click)="irAlTaller(taller.id)">
 
-        <!-- Foto del Taller -->
+
         <img [src]="taller.fotoVisual"
              class="card-img-top"
              alt="{{ taller.name }}"
              style="height: 200px; object-fit: cover;">
 
-        <!-- Info del Taller -->
+
         <div class="card-body text-center">
             <h5 class="card-title fw-bold text-dark">{{ taller.name }}</h5>
 
@@ -26,7 +26,7 @@
 
 </section>
 
-<!-- Mensaje de carga mientras busca en Firebase -->
+
 <div class="text-center py-5" *ngIf="talleres.length === 0">
     <p>Cargando talleres...</p>
 </div>

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import  { Routes } from '@angular/router';
 import { Home } from './pages/Home/home';
 import { Login } from './pages/login/login';
 import { Profile } from './pages/profile/profile';

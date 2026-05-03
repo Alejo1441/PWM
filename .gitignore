@@ -1,6 +1,0 @@
-.idea/
-# Cache de Angular
-      .angular/
-
-      # Librerías
-      node_module

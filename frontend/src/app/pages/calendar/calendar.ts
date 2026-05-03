@@ -15,7 +15,7 @@ export class Calendar implements OnInit {
     private route = inject(ActivatedRoute);
     private router = inject(Router);
     private tallerService = inject(TallerService);
-    private cdr = inject(ChangeDetectorRef); // Inyectamos el actualizador visual
+    private cdr = inject(ChangeDetectorRef);
 
     currentDate: Date = new Date();
     selectedDate: string | null = null;
@@ -47,13 +47,12 @@ export class Calendar implements OnInit {
                 if (data) {
                     this.tallerInfo = data;
 
-                    // --- TRADUCTOR FIREBASE ---
-                    // Para que tu fondo HTML no rompa el código
+
                     if (this.tallerInfo.fotoperfil) {
                         this.tallerInfo.image = [this.tallerInfo.fotoperfil];
                     }
 
-                    this.cdr.detectChanges(); // OBLIGAMOS a Angular a pintar el nombre
+                    this.cdr.detectChanges();
                 } else {
                     this.tallerInfo = { name: 'Taller no encontrado' };
                 }

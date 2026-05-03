@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth';
   styleUrl: './login.scss'
 })
 export class Login {
-  private authService = inject(AuthService); // Usamos el servicio
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   isLoginMode = true;
@@ -39,7 +39,7 @@ export class Login {
       const { email, password } = this.loginForm.value;
 
       try {
-        // Llamada limpia al servicio
+
         await this.authService.login(email!, password!);
         console.log('¡Login exitoso!');
         this.router.navigate(['/profile']);
@@ -61,7 +61,7 @@ export class Login {
       }
 
       try {
-        // Le pasamos los valores del formulario al servicio
+
         await this.authService.registrarUsuario(this.registerForm.value, this.registerForm.value.password!);
 
         console.log('¡Usuario y Perfil creados!');

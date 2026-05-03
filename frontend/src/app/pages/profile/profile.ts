@@ -4,7 +4,7 @@ import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DatabaseService } from '../../services/database';
-import { StorageService } from '../../services/storage'; // Inyectamos el nuevo servicio
+import { StorageService } from '../../services/storage';
 
 @Component({
     selector: 'app-profile',
@@ -16,13 +16,13 @@ import { StorageService } from '../../services/storage'; // Inyectamos el nuevo 
 export class Profile implements OnInit {
     private auth = inject(Auth);
     private dbService = inject(DatabaseService);
-    private storageService = inject(StorageService); // Usamos el servicio
+    private storageService = inject(StorageService);
     private router = inject(Router);
 
     usuarioInfo: any = null;
     activePanel: 'cars' | 'booking' = 'cars';
     showModal: boolean = false;
-    subiendoImagen: boolean = false; // Variable para controlar el estado de subida
+    subiendoImagen: boolean = false;
 
     cocheForm = new FormGroup({
         marca: new FormControl('', Validators.required),
@@ -97,7 +97,7 @@ export class Profile implements OnInit {
         if (file && user) {
             this.subiendoImagen = true;
             try {
-                // Llamamos al servicio de storage para subir la imagen y actualizar Firestore
+
                 await this.storageService.subirFotoPerfil(file, user.uid);
                 alert('Foto de perfil actualizada correctamente.');
             } catch (error) {
@@ -114,7 +114,7 @@ export class Profile implements OnInit {
     }
 
     async guardarCambios() {
-      // Comprobamos que el formulario sea válido antes de enviar
+
       const user = this.auth.currentUser;
 
       if (!user) {
@@ -124,20 +124,19 @@ export class Profile implements OnInit {
 
       if (this.updateForm.valid) {
 
-        // Extraemos los valores directamente del formulario
+
         const nombre = this.updateForm.value.nombre!;
         const apellido = this.updateForm.value.apellido!;
         const municipio = this.updateForm.value.municipio!;
         const uid = user.uid;
 
-        // Ahora sí, llamamos a tu función de Firebase con los datos correctos
-        // (Añadimos '!' o un fallback si TypeScript se queja de que pueden ser null)
+
         try {
           await this.dbService.updateUser(uid, nombre, apellido, municipio);
           alert('Perfil actualizado con éxito');
 
           this.updateForm.reset();
-          this.Editar(); // Opcional: Esto cerrará el formulario tras guardar
+          this.Editar();
         } catch (error) {
           console.error("Error al actualizar el perfil:", error);
         }

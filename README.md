@@ -1,4 +1,32 @@
-# PWM
+# SPRINT 3
+# NOMBRE DEL PROYECTO: AutoHub
+# Componentes del grupo
+    
+    -Alejo Santana, Alejandro
+    -Ojeda Hernández, José Miguel
+    -Pérez Sosa,Daniel
+
+
+
+# Estructura del Codigo
+
+
+- PWM->src->app; aqui es donde se encontraran la mayoría del trabajo que hemos realizado, dentro de components estan los templates que
+hemos realizadoo, en pages, las propias paginas web, y dentro de services, estan los servicios, para manejar los datos de firebase
+en cada página, luego dentro de app hay algo importante, aparte de lo ya nombrado, que sería el app.route.ts, que es donde se guardan 
+las direcciones, y donde va a estar cada pagina, y donde mandar una pagina, cuando ha recibido algun dato mal, en este caso
+siempre mandamos al home
+- el resto de la información sera entregada en el Power point por simple comodidad y no estar repitiendo información
+
+
+
+
+
+
+
+
+
+# PWM---Sprint_1
 
 # Nombre del proyecto: AutoHub
 
@@ -140,7 +168,7 @@ políticas del taller, o nos mostrará las políticas y preguntas de la propia p
 
 Usuario: Leon@gmail.com
 
-Pass:1234
+Pass:123456
 
 tambien se pueden crear nuevos usuarios, aunque no se guardan en el JSON, pero es completamente usable.
 

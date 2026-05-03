@@ -14,7 +14,7 @@ import { TallerService } from '../../services/taller';
 export class TallerInformacion implements OnInit {
   private route = inject(ActivatedRoute);
   private tallerService = inject(TallerService);
-  private cdr = inject(ChangeDetectorRef); // HERRAMIENTA NUEVA: Para forzar el redibujado de la pantalla
+  private cdr = inject(ChangeDetectorRef);
   private injector = inject(EnvironmentInjector);
   private db = inject(Firestore);
 
@@ -31,22 +31,17 @@ export class TallerInformacion implements OnInit {
 
       if (this.tallerInfo) {
 
-        // 1. ARREGLO DE SERVICIOS
-        // Tu BD manda un objeto "service", lo convertimos al Array "speciality" que espera el HTML
         if (this.tallerInfo.service) {
           this.tallerInfo.speciality = Object.keys(this.tallerInfo.service).map(nombreServicio => {
             return { service: nombreServicio, price: this.tallerInfo.service[nombreServicio] };
           });
         }
 
-        // 2. ARREGLO DE IMÁGENES
-        // Tu BD manda "fotoperfil" como texto, lo metemos en el Array "image" que espera el HTML
         if (this.tallerInfo.fotoperfil) {
           this.tallerInfo.image = [this.tallerInfo.fotoperfil];
         }
 
-        // 3. ARREGLO DE RESEÑAS
-        // Tu BD manda una sola reseña como objeto, la metemos en un Array para que funcione el .length
+
         if (this.tallerInfo.reviews) {
           if (!Array.isArray(this.tallerInfo.reviews)) {
             this.tallerInfo.reviews = [this.tallerInfo.reviews];
@@ -54,7 +49,7 @@ export class TallerInformacion implements OnInit {
           this.calcularEstrellas();
         }
 
-        // Forzamos la actualización de la pantalla
+
         this.cdr.detectChanges();
       }
     }

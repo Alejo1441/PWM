@@ -53,7 +53,7 @@ export class InfoComponent implements OnInit {
       }
 
       this.cargando = false;
-      this.cdr.detectChanges(); // Forzamos a Angular a pintar los datos actualizados
+      this.cdr.detectChanges();
     });
   }
 

@@ -18,7 +18,7 @@ export class CarSelect implements OnInit {
     private auth = inject(Auth);
     private dbService = inject(DatabaseService);
     private tallerService = inject(TallerService);
-    private cdr = inject(ChangeDetectorRef); // Forzamos actualización visual
+    private cdr = inject(ChangeDetectorRef);
 
     reservaInfo: any = null;
     tallerInfo: any = null;
@@ -51,20 +51,19 @@ export class CarSelect implements OnInit {
             if (tallerData) {
                 this.tallerInfo = tallerData;
 
-                // --- TRADUCTOR DE FIREBASE ---
-                // Convertimos tu Map de precios al Array que el código necesita
+
                 if (this.tallerInfo.service) {
                     this.tallerInfo.speciality = Object.keys(this.tallerInfo.service).map(nombreServicio => {
                         return { service: nombreServicio, price: this.tallerInfo.service[nombreServicio] };
                     });
                 }
-                // Traducimos la foto para que no se rompa el fondo de CSS
+
                 if (this.tallerInfo.fotoperfil) {
                     this.tallerInfo.image = [this.tallerInfo.fotoperfil];
                 }
 
                 this.calcularPrecio();
-                this.cdr.detectChanges(); // Actualizamos la pantalla
+                this.cdr.detectChanges();
             }
         }
     }
@@ -74,7 +73,6 @@ export class CarSelect implements OnInit {
 
         const servicioBuscado = this.reservaInfo.servicio.trim().toLowerCase();
 
-        // Busca el servicio. IMPORTANTE: Si reservaInfo.servicio es "Servicio General", no lo encontrará.
         const servicioEncontrado = this.tallerInfo.speciality?.find((s: any) =>
             s.service.trim().toLowerCase() === servicioBuscado
         );

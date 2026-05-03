@@ -1,13 +1,13 @@
 <hr class="Color-Linea">
 
-<!-- Contenedor para la imagen de fondo dinámica (Sin estilos inline) -->
+
 <div class="fondo-taller-dinamico" *ngIf="tallerInfo">
     <img [src]="getImageUrl(tallerInfo.image ? tallerInfo.image[0] : '')" alt="Fondo dinámico">
 </div>
 
 <main class="container-fluid px-4 py-4 TallerInfo" *ngIf="tallerInfo">
 
-    <!-- Botones de especialidad: Pasamos el ID en la ruta y el servicio como parámetro -->
+
     <div class="d-flex flex-wrap gap-3 mb-4 cajabotones" *ngIf="tallerInfo.speciality && tallerInfo.speciality.length > 0; else noServicios">
         <a *ngFor="let especialidad of tallerInfo.speciality"
            [routerLink]="['/calendar', tallerInfo.id]"
