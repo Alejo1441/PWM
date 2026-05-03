@@ -4,47 +4,67 @@ import { ActivatedRoute } from '@angular/router';
 import { TallerService } from '../../services/taller';
 
 @Component({
-    selector: 'app-text',
-    standalone: true,
-    imports: [CommonModule],
-    templateUrl: './text.html',
-    styleUrl: './text.css'
+  selector: 'app-text',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './text.html',
+  styleUrl: './text.css'
 })
 export class InfoComponent implements OnInit {
-    private route = inject(ActivatedRoute);
-    private tallerService = inject(TallerService);
-    private cdr = inject(ChangeDetectorRef);
+  private route = inject(ActivatedRoute);
+  private tallerService = inject(TallerService);
+  private cdr = inject(ChangeDetectorRef);
 
-    itemsA_Mostrar: { titulo: string, texto: string }[] = [];
-    tituloPagina: string = '';
-    cargando: boolean = true;
+  itemsA_Mostrar: { titulo: string, texto: string }[] = [];
+  tituloPagina: string = '';
+  cargando: boolean = true;
+  tallerInfo: any = null;
 
-    async ngOnInit() {
-        // Obtenemos el ID del taller y el TIPO (politicas o preguntas) de la URL
-        const idTaller = this.route.snapshot.queryParamMap.get('id');
-        const tipo = this.route.snapshot.queryParamMap.get('tipo') || 'politicas';
+  ngOnInit() {
+    this.route.queryParamMap.subscribe(async (queryParams) => {
 
-        this.tituloPagina = tipo === 'politicas' ? 'Políticas del Taller' : 'Preguntas Frecuentes';
+      this.cargando = true;
+      this.itemsA_Mostrar = [];
 
-        if (idTaller) {
-            const taller = await this.tallerService.getTallerById(idTaller);
+      const idTaller = this.route.snapshot.paramMap.get('id');
 
-            if (taller) {
-                // Accedemos directamente al campo del taller (taller['politicas'] o taller['preguntas'])
-                const datosNodo = (taller as any)[tipo];
+      const tipo = queryParams.get('tipo') || 'politicas';
 
-                if (datosNodo) {
-                    // Mapeamos el objeto de Firebase a nuestra lista
-                    // Estructura: name_politica: ["Titulo", "Respuesta"]
-                    this.itemsA_Mostrar = Object.keys(datosNodo).map(key => ({
-                        titulo: datosNodo[key][0],
-                        texto: datosNodo[key][1]
-                    }));
-                }
-            }
+      this.tituloPagina = tipo === 'politicas' ? 'Políticas del Taller' : 'Preguntas Frecuentes';
+
+      if (idTaller) {
+        const taller = await this.tallerService.getTallerById(idTaller);
+
+        if (taller) {
+          this.tallerInfo = taller;
+          const datosNodo = (taller as any)[tipo];
+
+          if (datosNodo) {
+            this.itemsA_Mostrar = Object.keys(datosNodo).map(key => ({
+              titulo: datosNodo[key][0],
+              texto: datosNodo[key][1]
+            }));
+          }
         }
+      }
 
-        this.cargando = false;
-        this.cdr.detectChanges(); // Forzamos a Angular a pintar los datos
+      if (this.tallerInfo.fotoperfil) {
+        this.tallerInfo.image = [this.tallerInfo.fotoperfil];
+      }
+
+      this.cargando = false;
+      this.cdr.detectChanges(); // Forzamos a Angular a pintar los datos actualizados
+    });
+  }
+
+  getImageUrl(url: string): string {
+    if (!url) return '../../assets/imagen.png';
+    if (url.startsWith('http')) return url;
+
+    let cleanUrl = url.replace('../', '').replace('../../', '');
+    if (!cleanUrl.startsWith('/')) {
+      cleanUrl = '/' + cleanUrl;
     }
+    return cleanUrl;
+  }
 }

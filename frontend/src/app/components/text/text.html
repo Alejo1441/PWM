@@ -1,3 +1,7 @@
+<div class="fondo-taller-dinamico" *ngIf="tallerInfo">
+  <img [src]="getImageUrl(tallerInfo.image ? tallerInfo.image[0] : '')" alt="Fondo dinámico">
+</div>
+
 <main id="main-content" class="py-5">
     <h1 class="text-center mb-5 text-dark fw-bold">{{ tituloPagina }}</h1>
 
@@ -20,3 +24,4 @@
 
     </div>
 </main>
+

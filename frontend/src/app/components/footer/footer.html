@@ -3,15 +3,21 @@
 
         <div class="row align-items-center text-center text-md-start gy-4">
 
-            <div class="col-12 col-md-3">
-                <!-- CAMBIO: Apuntamos a /text que es como se llama en app.routes.ts -->
-                <a routerLink="/text" [queryParams]="{ tipo: 'politicas' }" class="text-white text-decoration-none" style="cursor: pointer;">Politicas de privacidad</a>
-            </div>
+          <div class="col-12 col-md-3">
+            <a [routerLink]="['/text', idTaller]"
+               [queryParams]="{ tipo: 'politicas' }"
+               class="text-white text-decoration-none" style="cursor: pointer;">
+              Politicas de privacidad
+            </a>
+          </div>
 
-            <div class="col-12 col-md-3">
-                <!-- CAMBIO: Apuntamos a /text -->
-                <a routerLink="/text" [queryParams]="{ tipo: 'preguntas' }" class="text-white text-decoration-none" style="cursor: pointer;">Preguntas frecuentes</a>
-            </div>
+          <div class="col-12 col-md-3">
+            <a [routerLink]="['/text', idTaller]"
+               [queryParams]="{ tipo: 'preguntas' }"
+               class="text-white text-decoration-none" style="cursor: pointer;">
+              Preguntas frecuentes
+            </a>
+          </div>
 
             <div class="col-12 col-md-3">
                 <a href="https://x.com/alealejo44" target="_blank" class="text-white text-decoration-none">redes sociales</a>
